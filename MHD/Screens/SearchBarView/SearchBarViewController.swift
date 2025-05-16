@@ -16,15 +16,13 @@ enum InputFieldType: String {
 
 class StationSearchViewController: UIViewController {
     
-    private let tableView = UITableView()
-    
     private let searchTextField = UITextField()
-
-    var fieldType: InputFieldType = .from
+    private let tableView = UITableView()
     
     private var stations = ["New York", "London", "Paris", "Tokyo", "Berlin", "Rome"]
     private var filteredStations: [String] = []
     
+    var fieldType: InputFieldType = .from
     
     
     override func viewDidLoad() {
@@ -33,6 +31,7 @@ class StationSearchViewController: UIViewController {
         
         setupSafeAreaBackground()
         setupSearchTextField()
+        setupTable()
     }
     
     private func setupSafeAreaBackground() {
@@ -87,6 +86,37 @@ class StationSearchViewController: UIViewController {
             searchTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
+    
+    private func setupTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        
+        
+
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: searchTextField.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}
+
+extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stations.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
+        cell.textLabel?.text = "gg"
+        return cell
+    }
+    
+    
 }
 
 import SwiftUI
