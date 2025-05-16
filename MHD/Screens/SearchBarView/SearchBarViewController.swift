@@ -24,18 +24,21 @@ class StationSearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue
         
-        let v = UIView(color: Colors.primary)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(v)
+        setupSafeAreaBackground()
+        setupSearchTextField()
+    }
+    
+    private func setupSafeAreaBackground() {
+        let safeAreaBackground = UIView(color: Colors.primary)
+        safeAreaBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(safeAreaBackground)
         
         NSLayoutConstraint.activate([
-            v.topAnchor.constraint(equalTo: view.topAnchor),
-            v.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            v.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            v.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            safeAreaBackground.topAnchor.constraint(equalTo: view.topAnchor),
+            safeAreaBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            safeAreaBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            safeAreaBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
-        
-        setupSearchTextField()
     }
     
     private func setupSearchTextField() {
