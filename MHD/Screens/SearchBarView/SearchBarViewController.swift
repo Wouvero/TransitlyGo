@@ -76,15 +76,31 @@ class StationSearchViewController: UIViewController {
         searchTextField.rightViewMode = .always
         searchTextField.rightView = rightView
         
-        view.addSubview(searchTextField)
+        // Setup toolbar
+        setupToolBar()
         
         // Setup layout
+        view.addSubview(searchTextField)
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             searchTextField.heightAnchor.constraint(equalToConstant: 56)
         ])
+    }
+    
+    private func setupToolBar() {
+      
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        toolBar.barStyle = .default
+        
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(dissmissKeyboard))
+        
+        toolBar.items = [flexibleSpace, doneButton]
+        toolBar.sizeToFit()
+        
+        searchTextField.inputAccessoryView = toolBar
     }
     
     private func setupTable() {
@@ -102,6 +118,10 @@ class StationSearchViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    @objc private func dissmissKeyboard() {
+        searchTextField.resignFirstResponder()
     }
 }
 
