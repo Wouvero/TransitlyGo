@@ -27,9 +27,9 @@ extension TabBarItem {
             viewController: UIViewController()
         ),
         TabBarItem(
-            title: "Timetable",
+            title: "SearchBar",
             icon: SFSymbols.search,
-            viewController: UIViewController()
+            viewController: SearchBarViewController()
         ),
         TabBarItem(
             title: "Route",

@@ -74,6 +74,7 @@
 		377AEB9A2DD3E17F00929129 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB992DD3E17B00929129 /* TimeInterval.swift */; };
 		377AEB9C2DD4C88800929129 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9B2DD4C88800929129 /* TableViewCell.swift */; };
 		377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */; };
+		377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* SearchBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 		377AEB992DD3E17B00929129 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		377AEB9B2DD4C88800929129 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
+		377AEBB42DD739A400929129 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBB32DD7397D00929129 /* SearchBarView */,
 				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
 				375BA6002DB00B4000FD8477 /* RoutesView */,
 				374872702DBD2D42006126B2 /* StationView */,
@@ -481,6 +484,14 @@
 			path = Thrash;
 			sourceTree = "<group>";
 		};
+		377AEBB32DD7397D00929129 /* SearchBarView */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBB42DD739A400929129 /* SearchBarViewController.swift */,
+			);
+			path = SearchBarView;
+			sourceTree = "<group>";
+		};
 		37E0CC622D93F1BB003770B1 = {
 			isa = PBXGroup;
 			children = (
@@ -630,6 +641,7 @@
 				374873092DC503A1006126B2 /* _TimetableCollectionView.swift in Sources */,
 				374873112DC68E78006126B2 /* _DepartureTableView.swift in Sources */,
 				374873032DC2D3D1006126B2 /* StationsTable.swift in Sources */,
+				377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */,
 				375BA5FF2DB008EE00FD8477 /* UIViewController.swift in Sources */,
 				37370BEB2DA6E197007BB225 /* TabBarItem.swift in Sources */,
 				37370BCC2DA6CAC0007BB225 /* Fonts.swift in Sources */,
