@@ -52,6 +52,10 @@ class StationSearchViewController: UIViewController {
         searchTextField.backgroundColor = .white
         searchTextField.addBorder(for: [.bottom], in: .black, width: 1)
         
+        // Add text field delegate
+        searchTextField.delegate = self
+        searchTextField.addTarget(self, action: #selector(searchTextFieldChanged), for: .editingChanged)
+        
         // Setup left view
         let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 56))
         searchTextField.leftViewMode = .always
@@ -129,7 +133,15 @@ class StationSearchViewController: UIViewController {
     @objc private func dissmissViewController(_ sender: UITapGestureRecognizer) {
         self.dismiss(animated: true)
     }
+    
+    @objc private func searchTextFieldChanged(_ sender: UITextField) {
+        print(sender.text ?? "")
+    }
 
+}
+
+extension StationSearchViewController: UITextFieldDelegate {
+    
 }
 
 extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
