@@ -33,31 +33,12 @@ extension CDStation : Identifiable {
 }
 
 extension CDStation {
-    func fetchAllStations(context: NSManagedObjectContext) -> [CDStation] {
+    static func fetchAllStations(context: NSManagedObjectContext) -> [CDStation] {
         let fetchRequest = CDStation.fetchRequest()
         
         do {
             let stations = try context.fetch(fetchRequest)
             return stations
-        } catch let error as NSError {
-            print("Could not fetch stations. \(error), \(error.userInfo)")
-            return []
-        }
-    }
-    
-    func fetchAllStations(context: NSManagedObjectContext, contains searchText: String) -> [CDStation] {
-        let fetchRequest = CDStation.fetchRequest()
-        
-        // 1. Add predicate
-        let predicate = NSPredicate(format: "stationInfo.stationName CONTAINS[cd] %@", searchText)
-        fetchRequest.predicate = predicate
-        
-        // 2. Add sort descriptor for alphabetical order
-        let sortDescriptor = NSSortDescriptor(key: "stationInfo.stationName", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        do {
-            return try context.fetch(fetchRequest)
         } catch let error as NSError {
             print("Could not fetch stations. \(error), \(error.userInfo)")
             return []
