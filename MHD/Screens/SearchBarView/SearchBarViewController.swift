@@ -19,7 +19,13 @@ class StationSearchViewController: UIViewController {
     private let searchTextField = UITextField()
     private let tableView = UITableView()
     
-    private var filteredStationInfoData: [CDStationInfo] = []
+    private var alphabeticallyGroupedStations: [String: [CDStationInfo]] = [:] {
+        didSet {
+            alphabetSectionTitles = alphabeticallyGroupedStations.keys.sorted()
+            tableView.reloadData()
+        }
+    }
+    private var alphabetSectionTitles: [String] = []
     
     var fieldType: InputFieldType = .from
     
@@ -115,6 +121,7 @@ class StationSearchViewController: UIViewController {
     private func setupTable() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
         
         
@@ -139,15 +146,13 @@ class StationSearchViewController: UIViewController {
     
     @objc private func searchTextFieldChanged(_ sender: UITextField) {
         guard let searchText = sender.text, !searchText.isEmpty else {
-            filteredStationInfoData = []
+            alphabeticallyGroupedStations = [:]
             tableView.reloadData()
             return
         }
         
-        filteredStationInfoData = CDStationInfo.fetchAllStationInfo(context: context, contains: searchText)
-        tableView.reloadData()
+        alphabeticallyGroupedStations = CDStationInfo.searchStationInfosGroupedAlphabetically(context: context, contains: searchText)
     }
-
 }
 
 extension StationSearchViewController: UITextFieldDelegate {
@@ -155,13 +160,28 @@ extension StationSearchViewController: UITextFieldDelegate {
 }
 
 extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return alphabetSectionTitles.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredStationInfoData.count
+        let key = alphabetSectionTitles[section]
+        return alphabeticallyGroupedStations[key]?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = filteredStationInfoData[indexPath.row].stationName
+        print(indexPath)
+        let key = alphabetSectionTitles[indexPath.section]
+        if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] {
+            cell.textLabel?.text = stationInfoItem.stationName
+            //cell.detailTextLabel?.text = indexPath.row == 0 ? key : nil
+        }
+        
         return cell
     }
 }
