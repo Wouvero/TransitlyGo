@@ -64,6 +64,30 @@ extension CDStationInfo: Identifiable {
 }
 
 extension CDStationInfo {
+    static func fetchAllStationInfo(context: NSManagedObjectContext) -> [String: [CDStationInfo]] {
+        let fetchRequest: NSFetchRequest<CDStationInfo> = CDStationInfo.fetchRequest()
+        
+        let sortDescriptor = NSSortDescriptor(key: "stationName", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let allStationInfos = try context.fetch(fetchRequest)
+            
+            return Dictionary(grouping: allStationInfos) { stationInfo in
+                guard let name = stationInfo.stationName?.uppercased(), !name.isEmpty else {
+                    return "#"  // For stations with no name
+                }
+                
+                let firstLetter = String(name.prefix(1))
+                return firstLetter
+            }
+        } catch {
+            print("Failed to fetch station infos: \(error.localizedDescription)")
+            return [:]
+        }
+    }
+    
+    
     static func fetchAllStationInfo(context: NSManagedObjectContext, contains searchText: String) -> [CDStationInfo] {
         let fetchRequest = CDStationInfo.fetchRequest()
         
