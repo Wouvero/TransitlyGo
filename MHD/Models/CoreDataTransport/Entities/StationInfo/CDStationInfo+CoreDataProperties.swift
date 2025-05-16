@@ -59,6 +59,28 @@ extension CDStationInfo {
 
 }
 
-extension CDStationInfo : Identifiable {
+extension CDStationInfo: Identifiable {
 
+}
+
+extension CDStationInfo {
+    static func fetchAllStationInfo(context: NSManagedObjectContext, contains searchText: String) -> [CDStationInfo] {
+        let fetchRequest = CDStationInfo.fetchRequest()
+        
+        // 1. Add predicate
+        let predicate = NSPredicate(format: "stationName CONTAINS[cd] %@", searchText)
+        fetchRequest.predicate = predicate
+        
+        
+        // 2. Add sort descriptor for alphabetical order
+        let sortDescriptor = NSSortDescriptor(key: "stationName", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            return try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch stations. \(error), \(error.userInfo)")
+            return []
+        }
+    }
 }
