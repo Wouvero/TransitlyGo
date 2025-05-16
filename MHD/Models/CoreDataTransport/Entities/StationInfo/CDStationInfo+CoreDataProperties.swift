@@ -64,7 +64,7 @@ extension CDStationInfo: Identifiable {
 }
 
 extension CDStationInfo {
-    static func fetchAllStationInfo(context: NSManagedObjectContext) -> [String: [CDStationInfo]] {
+    static func searchStationInfosGroupedAlphabetically(context: NSManagedObjectContext) -> [String: [CDStationInfo]] {
         let fetchRequest: NSFetchRequest<CDStationInfo> = CDStationInfo.fetchRequest()
         
         let sortDescriptor = NSSortDescriptor(key: "stationName", ascending: true)
@@ -87,7 +87,7 @@ extension CDStationInfo {
     }
     
     
-    static func fetchAllStationInfo(context: NSManagedObjectContext, contains searchText: String) -> [CDStationInfo] {
+    static func searchStationInfosGroupedAlphabetically(context: NSManagedObjectContext, contains searchText: String) -> [String: [CDStationInfo]] {
         let fetchRequest: NSFetchRequest<CDStationInfo> = CDStationInfo.fetchRequest()
         
         // 1. Add predicate
@@ -100,10 +100,18 @@ extension CDStationInfo {
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
-            return try context.fetch(fetchRequest)
+            let allStationInfos = try context.fetch(fetchRequest)
+            
+            return Dictionary(grouping: allStationInfos) { stationInfo in
+                guard let name = stationInfo.stationName?.uppercased(), !name.isEmpty, let firstCharacter = name.first else {
+                    return "#"  // For stations with no name
+                }
+                
+                return firstCharacter.isLetter ? String(firstCharacter) : "#"
+            }
         } catch let error as NSError {
             print("Failed to fetch station infos: \(error.localizedDescription)")
-            return []
+            return [:]
         }
     }
 }
