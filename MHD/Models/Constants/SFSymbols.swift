@@ -14,5 +14,6 @@ struct SFSymbols {
     static let bus = "bus.fill"
     static let station = "flag"
     static let favorite = "heart"
+    static let xmark = "xmark"
     
 }
