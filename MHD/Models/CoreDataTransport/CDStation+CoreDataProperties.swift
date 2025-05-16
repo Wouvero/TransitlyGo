@@ -31,3 +31,17 @@ extension CDStation {
 extension CDStation : Identifiable {
 
 }
+
+extension CDStation {
+    func fetchAllStations(context: NSManagedObjectContext) -> [CDStation] {
+        let fetchRequest = CDStation.fetchRequest()
+        
+        do {
+            let stations = try context.fetch(fetchRequest)
+            return stations
+        } catch let error as NSError {
+            print("Could not fetch stations. \(error), \(error.userInfo)")
+            return []
+        }
+    }
+}
