@@ -9,11 +9,18 @@
 import UIKit
 import UIKitTools
 
+enum InputFieldType: String {
+    case from = "Zo zastávky"
+    case to = "Na zastávku"
+}
+
 class StationSearchViewController: UIViewController {
     
     private let tableView = UITableView()
     
     private let searchTextField = UITextField()
+
+    var fieldType: InputFieldType = .from
     
     private var stations = ["New York", "London", "Paris", "Tokyo", "Berlin", "Rome"]
     private var filteredStations: [String] = []
@@ -42,7 +49,7 @@ class StationSearchViewController: UIViewController {
     }
     
     private func setupSearchTextField() {
-        searchTextField.placeholder = "Hľadať station"
+        searchTextField.placeholder = fieldType.rawValue
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.backgroundColor = .white
         searchTextField.addBorder(for: [.bottom], in: .black, width: 1)
@@ -140,12 +147,12 @@ class SearchBarViewController: UIViewController {
     
     @objc private func handleFromTap() {
         print("Handle from tap")
-        presentSearchController()
+        presentSearchController(for: .from)
     }
     
     @objc private func handleToTap() {
         print("Handle to tap")
-        presentSearchController()
+        presentSearchController(for: .to)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -153,9 +160,9 @@ class SearchBarViewController: UIViewController {
         setupNavigationBar()
     }
     
-    private func presentSearchController() {
+    private func presentSearchController(for fieldType: InputFieldType = .from) {
         let searchController = StationSearchViewController()
-        
+        searchController.fieldType = fieldType
         searchController.modalPresentationStyle = .fullScreen
         
         present(searchController, animated: true)
