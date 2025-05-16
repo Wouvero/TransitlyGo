@@ -19,10 +19,13 @@ class StationSearchViewController: UIViewController {
     private let searchTextField = UITextField()
     private let tableView = UITableView()
     
-    private var filteredStations: [CDStation] = []
+    private var filteredStationInfoData: [CDStationInfo] = []
     
     var fieldType: InputFieldType = .from
     
+    private var context: NSManagedObjectContext {
+        return CoreDataManager.shared.viewContext
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,7 +138,14 @@ class StationSearchViewController: UIViewController {
     }
     
     @objc private func searchTextFieldChanged(_ sender: UITextField) {
-        print(sender.text ?? "")
+        guard let searchText = sender.text, !searchText.isEmpty else {
+            filteredStationInfoData = []
+            tableView.reloadData()
+            return
+        }
+        
+        filteredStationInfoData = CDStationInfo.fetchAllStationInfo(context: context, contains: searchText)
+        tableView.reloadData()
     }
 
 }
@@ -146,17 +156,18 @@ extension StationSearchViewController: UITextFieldDelegate {
 
 extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredStations.count
+        return filteredStationInfoData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = filteredStations[indexPath.row].stationInfo?.stationName
+        cell.textLabel?.text = filteredStationInfoData[indexPath.row].stationName
         return cell
     }
 }
 
 import SwiftUI
+import CoreData
 
 struct StationSearchViewController_previews: PreviewProvider {
     static var previews: some View {
