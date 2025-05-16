@@ -62,11 +62,15 @@ class StationSearchViewController: UIViewController {
         let rightView = UIView()
         rightView.setDimensions(width: 60, height: 56)
         
-        // Setup xmark view
+        // -> Setup xmark view
         let xmarkView = UIView()
-        let xmarkIcon = IconImageView(systemName: SFSymbols.xmark, config: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .medium))
-        
         xmarkView.setDimensions(width: 56, height: 56)
+        xmarkView.isUserInteractionEnabled = true
+        // -> Setup xmark view tap gesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmissViewController(_:)))
+        xmarkView.addGestureRecognizer(tapGesture)
+        
+        let xmarkIcon = IconImageView(systemName: SFSymbols.xmark, config: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .medium))
         xmarkView.addSubview(xmarkIcon)
         xmarkIcon.center()
         
@@ -123,6 +127,11 @@ class StationSearchViewController: UIViewController {
     @objc private func dissmissKeyboard() {
         searchTextField.resignFirstResponder()
     }
+    
+    @objc private func dissmissViewController(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true)
+    }
+
 }
 
 extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
