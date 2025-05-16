@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="CDAlert" representedClassName="CDAlert" syncable="YES">
+        <attribute name="endTime" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="String"/>
+        <attribute name="message" attributeType="String"/>
+        <attribute name="startTime" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDTransportLine" inverseName="alerts" inverseEntity="CDTransportLine"/>
+    </entity>
+    <entity name="CDDayTypeSchedule" representedClassName="CDDayTypeSchedule" syncable="YES">
+        <attribute name="dayType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="timeTables" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDHourlyDeparture" inverseName="dayTypeSchedule" inverseEntity="CDHourlyDeparture"/>
+        <relationship name="transitSchedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDTransitSchedule" inverseName="dayTypeSchedules" inverseEntity="CDTransitSchedule"/>
+    </entity>
+    <entity name="CDDirection" representedClassName="CDDirection" syncable="YES">
+        <attribute name="destinationStationId" attributeType="String"/>
+        <attribute name="id" attributeType="String"/>
+        <relationship name="destinationStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStationInfo" inverseName="directions" inverseEntity="CDStationInfo"/>
+        <relationship name="line" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDTransportLine" inverseName="directions" inverseEntity="CDTransportLine"/>
+        <relationship name="stations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDStation" inverseName="direction" inverseEntity="CDStation"/>
+    </entity>
+    <entity name="CDDirectionSpecificInfo" representedClassName="CDDirectionSpecificInfo" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="platform" optional="YES" attributeType="String"/>
+        <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStation" inverseName="directionSpecificInfo" inverseEntity="CDStation"/>
+    </entity>
+    <entity name="CDHourlyDeparture" representedClassName="CDHourlyDeparture" syncable="YES">
+        <attribute name="hour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="dayTypeSchedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDayTypeSchedule" inverseName="timeTables" inverseEntity="CDDayTypeSchedule"/>
+        <relationship name="minutes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDMinuteInfo" inverseName="hourlyDeparture" inverseEntity="CDMinuteInfo"/>
+    </entity>
+    <entity name="CDMinuteInfo" representedClassName="CDMinuteInfo" syncable="YES">
+        <attribute name="condition" optional="YES" attributeType="String"/>
+        <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="hourlyDeparture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDHourlyDeparture" inverseName="minutes" inverseEntity="CDHourlyDeparture"/>
+    </entity>
+    <entity name="CDStation" representedClassName="CDStation" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isOnSign" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="travelTimeToNextStop" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="direction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDirection" inverseName="stations" inverseEntity="CDDirection"/>
+        <relationship name="directionSpecificInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDDirectionSpecificInfo" inverseName="station" inverseEntity="CDDirectionSpecificInfo"/>
+        <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStationInfo" inverseName="stations" inverseEntity="CDStationInfo"/>
+        <relationship name="transitSchedule" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDTransitSchedule" inverseName="station" inverseEntity="CDTransitSchedule"/>
+    </entity>
+    <entity name="CDStationInfo" representedClassName="CDStationInfo" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="stationName" attributeType="String"/>
+        <relationship name="directions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDirection" inverseName="destinationStation" inverseEntity="CDDirection"/>
+        <relationship name="stations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDStation" inverseName="stationInfo" inverseEntity="CDStation"/>
+    </entity>
+    <entity name="CDTransitSchedule" representedClassName="CDTransitSchedule" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <relationship name="dayTypeSchedules" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDayTypeSchedule" inverseName="transitSchedule" inverseEntity="CDDayTypeSchedule"/>
+        <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStation" inverseName="transitSchedule" inverseEntity="CDStation"/>
+    </entity>
+    <entity name="CDTransportLine" representedClassName="CDTransportLine" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="indexPosition" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <relationship name="alerts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDAlert" inverseName="line" inverseEntity="CDAlert"/>
+        <relationship name="directions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDDirection" inverseName="line" inverseEntity="CDDirection"/>
+    </entity>
+</model>

@@ -1,0 +1,15 @@
+{
+  "originHash" : "a40537a90729910757effdc4d4681c2152f118193e0d08e291c8591fe4aa85e5",
+  "pins" : [
+    {
+      "identity" : "uikittools",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Wouvero/UIKitTools",
+      "state" : {
+        "revision" : "05406e5b8896dd89420ebc6290badbea443a212e",
+        "version" : "1.0.2"
+      }
+    }
+  ],
+  "version" : 3
+}
