@@ -19,8 +19,7 @@ class StationSearchViewController: UIViewController {
     private let searchTextField = UITextField()
     private let tableView = UITableView()
     
-    private var stations = ["New York", "London", "Paris", "Tokyo", "Berlin", "Rome"]
-    private var filteredStations: [String] = []
+    private var filteredStations: [CDStation] = []
     
     var fieldType: InputFieldType = .from
     
@@ -135,16 +134,14 @@ class StationSearchViewController: UIViewController {
 
 extension StationSearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stations.count
+        return filteredStations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "gg"
+        cell.textLabel?.text = filteredStations[indexPath.row].stationInfo?.stationName
         return cell
     }
-    
-    
 }
 
 import SwiftUI
