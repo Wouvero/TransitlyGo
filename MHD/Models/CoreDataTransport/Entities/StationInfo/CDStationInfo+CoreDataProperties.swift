@@ -89,7 +89,7 @@ extension CDStationInfo {
     
     
     static func fetchAllStationInfo(context: NSManagedObjectContext, contains searchText: String) -> [CDStationInfo] {
-        let fetchRequest = CDStationInfo.fetchRequest()
+        let fetchRequest: NSFetchRequest<CDStationInfo> = CDStationInfo.fetchRequest()
         
         // 1. Add predicate
         let predicate = NSPredicate(format: "stationName CONTAINS[cd] %@", searchText)
@@ -103,7 +103,7 @@ extension CDStationInfo {
         do {
             return try context.fetch(fetchRequest)
         } catch let error as NSError {
-            print("Could not fetch stations. \(error), \(error.userInfo)")
+            print("Failed to fetch station infos: \(error.localizedDescription)")
             return []
         }
     }
