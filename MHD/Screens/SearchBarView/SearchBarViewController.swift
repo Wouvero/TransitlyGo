@@ -13,5 +13,20 @@ class SearchBarViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+    
+    private func setupNavigationBar() {
+        if let navController = navigationController as? NavigationController {
+            let attributedText = NSAttributedStringBuilder()
+                .add(text: "Vyhľadanie spojenia", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize)])
+                .build()
+            
+            navController.setTitle(attributedText)
+        }
+    }
 }
 
