@@ -74,12 +74,11 @@ extension CDStationInfo {
             let allStationInfos = try context.fetch(fetchRequest)
             
             return Dictionary(grouping: allStationInfos) { stationInfo in
-                guard let name = stationInfo.stationName?.uppercased(), !name.isEmpty else {
+                guard let name = stationInfo.stationName?.uppercased(), !name.isEmpty, let firstCharacter = name.first else {
                     return "#"  // For stations with no name
                 }
                 
-                let firstLetter = String(name.prefix(1))
-                return firstLetter
+                return firstCharacter.isLetter ? String(firstCharacter) : "#"
             }
         } catch {
             print("Failed to fetch station infos: \(error.localizedDescription)")
