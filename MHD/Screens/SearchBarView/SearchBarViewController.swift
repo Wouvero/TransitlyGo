@@ -8,6 +8,7 @@
 
 import UIKit
 import UIKitTools
+import CoreData
 
 enum InputFieldType: String {
     case from = "Zo zastávky"
@@ -71,6 +72,11 @@ class StationSearchViewCell: UITableViewCell {
         
         rootView.addArrangedSubview(alphabetTitleView)
         rootView.addArrangedSubview(stationNameView)
+        
+        
+        let customSelectionView = UIView()
+        customSelectionView.backgroundColor = .systemGray6
+        selectedBackgroundView = customSelectionView
     }
     
     func configure(indexPath: IndexPath, alphabet: String, stationName: String?) {
@@ -84,7 +90,13 @@ class StationSearchViewCell: UITableViewCell {
     }
 }
 
+protocol StationSearchDelegate: AnyObject {
+    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType)
+}
+
 class StationSearchViewController: UIViewController {
+    
+    weak var delegate: StationSearchDelegate?
     
     private let searchTextField = UITextField()
     private let tableView = UITableView()
@@ -111,7 +123,7 @@ class StationSearchViewController: UIViewController {
         setupSearchTextField()
         setupTable()
     }
-    
+
     private func setupSafeAreaBackground() {
         let safeAreaBackground = UIView(color: Colors.primary)
         safeAreaBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -239,8 +251,20 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
         return alphabeticallyGroupedStations[key]?.count ?? 0
     }
     
+   
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("did select")
+        let key = alphabetSectionTitles[indexPath.section]
+        if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row]{
+            delegate?.didSelectStation(stationInfoItem, for: fieldType)
+            dissmissKeyboard()
+            dismiss(animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -251,23 +275,24 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
             cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName)
         }
         
+        tableView.deselectRow(at: indexPath, animated: true)
         return cell
     }
 }
 
-import SwiftUI
-import CoreData
+//import SwiftUI
+//import CoreData
+//
+//struct StationSearchViewController_previews: PreviewProvider {
+//    static var previews: some View {
+//        ViewControllerPreview {
+//            StationSearchViewController()
+//        }.ignoresSafeArea()
+//    }
+//}
 
-struct StationSearchViewController_previews: PreviewProvider {
-    static var previews: some View {
-        ViewControllerPreview {
-            StationSearchViewController()
-        }.ignoresSafeArea()
-    }
-}
 
-
-class SearchBarViewController: UIViewController {
+class SearchBarViewController: UIViewController, StationSearchDelegate {
     
     private let fromInputLabel = UILabel(
         text: "Začiatok",
@@ -288,7 +313,7 @@ class SearchBarViewController: UIViewController {
         let view = UIView()
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray.cgColor
+        view.layer.borderColor = UIColor.systemGray3.cgColor
         return view
     }()
     
@@ -296,7 +321,7 @@ class SearchBarViewController: UIViewController {
         let view = UIView()
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.systemGray.cgColor
+        view.layer.borderColor = UIColor.systemGray3.cgColor
         return view
     }()
     
@@ -353,6 +378,8 @@ class SearchBarViewController: UIViewController {
         ])
     }
     
+    
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
@@ -382,13 +409,23 @@ class SearchBarViewController: UIViewController {
     
     private func presentSearchController(for fieldType: InputFieldType = .from) {
         let searchController = StationSearchViewController()
+        searchController.delegate = self
         searchController.fieldType = fieldType
         searchController.modalPresentationStyle = .fullScreen
         
         present(searchController, animated: true)
     }
-
     
+    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType) {
+        switch fieldType {
+        case .from:
+            fromInputLabel.text = station.stationName
+        case .to:
+            toInputLabel.text = station.stationName
+        }
+    }
+
+
     private func setupNavigationBar() {
         if let navController = navigationController as? NavigationController {
             let attributedText = NSAttributedStringBuilder()
