@@ -74,6 +74,7 @@
 		377AEB9C2DD4C88800929129 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9B2DD4C88800929129 /* TableViewCell.swift */; };
 		377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */; };
 		377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* SearchBarViewController.swift */; };
+		377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 		377AEB9B2DD4C88800929129 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		377AEBB42DD739A400929129 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
+		377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsViewController.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -185,6 +187,7 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBB72DD8CEBB00929129 /* AllStationsView */,
 				377AEBB32DD7397D00929129 /* SearchBarView */,
 				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
 				375BA6002DB00B4000FD8477 /* RoutesView */,
@@ -489,6 +492,14 @@
 			path = SearchBarView;
 			sourceTree = "<group>";
 		};
+		377AEBB72DD8CEBB00929129 /* AllStationsView */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */,
+			);
+			path = AllStationsView;
+			sourceTree = "<group>";
+		};
 		37E0CC622D93F1BB003770B1 = {
 			isa = PBXGroup;
 			children = (
@@ -618,6 +629,7 @@
 				374872D12DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift in Sources */,
 				374872D22DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
+				377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */,
 				374872D32DC0D73B006126B2 /* CDStation+CoreDataClass.swift in Sources */,
 				374872D42DC0D73B006126B2 /* CDStation+CoreDataProperties.swift in Sources */,
 				374872D72DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
