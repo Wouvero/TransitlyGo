@@ -299,6 +299,13 @@ class SearchBarViewController: UIViewController {
         return view
     }()
     
+    private let searchButton: UIView = {
+        let view = UIView()
+        view.backgroundColor = Colors.primary
+        view.layer.cornerRadius = 8
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -317,8 +324,21 @@ class SearchBarViewController: UIViewController {
         toInputButton.addSubview(toInputLabel)
         toInputLabel.pinInSuperview(padding: .vertical(16))
         
+        searchButton.setDimensions(height: 50)
+        
+        let s = UILabel(
+            text: "Vyhľadať",
+            font: UIFont.systemFont(ofSize: 16, weight: .bold),
+            textColor: .white,
+            textAlignment: .center,
+            numberOfLines: 1
+        )
+        
+        searchButton.addSubview(s)
+        s.center()
+        
         let inputStack = UIStackView(
-            arrangedSubviews: [fromInputButton, toInputButton],
+            arrangedSubviews: [fromInputButton, toInputButton, searchButton],
             spacing: 8
         )
         
