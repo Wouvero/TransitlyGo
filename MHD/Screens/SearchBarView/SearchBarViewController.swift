@@ -14,6 +14,75 @@ enum InputFieldType: String {
     case to = "Na zastávku"
 }
 
+class StationSearchViewCell: UITableViewCell {
+    private var section: Int = 0
+    private var row: Int = 0
+    
+    private let alphabetTitle = UILabel(
+        text: "A",
+        font: UIFont.systemFont(ofSize: 16, weight: .regular),
+        textColor: .black,
+        textAlignment: .center,
+        numberOfLines: 1
+    )
+    
+    private let alphabetTitleView = UIView()
+    
+    private let stationName = UILabel(
+        text: "Title",
+        font: UIFont.systemFont(ofSize: 16, weight: .bold),
+        textColor: .black,
+        textAlignment: .center,
+        numberOfLines: 1
+    )
+    
+    private let stationNameView = UIView()
+    
+    private let rootView = UIStackView(
+        arrangedSubviews: [],
+        axis: .horizontal,
+        spacing: 0
+    )
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupCell()
+    }
+    
+    private func setupCell() {
+        addSubviews(rootView)
+        rootView.pinInSuperview()
+        
+        
+        alphabetTitleView.setDimensions(width: 50, height: 50)
+        alphabetTitleView.addSubview(alphabetTitle)
+        alphabetTitle.center()
+        
+        stationNameView.setDimensions(width: 50)
+        stationNameView.addSubview(stationName)
+        stationName.leading()
+        
+        rootView.addArrangedSubview(alphabetTitleView)
+        rootView.addArrangedSubview(stationNameView)
+    }
+    
+    func configure(indexPath: IndexPath, alphabet: String, stationName: String?) {
+        section = indexPath.section
+        row = indexPath.row
+        
+        alphabetTitle.text = alphabet
+        alphabetTitle.isHidden = row != 0
+        
+        self.stationName.text = stationName
+    }
+}
+
 class StationSearchViewController: UIViewController {
     
     private let searchTextField = UITextField()
@@ -122,7 +191,7 @@ class StationSearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.reuseIdentifier)
+        tableView.register(StationSearchViewCell.self, forCellReuseIdentifier: StationSearchViewCell.reuseIdentifier)
         
         
 
@@ -174,12 +243,11 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UITableViewCell.reuseIdentifier, for: indexPath)
-        print(indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: StationSearchViewCell.reuseIdentifier, for: indexPath) as! StationSearchViewCell
+
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] {
-            cell.textLabel?.text = stationInfoItem.stationName
-            //cell.detailTextLabel?.text = indexPath.row == 0 ? key : nil
+            cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName)
         }
         
         return cell
