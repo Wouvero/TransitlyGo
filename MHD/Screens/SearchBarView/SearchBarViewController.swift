@@ -64,7 +64,7 @@ class StationSearchViewCell: UITableViewCell {
         alphabetTitleView.addSubview(alphabetTitle)
         alphabetTitle.center()
         
-        stationNameView.setDimensions(width: 50)
+        stationNameView.setDimensions(height: 50)
         stationNameView.addSubview(stationName)
         stationName.leading()
         
