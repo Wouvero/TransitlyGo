@@ -58,6 +58,7 @@ class StationSearchViewCell: UITableViewCell {
     private func setupCell() {
         addSubviews(rootView)
         rootView.pinInSuperview()
+        rootView.addBorder(for: [.bottom], in: .systemGray5, width: 1)
         
         
         alphabetTitleView.setDimensions(width: 50, height: 50)
