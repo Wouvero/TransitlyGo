@@ -268,21 +268,37 @@ struct StationSearchViewController_previews: PreviewProvider {
 
 class SearchBarViewController: UIViewController {
     
-    private let fromInputField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Začiatok"
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    private let fromInputLabel = UILabel(
+        text: "Začiatok",
+        font: UIFont.systemFont(ofSize: 16, weight: .regular),
+        textColor: .black,
+        textAlignment: .left,
+        numberOfLines: 0
+    )
+    private let toInputLabel = UILabel(
+        text: "Koniec",
+        font: UIFont.systemFont(ofSize: 16, weight: .regular),
+        textColor: .black,
+        textAlignment: .left,
+        numberOfLines: 0
+    )
+    
+    private let fromInputButton: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray.cgColor
+        return view
     }()
     
-    private let toInputField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Koniec"
-        textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    private let toInputButton: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray.cgColor
+        return view
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -293,22 +309,39 @@ class SearchBarViewController: UIViewController {
     }
     
     private func setupUI() {
+        fromInputButton.setDimensions(height: 50)
+        fromInputButton.addSubview(fromInputLabel)
+        fromInputLabel.pinInSuperview(padding: .vertical(16))
+        
+        toInputButton.setDimensions(height: 50)
+        toInputButton.addSubview(toInputLabel)
+        toInputLabel.pinInSuperview(padding: .vertical(16))
+        
         let inputStack = UIStackView(
-            arrangedSubviews: [fromInputField, toInputField],
+            arrangedSubviews: [fromInputButton, toInputButton],
             spacing: 8
         )
         
+        
         view.addSubview(inputStack)
-        inputStack.setWidth(300)
-        inputStack.center()
+        
+        NSLayoutConstraint.activate([
+            inputStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            inputStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            inputStack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
     }
     
     private func setupGestures() {
         let fromTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleFromTap))
-        fromInputField.addGestureRecognizer(fromTapGesture)
+        fromInputButton.addGestureRecognizer(fromTapGesture)
         
         let toTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleToTap))
-        toInputField.addGestureRecognizer(toTapGesture)
+        toInputButton.addGestureRecognizer(toTapGesture)
     }
     
     @objc private func handleFromTap() {
