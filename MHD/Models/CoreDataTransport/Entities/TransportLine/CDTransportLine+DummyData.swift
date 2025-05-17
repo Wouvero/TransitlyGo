@@ -38,7 +38,8 @@ extension CDTransportLine {
             (id: "STI_7", stationName: "Hillside Junction"),
             (id: "STI_8", stationName: "Downtown Exchange"),
             (id: "STI_9", stationName: "North Quarter Hub"),
-            (id: "STI_10", stationName: "Southside Transit Center")
+            (id: "STI_10", stationName: "Southside Transit Center"),
+            (id: "STI_11", stationName: "Southside Transit Downtown")
         ]
         
         var createdStationInfo: [CDStationInfo] = []
