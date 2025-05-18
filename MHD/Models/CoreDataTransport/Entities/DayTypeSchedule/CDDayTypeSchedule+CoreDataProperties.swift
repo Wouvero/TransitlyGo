@@ -1,7 +1,7 @@
 //
 //
 //
-// Created by: Patrik Drab on 29/04/2025
+// Created by: Patrik Drab on 18/05/2025
 // Copyright (c) 2025 MHD 
 //
 //         
@@ -19,8 +19,8 @@ extension CDDayTypeSchedule {
     }
 
     @NSManaged public var dayType: Int16
-    @NSManaged public var transitSchedule: CDTransitSchedule?
     @NSManaged public var timeTables: NSSet?
+    @NSManaged public var transitSchedule: CDTransitSchedule?
 
 }
 
@@ -28,10 +28,10 @@ extension CDDayTypeSchedule {
 extension CDDayTypeSchedule {
 
     @objc(addTimeTablesObject:)
-    @NSManaged public func addToTimeTables(_ value: CDHourlyDeparture)
+    @NSManaged public func addToTimeTables(_ value: CDHourlyInfo)
 
     @objc(removeTimeTablesObject:)
-    @NSManaged public func removeFromTimeTables(_ value: CDHourlyDeparture)
+    @NSManaged public func removeFromTimeTables(_ value: CDHourlyInfo)
 
     @objc(addTimeTables:)
     @NSManaged public func addToTimeTables(_ values: NSSet)

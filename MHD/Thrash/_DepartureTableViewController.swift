@@ -111,7 +111,7 @@ private extension DepartureTableViewController {
     
     func handleDayTypeSelection(_ dayTypeIndex: Int) {
         let selectedSchedule = dayTypeSchedules[dayTypeIndex]
-        let departures = selectedSchedule.timeTables?.allObjects as? [CDHourlyDeparture] ?? []
+        let departures = selectedSchedule.timeTables?.allObjects as? [CDHourlyInfo] ?? []
         let sortedDepartures = departures.sorted { $0.hour < $1.hour }
         timetableView.update(with: sortedDepartures)
     }

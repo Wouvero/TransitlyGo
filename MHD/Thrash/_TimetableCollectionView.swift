@@ -11,8 +11,8 @@ import UIKit
 
 class TimetableCollectionView: UIView {
     
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, CDHourlyDeparture>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CDHourlyDeparture>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, CDHourlyInfo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CDHourlyInfo>
     
     private var collectionView: UICollectionView!
     private let layout = UICollectionViewFlowLayout()
@@ -22,7 +22,7 @@ class TimetableCollectionView: UIView {
     let itemsInRow: CGFloat = 1
 
 
-    private var data: [CDHourlyDeparture] = [] {
+    private var data: [CDHourlyInfo] = [] {
         didSet {
             applySnapshot()
         }
@@ -84,7 +84,7 @@ class TimetableCollectionView: UIView {
         super.init(coder: coder)
     }
     
-    func update(with departures: [CDHourlyDeparture]) {
+    func update(with departures: [CDHourlyInfo]) {
         self.data = departures
     }
 }

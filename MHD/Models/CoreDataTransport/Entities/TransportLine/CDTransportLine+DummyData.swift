@@ -122,7 +122,7 @@ extension CDTransportLine {
             
             // Create hourly departures (6AM to 10PM)
             for hour in 6...22 {
-                let hourlyDeparture = CDHourlyDeparture(context: context)
+                let hourlyDeparture = CDHourlyInfo(context: context)
                 hourlyDeparture.hour = Int16(hour)
                 hourlyDeparture.dayTypeSchedule = dayTypeSchedule
                 

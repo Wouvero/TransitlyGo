@@ -79,7 +79,7 @@ class DepartureTableViewCell: UITableViewCell {
     
     
     func configure(
-        with departure: CDHourlyDeparture,
+        with departure: CDHourlyInfo,
         departureCellIndex: Int,
         activeHourIndex: Int?,
         activeMinuteIndex: Int?

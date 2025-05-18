@@ -90,7 +90,7 @@ class TableViewCell: UITableViewCell {
     }
     
     func configure(
-        with departure: CDHourlyDeparture,
+        with departure: CDHourlyInfo,
         cellIndex: Int,
         currentTable: Bool,
         highlightRowIndex: Int? = nil,

@@ -20,7 +20,7 @@ class TableView: UIView {
     private var segmentedControl: UISegmentedControl!
     
     private let tableView = UITableView()
-    private var tableViewData: [CDHourlyDeparture] = [] {
+    private var tableViewData: [CDHourlyInfo] = [] {
         didSet { tableView.reloadData() }
     }
     
@@ -363,19 +363,19 @@ private extension TableView {
 // MARK: - Schedule Data Access
 private extension TableView {
     
-    func getMinuteInfoData(for hourEntity: CDHourlyDeparture) -> [CDMinuteInfo] {
+    func getMinuteInfoData(for hourEntity: CDHourlyInfo) -> [CDMinuteInfo] {
         let minuteInfoData = hourEntity.minutes?.allObjects as? [CDMinuteInfo] ?? []
         let minuteInfoDataSorted = minuteInfoData.sorted { $0.minute < $1.minute}
         return minuteInfoDataSorted
     }
     
-    func getHourInfoData(for dayTypeIndex: Int) -> [CDHourlyDeparture] {
-        let hourInfoData = dayTypeSchedules[dayTypeIndex].timeTables?.allObjects as? [CDHourlyDeparture] ?? []
+    func getHourInfoData(for dayTypeIndex: Int) -> [CDHourlyInfo] {
+        let hourInfoData = dayTypeSchedules[dayTypeIndex].timeTables?.allObjects as? [CDHourlyInfo] ?? []
         let hourInfoDataSorted = hourInfoData.sorted { $0.hour < $1.hour }
         return hourInfoDataSorted
     }
     
-    func getTransformedHourInfoData(for hourInfoData: [CDHourlyDeparture], matchingHour: Int) -> [CDHourlyDeparture] {
+    func getTransformedHourInfoData(for hourInfoData: [CDHourlyInfo], matchingHour: Int) -> [CDHourlyInfo] {
         guard !hourInfoData.isEmpty else { return [] }
         
         guard let index = hourInfoData.firstIndex(where: { $0.hour == matchingHour }) else {

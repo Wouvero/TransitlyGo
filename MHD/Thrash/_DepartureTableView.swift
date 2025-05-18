@@ -12,17 +12,17 @@ import UIKit
 class DepartureTableView: UIView, UITableViewDelegate{
     static let reuseIdentifier = "DepartureTableView"
     
-    typealias DataSource = UITableViewDiffableDataSource<Int, CDHourlyDeparture>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CDHourlyDeparture>
+    typealias DataSource = UITableViewDiffableDataSource<Int, CDHourlyInfo>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, CDHourlyInfo>
     
     private var departureTableView = UITableView()
     
-    private var data: [CDHourlyDeparture] = [] {
+    private var data: [CDHourlyInfo] = [] {
         didSet {
             applySnapshot()
         }
     }
-    private var dataSource: UITableViewDiffableDataSource<Int, CDHourlyDeparture>!
+    private var dataSource: UITableViewDiffableDataSource<Int, CDHourlyInfo>!
     
     
     
@@ -79,7 +79,7 @@ class DepartureTableView: UIView, UITableViewDelegate{
     }
     
     private func configureDataSource() {
-        dataSource = UITableViewDiffableDataSource<Int, CDHourlyDeparture>(tableView: departureTableView) {[weak self] tableView, indexPath, item in
+        dataSource = UITableViewDiffableDataSource<Int, CDHourlyInfo>(tableView: departureTableView) {[weak self] tableView, indexPath, item in
             guard let self = self else { return UITableViewCell() }
             let row = tableView.dequeueReusableCell(withIdentifier: DepartureTableViewCell.reuseIdentifier, for: indexPath) as! DepartureTableViewCell
             
@@ -132,7 +132,7 @@ class DepartureTableView: UIView, UITableViewDelegate{
     }
     
     
-    func update(with departures: [CDHourlyDeparture]) {
+    func update(with departures: [CDHourlyInfo]) {
         self.data = departures
         selectNextDeparture()
         

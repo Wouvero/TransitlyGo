@@ -1,7 +1,7 @@
 //
 //
 //
-// Created by: Patrik Drab on 29/04/2025
+// Created by: Patrik Drab on 18/05/2025
 // Copyright (c) 2025 MHD 
 //
 //         
@@ -19,8 +19,8 @@ extension CDTransitSchedule {
     }
 
     @NSManaged public var id: String?
-    @NSManaged public var station: CDStation?
     @NSManaged public var dayTypeSchedules: NSSet?
+    @NSManaged public var station: CDStation?
 
 }
 

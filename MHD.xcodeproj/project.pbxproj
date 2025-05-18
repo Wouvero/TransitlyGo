@@ -29,18 +29,10 @@
 		374872772DC0B4CC006126B2 /* TransportModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 374872752DC0B4CC006126B2 /* TransportModel.xcdatamodeld */; };
 		374872C72DC0D73B006126B2 /* CDAlert+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872B32DC0D73B006126B2 /* CDAlert+CoreDataClass.swift */; };
 		374872C82DC0D73B006126B2 /* CDAlert+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872B42DC0D73B006126B2 /* CDAlert+CoreDataProperties.swift */; };
-		374872C92DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872B52DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataClass.swift */; };
-		374872CA2DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872B62DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataProperties.swift */; };
 		374872CD2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872B92DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataClass.swift */; };
 		374872CE2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BA2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataProperties.swift */; };
-		374872CF2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BB2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataClass.swift */; };
-		374872D02DC0D73B006126B2 /* CDHourlyDeparture+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BC2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataProperties.swift */; };
-		374872D12DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BD2DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift */; };
-		374872D22DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BE2DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift */; };
 		374872D32DC0D73B006126B2 /* CDStation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872BF2DC0D73B006126B2 /* CDStation+CoreDataClass.swift */; };
 		374872D42DC0D73B006126B2 /* CDStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872C02DC0D73B006126B2 /* CDStation+CoreDataProperties.swift */; };
-		374872D72DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872C32DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift */; };
-		374872D82DC0D73B006126B2 /* CDTransitSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872C42DC0D73B006126B2 /* CDTransitSchedule+CoreDataProperties.swift */; };
 		374872D92DC0D73B006126B2 /* CDTransportLine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872C52DC0D73B006126B2 /* CDTransportLine+CoreDataClass.swift */; };
 		374872DA2DC0D73B006126B2 /* CDTransportLine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872C62DC0D73B006126B2 /* CDTransportLine+CoreDataProperties.swift */; };
 		374872E02DC0DAA1006126B2 /* CDDirection+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374872DC2DC0DAA1006126B2 /* CDDirection+CoreDataClass.swift */; };
@@ -76,6 +68,14 @@
 		377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* SearchBarViewController.swift */; };
 		377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */; };
 		377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */; };
+		377AEBC12DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBD2DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift */; };
+		377AEBC22DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBE2DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift */; };
+		377AEBC32DDA2B3300929129 /* CDMinuteInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBF2DDA2B3300929129 /* CDMinuteInfo+CoreDataClass.swift */; };
+		377AEBC42DDA2B3300929129 /* CDMinuteInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBC02DDA2B3300929129 /* CDMinuteInfo+CoreDataProperties.swift */; };
+		377AEBCD2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBC92DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift */; };
+		377AEBCE2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBCA2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift */; };
+		377AEBCF2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBCB2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift */; };
+		377AEBD02DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBCC2DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,18 +101,10 @@
 		374872762DC0B4CC006126B2 /* TransportModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TransportModel.xcdatamodel; sourceTree = "<group>"; };
 		374872B32DC0D73B006126B2 /* CDAlert+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDAlert+CoreDataClass.swift"; path = "../../CDAlert+CoreDataClass.swift"; sourceTree = "<group>"; };
 		374872B42DC0D73B006126B2 /* CDAlert+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDAlert+CoreDataProperties.swift"; path = "../../CDAlert+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		374872B52DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDDayTypeSchedule+CoreDataClass.swift"; path = "../../CDDayTypeSchedule+CoreDataClass.swift"; sourceTree = "<group>"; };
-		374872B62DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDDayTypeSchedule+CoreDataProperties.swift"; path = "../../CDDayTypeSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		374872B92DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDDirectionSpecificInfo+CoreDataClass.swift"; path = "../../CDDirectionSpecificInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		374872BA2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDDirectionSpecificInfo+CoreDataProperties.swift"; path = "../../CDDirectionSpecificInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		374872BB2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDHourlyDeparture+CoreDataClass.swift"; path = "../../CDHourlyDeparture+CoreDataClass.swift"; sourceTree = "<group>"; };
-		374872BC2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDHourlyDeparture+CoreDataProperties.swift"; path = "../../CDHourlyDeparture+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		374872BD2DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDMinuteInfo+CoreDataClass.swift"; path = "../../CDMinuteInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		374872BE2DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDMinuteInfo+CoreDataProperties.swift"; path = "../../CDMinuteInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		374872BF2DC0D73B006126B2 /* CDStation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDStation+CoreDataClass.swift"; path = "../../CDStation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		374872C02DC0D73B006126B2 /* CDStation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDStation+CoreDataProperties.swift"; path = "../../CDStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		374872C32DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDTransitSchedule+CoreDataClass.swift"; path = "../../CDTransitSchedule+CoreDataClass.swift"; sourceTree = "<group>"; };
-		374872C42DC0D73B006126B2 /* CDTransitSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDTransitSchedule+CoreDataProperties.swift"; path = "../../CDTransitSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		374872C52DC0D73B006126B2 /* CDTransportLine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDTransportLine+CoreDataClass.swift"; path = "../../CDTransportLine+CoreDataClass.swift"; sourceTree = "<group>"; };
 		374872C62DC0D73B006126B2 /* CDTransportLine+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDTransportLine+CoreDataProperties.swift"; path = "../../CDTransportLine+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		374872DC2DC0DAA1006126B2 /* CDDirection+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDirection+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -148,6 +140,14 @@
 		377AEBB42DD739A400929129 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsViewController.swift; sourceTree = "<group>"; };
 		377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
+		377AEBBD2DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDHourlyInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		377AEBBE2DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDHourlyInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		377AEBBF2DDA2B3300929129 /* CDMinuteInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMinuteInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		377AEBC02DDA2B3300929129 /* CDMinuteInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMinuteInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		377AEBC92DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDayTypeSchedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		377AEBCA2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDDayTypeSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		377AEBCB2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransitSchedule+CoreDataClass.swift"; sourceTree = "<group>"; };
+		377AEBCC2DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransitSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -305,8 +305,8 @@
 		374872AB2DC0D658006126B2 /* DayTypeSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				374872B52DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataClass.swift */,
-				374872B62DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataProperties.swift */,
+				377AEBC92DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift */,
+				377AEBCA2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift */,
 			);
 			path = DayTypeSchedule;
 			sourceTree = "<group>";
@@ -329,20 +329,20 @@
 			path = DirectionSpecificInfo;
 			sourceTree = "<group>";
 		};
-		374872AE2DC0D679006126B2 /* HourlyDeparture */ = {
+		374872AE2DC0D679006126B2 /* HourlyInfo */ = {
 			isa = PBXGroup;
 			children = (
-				374872BB2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataClass.swift */,
-				374872BC2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataProperties.swift */,
+				377AEBBD2DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift */,
+				377AEBBE2DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift */,
 			);
-			path = HourlyDeparture;
+			path = HourlyInfo;
 			sourceTree = "<group>";
 		};
 		374872AF2DC0D686006126B2 /* MinuteInto */ = {
 			isa = PBXGroup;
 			children = (
-				374872BD2DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift */,
-				374872BE2DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift */,
+				377AEBBF2DDA2B3300929129 /* CDMinuteInfo+CoreDataClass.swift */,
+				377AEBC02DDA2B3300929129 /* CDMinuteInfo+CoreDataProperties.swift */,
 			);
 			path = MinuteInto;
 			sourceTree = "<group>";
@@ -368,8 +368,8 @@
 		374872B22DC0D6AD006126B2 /* TransitSchedule */ = {
 			isa = PBXGroup;
 			children = (
-				374872C32DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift */,
-				374872C42DC0D73B006126B2 /* CDTransitSchedule+CoreDataProperties.swift */,
+				377AEBCB2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift */,
+				377AEBCC2DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift */,
 			);
 			path = TransitSchedule;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 				374872AD2DC0D66C006126B2 /* DirectionSpecificInfo */,
 				374872B22DC0D6AD006126B2 /* TransitSchedule */,
 				374872AB2DC0D658006126B2 /* DayTypeSchedule */,
-				374872AE2DC0D679006126B2 /* HourlyDeparture */,
+				374872AE2DC0D679006126B2 /* HourlyInfo */,
 				374872AF2DC0D686006126B2 /* MinuteInto */,
 				374872AA2DC0D645006126B2 /* Alert */,
 			);
@@ -621,8 +621,6 @@
 				374872C72DC0D73B006126B2 /* CDAlert+CoreDataClass.swift in Sources */,
 				374873012DC2D38F006126B2 /* StationViewCell.swift in Sources */,
 				374872C82DC0D73B006126B2 /* CDAlert+CoreDataProperties.swift in Sources */,
-				374872C92DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataClass.swift in Sources */,
-				374872CA2DC0D73B006126B2 /* CDDayTypeSchedule+CoreDataProperties.swift in Sources */,
 				3748730B2DC50427006126B2 /* _TimetableCollectionViewCell.swift in Sources */,
 				374872CD2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataClass.swift in Sources */,
 				374872ED2DC10B6A006126B2 /* CDTransportLine+DummyData.swift in Sources */,
@@ -634,19 +632,21 @@
 				374872E22DC0DAA1006126B2 /* CDStationInfo+CoreDataClass.swift in Sources */,
 				374872E32DC0DAA1006126B2 /* CDStationInfo+CoreDataProperties.swift in Sources */,
 				374872E92DC1096B006126B2 /* TransportLinesCollectionView.swift in Sources */,
+				377AEBC12DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift in Sources */,
+				377AEBC22DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift in Sources */,
+				377AEBC32DDA2B3300929129 /* CDMinuteInfo+CoreDataClass.swift in Sources */,
+				377AEBC42DDA2B3300929129 /* CDMinuteInfo+CoreDataProperties.swift in Sources */,
 				3748730D2DC63725006126B2 /* Helper.swift in Sources */,
-				374872CF2DC0D73B006126B2 /* CDHourlyDeparture+CoreDataClass.swift in Sources */,
-				374872D02DC0D73B006126B2 /* CDHourlyDeparture+CoreDataProperties.swift in Sources */,
-				374872D12DC0D73B006126B2 /* CDMinuteInfo+CoreDataClass.swift in Sources */,
-				374872D22DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift in Sources */,
+				377AEBCD2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift in Sources */,
+				377AEBCE2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift in Sources */,
+				377AEBCF2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
+				377AEBD02DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
 				377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */,
 				377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */,
 				374872D32DC0D73B006126B2 /* CDStation+CoreDataClass.swift in Sources */,
 				374872D42DC0D73B006126B2 /* CDStation+CoreDataProperties.swift in Sources */,
-				374872D72DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
 				377AEB982DD1076800929129 /* TableView.swift in Sources */,
-				374872D82DC0D73B006126B2 /* CDTransitSchedule+CoreDataProperties.swift in Sources */,
 				374872D92DC0D73B006126B2 /* CDTransportLine+CoreDataClass.swift in Sources */,
 				374872DA2DC0D73B006126B2 /* CDTransportLine+CoreDataProperties.swift in Sources */,
 				374872662DBBC62B006126B2 /* _NavBar.swift in Sources */,

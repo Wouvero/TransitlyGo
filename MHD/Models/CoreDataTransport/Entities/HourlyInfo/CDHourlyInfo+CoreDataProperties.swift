@@ -1,7 +1,7 @@
 //
 //
 //
-// Created by: Patrik Drab on 29/04/2025
+// Created by: Patrik Drab on 18/05/2025
 // Copyright (c) 2025 MHD 
 //
 //         
@@ -12,10 +12,10 @@ import Foundation
 import CoreData
 
 
-extension CDHourlyDeparture {
+extension CDHourlyInfo {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDHourlyDeparture> {
-        return NSFetchRequest<CDHourlyDeparture>(entityName: "CDHourlyDeparture")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDHourlyInfo> {
+        return NSFetchRequest<CDHourlyInfo>(entityName: "CDHourlyInfo")
     }
 
     @NSManaged public var hour: Int16
@@ -25,7 +25,7 @@ extension CDHourlyDeparture {
 }
 
 // MARK: Generated accessors for minutes
-extension CDHourlyDeparture {
+extension CDHourlyInfo {
 
     @objc(addMinutesObject:)
     @NSManaged public func addToMinutes(_ value: CDMinuteInfo)
@@ -41,6 +41,6 @@ extension CDHourlyDeparture {
 
 }
 
-extension CDHourlyDeparture : Identifiable {
+extension CDHourlyInfo : Identifiable {
 
 }

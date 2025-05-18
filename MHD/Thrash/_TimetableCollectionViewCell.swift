@@ -68,7 +68,7 @@ class TimetableCollectionViewCell: UICollectionViewCell {
     }
 
 
-    func configure(with departure: CDHourlyDeparture, index: Int) {
+    func configure(with departure: CDHourlyInfo, index: Int) {
 //        guard hourLabel.text != "\(departure.hour)" || cellIndex != index else { return }
 //
 //        cellIndex = index
