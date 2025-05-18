@@ -130,7 +130,7 @@ extension TransportLinesCollectionView: UICollectionViewDelegate{
         guard let selectedTrasportLine = dataSource.itemIdentifier(for: indexPath) else { return }
         
         if let parrentVC = self.findViewController() {
-            let routeVC = RoutesViewController(for: selectedTrasportLine)
+            let routeVC = DirectionsViewController(for: selectedTrasportLine)
             parrentVC.navigationController?.pushViewController(routeVC, animated: true)
         }
     }

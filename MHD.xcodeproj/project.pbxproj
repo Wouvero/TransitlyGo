@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		37370BC62DA27717007BB225 /* RoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BC52DA276C0007BB225 /* RoutesViewController.swift */; };
+		37370BC62DA27717007BB225 /* DirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BC52DA276C0007BB225 /* DirectionsViewController.swift */; };
 		37370BCA2DA6CAAE007BB225 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BC92DA6CAA9007BB225 /* Colors.swift */; };
 		37370BCC2DA6CAC0007BB225 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BCB2DA6CABD007BB225 /* Fonts.swift */; };
 		37370BCF2DA6CADC007BB225 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BCE2DA6CADA007BB225 /* Images.swift */; };
@@ -79,7 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		37370BC52DA276C0007BB225 /* RoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesViewController.swift; sourceTree = "<group>"; };
+		37370BC52DA276C0007BB225 /* DirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsViewController.swift; sourceTree = "<group>"; };
 		37370BC92DA6CAA9007BB225 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		37370BCB2DA6CABD007BB225 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		37370BCE2DA6CADA007BB225 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				377AEBB72DD8CEBB00929129 /* AllStationsView */,
 				377AEBB32DD7397D00929129 /* SearchBarView */,
 				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
-				375BA6002DB00B4000FD8477 /* RoutesView */,
+				375BA6002DB00B4000FD8477 /* DirectionsView */,
 				374872702DBD2D42006126B2 /* StationView */,
 				374872712DBD2D6E006126B2 /* TimeTableView */,
 			);
@@ -429,12 +429,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		375BA6002DB00B4000FD8477 /* RoutesView */ = {
+		375BA6002DB00B4000FD8477 /* DirectionsView */ = {
 			isa = PBXGroup;
 			children = (
-				37370BC52DA276C0007BB225 /* RoutesViewController.swift */,
+				37370BC52DA276C0007BB225 /* DirectionsViewController.swift */,
 			);
-			path = RoutesView;
+			path = DirectionsView;
 			sourceTree = "<group>";
 		};
 		377246BF2D947484000ED98C /* MHD */ = {
@@ -669,7 +669,7 @@
 				37370BE92DA6E082007BB225 /* TabBarView+Action.swift in Sources */,
 				37370BE22DA6DFA0007BB225 /* FadeInTransition.swift in Sources */,
 				37370BE52DA6DFF4007BB225 /* TabBarView+UI.swift in Sources */,
-				37370BC62DA27717007BB225 /* RoutesViewController.swift in Sources */,
+				37370BC62DA27717007BB225 /* DirectionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

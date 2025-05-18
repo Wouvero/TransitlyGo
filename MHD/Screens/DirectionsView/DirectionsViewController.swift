@@ -11,7 +11,7 @@ import UIKitTools
 import SwiftUI
 
 
-class RoutesViewController: UIViewController {
+class DirectionsViewController: UIViewController {
     static let reuseIdentifier = "RoutesViewController"
 
     private let transportLine: CDTransportLine
