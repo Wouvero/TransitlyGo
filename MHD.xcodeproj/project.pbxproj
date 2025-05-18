@@ -75,6 +75,7 @@
 		377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */; };
 		377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* SearchBarViewController.swift */; };
 		377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */; };
+		377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		377AEBB42DD739A400929129 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
 		377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsViewController.swift; sourceTree = "<group>"; };
+		377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -495,9 +497,18 @@
 		377AEBB72DD8CEBB00929129 /* AllStationsView */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBBA2DD9DE4A00929129 /* StationDetailView */,
 				377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */,
 			);
 			path = AllStationsView;
+			sourceTree = "<group>";
+		};
+		377AEBBA2DD9DE4A00929129 /* StationDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */,
+			);
+			path = StationDetailView;
 			sourceTree = "<group>";
 		};
 		37E0CC622D93F1BB003770B1 = {
@@ -630,6 +641,7 @@
 				374872D22DC0D73B006126B2 /* CDMinuteInfo+CoreDataProperties.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
 				377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */,
+				377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */,
 				374872D32DC0D73B006126B2 /* CDStation+CoreDataClass.swift in Sources */,
 				374872D42DC0D73B006126B2 /* CDStation+CoreDataProperties.swift in Sources */,
 				374872D72DC0D73B006126B2 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
