@@ -10,7 +10,7 @@ import UIKit
 import UIKitTools
 import CoreData
 
-class AllStationsViewController: UIViewController {
+class StationsListViewController: UIViewController {
     private let tableView = UITableView()
     
     private var alphabeticallyGroupedStations: [String: [CDStationInfo]] = [:] {
@@ -64,7 +64,7 @@ class AllStationsViewController: UIViewController {
     }
 }
 
-extension AllStationsViewController: UITableViewDelegate, UITableViewDataSource {
+extension StationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return alphabetSectionTitles.count
     }

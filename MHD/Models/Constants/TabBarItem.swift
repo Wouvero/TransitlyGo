@@ -34,7 +34,7 @@ extension TabBarItem {
         TabBarItem(
             title: "Route",
             icon: SFSymbols.station,
-            viewController: AllStationsViewController()
+            viewController: StationsListViewController()
         )
     ]
 }

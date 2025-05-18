@@ -66,7 +66,7 @@
 		377AEB9C2DD4C88800929129 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9B2DD4C88800929129 /* TableViewCell.swift */; };
 		377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */; };
 		377AEBB52DD739B100929129 /* SearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* SearchBarViewController.swift */; };
-		377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */; };
+		377AEBB92DD8CED700929129 /* StationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* StationsListViewController.swift */; };
 		377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */; };
 		377AEBC12DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBD2DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift */; };
 		377AEBC22DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBBE2DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift */; };
@@ -138,7 +138,7 @@
 		377AEB9B2DD4C88800929129 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		377AEBB42DD739A400929129 /* SearchBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarViewController.swift; sourceTree = "<group>"; };
-		377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsViewController.swift; sourceTree = "<group>"; };
+		377AEBB82DD8CECD00929129 /* StationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListViewController.swift; sourceTree = "<group>"; };
 		377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailViewController.swift; sourceTree = "<group>"; };
 		377AEBBD2DDA2B3300929129 /* CDHourlyInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDHourlyInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		377AEBBE2DDA2B3300929129 /* CDHourlyInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDHourlyInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -189,7 +189,7 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				377AEBB72DD8CEBB00929129 /* AllStationsView */,
+				377AEBB72DD8CEBB00929129 /* StationsListView */,
 				377AEBB32DD7397D00929129 /* SearchBarView */,
 				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
 				375BA6002DB00B4000FD8477 /* DirectionsView */,
@@ -494,13 +494,13 @@
 			path = SearchBarView;
 			sourceTree = "<group>";
 		};
-		377AEBB72DD8CEBB00929129 /* AllStationsView */ = {
+		377AEBB72DD8CEBB00929129 /* StationsListView */ = {
 			isa = PBXGroup;
 			children = (
 				377AEBBA2DD9DE4A00929129 /* StationDetailView */,
-				377AEBB82DD8CECD00929129 /* AllStationsViewController.swift */,
+				377AEBB82DD8CECD00929129 /* StationsListViewController.swift */,
 			);
-			path = AllStationsView;
+			path = StationsListView;
 			sourceTree = "<group>";
 		};
 		377AEBBA2DD9DE4A00929129 /* StationDetailView */ = {
@@ -642,7 +642,7 @@
 				377AEBCF2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
 				377AEBD02DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
-				377AEBB92DD8CED700929129 /* AllStationsViewController.swift in Sources */,
+				377AEBB92DD8CED700929129 /* StationsListViewController.swift in Sources */,
 				377AEBBC2DD9DE5D00929129 /* StationDetailViewController.swift in Sources */,
 				374872D32DC0D73B006126B2 /* CDStation+CoreDataClass.swift in Sources */,
 				374872D42DC0D73B006126B2 /* CDStation+CoreDataProperties.swift in Sources */,
