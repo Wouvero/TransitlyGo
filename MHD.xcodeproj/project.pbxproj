@@ -189,13 +189,13 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				377AEBB72DD8CEBB00929129 /* StationsListView */,
-				377AEBBA2DD9DE4A00929129 /* StationDetailView */,
-				377AEBB32DD7397D00929129 /* SearchBarView */,
-				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
-				375BA6002DB00B4000FD8477 /* DirectionsView */,
-				374872702DBD2D42006126B2 /* RouteStationsView */,
-				374872712DBD2D6E006126B2 /* TimeTableView */,
+				377AEBB72DD8CEBB00929129 /* StationsListScreen */,
+				377AEBBA2DD9DE4A00929129 /* StationDetailScreen */,
+				377AEBB32DD7397D00929129 /* SearchBarScreen */,
+				375BA5FC2DAFF89400FD8477 /* TransportLinesScreen */,
+				375BA6002DB00B4000FD8477 /* DirectionsScreen */,
+				374872702DBD2D42006126B2 /* RouteStationsScreen */,
+				374872712DBD2D6E006126B2 /* TimeTableScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -247,24 +247,24 @@
 			path = NavBar;
 			sourceTree = "<group>";
 		};
-		374872702DBD2D42006126B2 /* RouteStationsView */ = {
+		374872702DBD2D42006126B2 /* RouteStationsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				374873002DC2D38F006126B2 /* StationViewCell.swift */,
 				374873022DC2D3D1006126B2 /* StationsTable.swift */,
 				375BA5F82DABFFF900FD8477 /* RouteStationsViewController.swift */,
 			);
-			path = RouteStationsView;
+			path = RouteStationsScreen;
 			sourceTree = "<group>";
 		};
-		374872712DBD2D6E006126B2 /* TimeTableView */ = {
+		374872712DBD2D6E006126B2 /* TimeTableScreen */ = {
 			isa = PBXGroup;
 			children = (
 				377AEB972DD1075D00929129 /* TableView.swift */,
 				377AEB9B2DD4C88800929129 /* TableViewCell.swift */,
 				377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */,
 			);
-			path = TimeTableView;
+			path = TimeTableScreen;
 			sourceTree = "<group>";
 		};
 		374872742DC0B348006126B2 /* CoreDataTransport */ = {
@@ -410,14 +410,14 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
-		375BA5FC2DAFF89400FD8477 /* TransportLinesView */ = {
+		375BA5FC2DAFF89400FD8477 /* TransportLinesScreen */ = {
 			isa = PBXGroup;
 			children = (
 				374872E62DC1093E006126B2 /* TransportLineCell.swift */,
 				374872E82DC1096B006126B2 /* TransportLinesCollectionView.swift */,
 				377246B62D947484000ED98C /* TransportLinesViewController.swift */,
 			);
-			path = TransportLinesView;
+			path = TransportLinesScreen;
 			sourceTree = "<group>";
 		};
 		375BA5FD2DB008E000FD8477 /* Extensions */ = {
@@ -430,12 +430,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		375BA6002DB00B4000FD8477 /* DirectionsView */ = {
+		375BA6002DB00B4000FD8477 /* DirectionsScreen */ = {
 			isa = PBXGroup;
 			children = (
 				37370BC52DA276C0007BB225 /* DirectionsViewController.swift */,
 			);
-			path = DirectionsView;
+			path = DirectionsScreen;
 			sourceTree = "<group>";
 		};
 		377246BF2D947484000ED98C /* MHD */ = {
@@ -487,28 +487,28 @@
 			path = Thrash;
 			sourceTree = "<group>";
 		};
-		377AEBB32DD7397D00929129 /* SearchBarView */ = {
+		377AEBB32DD7397D00929129 /* SearchBarScreen */ = {
 			isa = PBXGroup;
 			children = (
 				377AEBB42DD739A400929129 /* SearchBarViewController.swift */,
 			);
-			path = SearchBarView;
+			path = SearchBarScreen;
 			sourceTree = "<group>";
 		};
-		377AEBB72DD8CEBB00929129 /* StationsListView */ = {
+		377AEBB72DD8CEBB00929129 /* StationsListScreen */ = {
 			isa = PBXGroup;
 			children = (
 				377AEBB82DD8CECD00929129 /* StationsListViewController.swift */,
 			);
-			path = StationsListView;
+			path = StationsListScreen;
 			sourceTree = "<group>";
 		};
-		377AEBBA2DD9DE4A00929129 /* StationDetailView */ = {
+		377AEBBA2DD9DE4A00929129 /* StationDetailScreen */ = {
 			isa = PBXGroup;
 			children = (
 				377AEBBB2DD9DE5900929129 /* StationDetailViewController.swift */,
 			);
-			path = StationDetailView;
+			path = StationDetailScreen;
 			sourceTree = "<group>";
 		};
 		37E0CC622D93F1BB003770B1 = {
