@@ -11,7 +11,7 @@ import SwiftUI
 import UIKitTools
 
 
-class StationController: UIViewController {
+class RouteStationsController: UIViewController {
     static let reuseIdentifier = "StationController"
 
     private let direction: CDDirection

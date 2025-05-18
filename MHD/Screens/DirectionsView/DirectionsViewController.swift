@@ -145,7 +145,7 @@ class DirectionsViewController: UIViewController {
     }
     
     private func moveToStations(for direction: CDDirection) {
-        let stationViewController = StationController(direction: direction)
+        let stationViewController = RouteStationsController(direction: direction)
         navigationController?.pushViewController(stationViewController, animated: true)
     }
 }
