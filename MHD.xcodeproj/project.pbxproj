@@ -190,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				377AEBB72DD8CEBB00929129 /* StationsListView */,
+				377AEBBA2DD9DE4A00929129 /* StationDetailView */,
 				377AEBB32DD7397D00929129 /* SearchBarView */,
 				375BA5FC2DAFF89400FD8477 /* TransportLinesView */,
 				375BA6002DB00B4000FD8477 /* DirectionsView */,
@@ -497,7 +498,6 @@
 		377AEBB72DD8CEBB00929129 /* StationsListView */ = {
 			isa = PBXGroup;
 			children = (
-				377AEBBA2DD9DE4A00929129 /* StationDetailView */,
 				377AEBB82DD8CECD00929129 /* StationsListViewController.swift */,
 			);
 			path = StationsListView;
