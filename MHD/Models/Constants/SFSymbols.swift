@@ -16,4 +16,6 @@ struct SFSymbols {
     static let favorite = "heart"
     static let xmark = "xmark"
     static let map = "map"
+    static let changePosition = "arrow.up.arrow.down.circle"
+    
 }
