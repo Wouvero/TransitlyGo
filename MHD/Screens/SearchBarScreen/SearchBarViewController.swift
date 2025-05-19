@@ -14,19 +14,6 @@ enum InputFieldType: String {
     case to = "Na zastávku"
 }
 
-
-//import SwiftUI
-//import CoreData
-//
-//struct StationSearchViewController_previews: PreviewProvider {
-//    static var previews: some View {
-//        ViewControllerPreview {
-//            StationSearchViewController()
-//        }.ignoresSafeArea()
-//    }
-//}
-
-
 class SearchBarViewController: UIViewController, StationSearchDelegate {
     
     private let fromInputLabel = UILabel(
@@ -44,6 +31,14 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         numberOfLines: 0
     )
     
+    private let searchLabel = UILabel(
+        text: "Vyhľadať",
+        font: UIFont.systemFont(ofSize: 16, weight: .bold),
+        textColor: .white,
+        textAlignment: .center,
+        numberOfLines: 1
+    )
+    
     private let fromInputButton: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 8
@@ -59,6 +54,15 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         view.layer.borderColor = UIColor.systemGray3.cgColor
         return view
     }()
+    
+    private let changeButton: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 8
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    private let changeButtonIcon = IconImageView(systemName: SFSymbols.changePosition,config: UIImage.SymbolConfiguration(pointSize: tabBarIconSize, weight: .regular, scale: .default), tintColor: .white)
     
     private let searchButton: UIView = {
         let view = UIView()
@@ -87,29 +91,38 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         
         searchButton.setDimensions(height: 50)
         
-        let s = UILabel(
-            text: "Vyhľadať",
-            font: UIFont.systemFont(ofSize: 16, weight: .bold),
-            textColor: .white,
-            textAlignment: .center,
-            numberOfLines: 1
+        changeButton.setDimensions(width: 40, height: 40)
+        changeButton.addSubview(changeButtonIcon)
+        changeButtonIcon.center()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleChangeButtonTap))
+        changeButton.addGestureRecognizer(tapGestureRecognizer)
+        
+        let inputStackView = UIStackView(
+            arrangedSubviews: [fromInputButton, toInputButton],
+            spacing: 8
         )
         
-        searchButton.addSubview(s)
-        s.center()
+        inputStackView.addSubview(changeButton)
+        changeButton.trailing(offset: .init(x: -20, y: 0))
         
-        let inputStack = UIStackView(
-            arrangedSubviews: [fromInputButton, toInputButton, searchButton],
+        
+        
+        searchButton.addSubview(searchLabel)
+        searchLabel.center()
+        
+        let rootStackView = UIStackView(
+            arrangedSubviews: [inputStackView, searchButton],
             spacing: 8
         )
         
         
-        view.addSubview(inputStack)
+        view.addSubview(rootStackView)
         
         NSLayoutConstraint.activate([
-            inputStack.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            inputStack.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            inputStack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            rootStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            rootStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            rootStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -125,6 +138,10 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         
         let toTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleToTap))
         toInputButton.addGestureRecognizer(toTapGesture)
+    }
+    
+    @objc private func handleChangeButtonTap() {
+        print("Handle change button tap")
     }
     
     @objc private func handleFromTap() {
