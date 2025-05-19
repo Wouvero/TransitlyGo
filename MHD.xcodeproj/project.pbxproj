@@ -78,6 +78,8 @@
 		377AEBD02DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBCC2DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift */; };
 		377AEBD22DDB30D900929129 /* StationSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD12DDB30D900929129 /* StationSearchViewCell.swift */; };
 		377AEBD42DDB310000929129 /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD32DDB310000929129 /* StationSearchViewController.swift */; };
+		377AEBD62DDB63B400929129 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD52DDB63B100929129 /* Data.swift */; };
+		377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBDC2DDB683C00929129 /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +154,8 @@
 		377AEBCC2DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransitSchedule+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		377AEBD12DDB30D900929129 /* StationSearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewCell.swift; sourceTree = "<group>"; };
 		377AEBD32DDB310000929129 /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
+		377AEBD52DDB63B100929129 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		377AEBDC2DDB683C00929129 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -193,6 +197,7 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBDB2DDB683500929129 /* MapScreen */,
 				377AEBB72DD8CEBB00929129 /* StationsListScreen */,
 				377AEBBA2DD9DE4A00929129 /* StationDetailScreen */,
 				377AEBB32DD7397D00929129 /* SearchBarScreen */,
@@ -291,6 +296,7 @@
 		374872A92DC0D63A006126B2 /* TransportLine */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBD52DDB63B100929129 /* Data.swift */,
 				374872EC2DC10B67006126B2 /* CDTransportLine+DummyData.swift */,
 				374872C52DC0D73B006126B2 /* CDTransportLine+CoreDataClass.swift */,
 				374872C62DC0D73B006126B2 /* CDTransportLine+CoreDataProperties.swift */,
@@ -517,6 +523,14 @@
 			path = StationDetailScreen;
 			sourceTree = "<group>";
 		};
+		377AEBDB2DDB683500929129 /* MapScreen */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBDC2DDB683C00929129 /* MapViewController.swift */,
+			);
+			path = MapScreen;
+			sourceTree = "<group>";
+		};
 		37E0CC622D93F1BB003770B1 = {
 			isa = PBXGroup;
 			children = (
@@ -630,6 +644,7 @@
 				3748730B2DC50427006126B2 /* _TimetableCollectionViewCell.swift in Sources */,
 				374872CD2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataClass.swift in Sources */,
 				374872ED2DC10B6A006126B2 /* CDTransportLine+DummyData.swift in Sources */,
+				377AEBD62DDB63B400929129 /* Data.swift in Sources */,
 				377AEBD42DDB310000929129 /* StationSearchViewController.swift in Sources */,
 				374872CE2DC0D73B006126B2 /* CDDirectionSpecificInfo+CoreDataProperties.swift in Sources */,
 				374872E02DC0DAA1006126B2 /* CDDirection+CoreDataClass.swift in Sources */,
@@ -647,6 +662,7 @@
 				377AEBCD2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataClass.swift in Sources */,
 				377AEBCE2DDA2C0800929129 /* CDDayTypeSchedule+CoreDataProperties.swift in Sources */,
 				377AEBCF2DDA2C0800929129 /* CDTransitSchedule+CoreDataClass.swift in Sources */,
+				377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */,
 				377AEBD22DDB30D900929129 /* StationSearchViewCell.swift in Sources */,
 				377AEBD02DDA2C0800929129 /* CDTransitSchedule+CoreDataProperties.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,

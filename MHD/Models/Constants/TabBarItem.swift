@@ -32,6 +32,11 @@ extension TabBarItem {
             viewController: SearchBarViewController()
         ),
         TabBarItem(
+            title: "Map",
+            icon: SFSymbols.map,
+            viewController: MapViewController()
+        ),
+        TabBarItem(
             title: "Route",
             icon: SFSymbols.station,
             viewController: StationsListViewController()
