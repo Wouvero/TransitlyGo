@@ -56,7 +56,7 @@ class StationsListViewController: UIViewController {
     private func setupNavigationBar() {
         if let navController = navigationController as? NavigationController {
             let attributedText = NSAttributedStringBuilder()
-                .add(text: "Všetky zástavky", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
+                .add(text: "Všetky zastávky", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
                 .build()
             
             navController.setTitle(attributedText)
