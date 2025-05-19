@@ -48,7 +48,7 @@ private extension TransportLinesViewController {
         if let navController = navigationController as? NavigationController {
             
             let attributedText = NSAttributedStringBuilder()
-                .add(text: "Zoznam liniek", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize)])
+                .add(text: "Zoznam liniek", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
                 .build()
   
             navController.setTitle(attributedText)
