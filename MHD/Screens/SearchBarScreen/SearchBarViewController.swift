@@ -117,7 +117,7 @@ class StationSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .systemBackground
         
         setupSafeAreaBackground()
         setupSearchTextField()
@@ -141,7 +141,7 @@ class StationSearchViewController: UIViewController {
         searchTextField.placeholder = fieldType.rawValue
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         searchTextField.backgroundColor = .white
-        searchTextField.addBorder(for: [.bottom], in: .black, width: 1)
+        searchTextField.addBorder(for: [.bottom], in: .systemGray3, width: 1)
         
         // Add text field delegate
         searchTextField.delegate = self
@@ -429,7 +429,7 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
     private func setupNavigationBar() {
         if let navController = navigationController as? NavigationController {
             let attributedText = NSAttributedStringBuilder()
-                .add(text: "Vyhľadanie spojenia", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize)])
+                .add(text: "Vyhľadanie spojenia", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
                 .build()
             
             navController.setTitle(attributedText)
