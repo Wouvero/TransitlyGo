@@ -24,10 +24,10 @@ struct NotificationKey {
     static let inputFieldType: String = "InputFieldType"
 }
 
-class SearchBarViewController: UIViewController {
+class SearchConectionViewController: UIViewController {
     
     private let fromInputLabel = UILabel(
-        text: "Začiatok",
+        text: InputFieldType.from.rawValue,
         font: UIFont.systemFont(ofSize: 16, weight: .regular),
         textColor: .black,
         textAlignment: .left,
@@ -35,7 +35,7 @@ class SearchBarViewController: UIViewController {
     )
     
     private let toInputLabel = UILabel(
-        text: "Koniec",
+        text: InputFieldType.to.rawValue,
         font: UIFont.systemFont(ofSize: 16, weight: .regular),
         textColor: .black,
         textAlignment: .left,
@@ -101,7 +101,7 @@ class SearchBarViewController: UIViewController {
 
 }
 
-extension SearchBarViewController {
+extension SearchConectionViewController {
     
     private func setupUI() {
         fromInputButton.setDimensions(height: 50)
@@ -169,19 +169,38 @@ extension SearchBarViewController {
     }
 }
 
-extension SearchBarViewController {
+extension SearchConectionViewController {
     
     @objc private func handleChangeButtonTap() {
-        print("Handle change button tap")
+        if fromInputLabel.text != InputFieldType.from.rawValue &&
+            toInputLabel.text != InputFieldType.to.rawValue {
+            let tempFromInputLabel = fromInputLabel.text
+            let tempToInputLabel = toInputLabel.text
+            
+            fromInputLabel.text = tempToInputLabel
+            toInputLabel.text = tempFromInputLabel
+        }
+        else if fromInputLabel.text != InputFieldType.from.rawValue &&
+            toInputLabel.text == InputFieldType.to.rawValue {
+            let tempFromInputLabel = fromInputLabel.text
+            
+            fromInputLabel.text = InputFieldType.from.rawValue
+            toInputLabel.text = tempFromInputLabel
+        }
+        else if fromInputLabel.text == InputFieldType.from.rawValue &&
+            toInputLabel.text != InputFieldType.to.rawValue {
+            let tempToInputLabel = toInputLabel.text
+            
+            fromInputLabel.text = tempToInputLabel
+            toInputLabel.text = InputFieldType.to.rawValue
+        }
     }
     
     @objc private func handleFromTap() {
-        print("Handle from tap")
         presentSearchController(for: .from)
     }
     
     @objc private func handleToTap() {
-        print("Handle to tap")
         presentSearchController(for: .to)
     }
     
@@ -195,7 +214,7 @@ extension SearchBarViewController {
     
 }
 
-extension SearchBarViewController {
+extension SearchConectionViewController {
     
     private func setupObserver() {
         NotificationCenter.default.addObserver(
@@ -207,20 +226,16 @@ extension SearchBarViewController {
     }
     
     @objc private func didSelectStation(_ notification: Notification) {
-        if let userInfo = notification.object as? [String: Any],
-           let stationData = userInfo["data"] as? String {
-            print("Received station:", stationData)
+        if let stationInfo = notification.object as? CDStationInfo,
+           let userInfo = notification.userInfo,
+           let textFieldType = userInfo["fieldType"] as? InputFieldType {
+            switch textFieldType {
+            case .from:
+                fromInputLabel.text = stationInfo.stationName
+            case .to:
+                toInputLabel.text = stationInfo.stationName
+            }
         }
     }
-
     
-//    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType) {
-//        switch fieldType {
-//        case .from:
-//            fromInputLabel.text = station.stationName
-//        case .to:
-//            toInputLabel.text = station.stationName
-//        }
-//    }
-
 }

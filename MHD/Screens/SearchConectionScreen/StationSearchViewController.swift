@@ -212,10 +212,10 @@ extension StationSearchViewController {
             spacing: 8
         )
         
-        let tapGestureRecohnizer = UITapGestureRecognizer(target: self, action: #selector(pushToMapController))
+        //let tapGestureRecohnizer = UITapGestureRecognizer(target: self, action: #selector(pushToMapController))
         let tapGestureRecohnizer_1 = UITapGestureRecognizer(target: self, action: #selector(pushToStationController))
-        optionStack_3.addGestureRecognizer(tapGestureRecohnizer)
         optionStack_1.addGestureRecognizer(tapGestureRecohnizer_1)
+        //optionStack_3.addGestureRecognizer(tapGestureRecohnizer)
         
         let optionsStack = UIStackView(
             arrangedSubviews: [optionStack_1, optionStack_2, optionStack_3],
@@ -236,16 +236,17 @@ extension StationSearchViewController {
 extension StationSearchViewController {
     
     @objc private func pushToStationController(_ sender: UITapGestureRecognizer) {
-        let mapController = StationsListViewController()
-        mapController.modalPresentationStyle = .fullScreen
-        present(mapController, animated: false, completion: nil)
+        let stationsListController = StationsListViewController()
+        stationsListController.fieldType = fieldType
+        stationsListController.modalPresentationStyle = .fullScreen
+        present(stationsListController, animated: false, completion: nil)
     }
     
-    @objc private func pushToMapController(_ sender: UITapGestureRecognizer) {
-        let mapController = MapViewController()
-        mapController.modalPresentationStyle = .fullScreen
-        present(mapController, animated: false, completion: nil)
-    }
+//    @objc private func pushToMapController(_ sender: UITapGestureRecognizer) {
+//        let mapController = MapViewController()
+//        mapController.modalPresentationStyle = .fullScreen
+//        present(mapController, animated: false, completion: nil)
+//    }
     
     @objc private func dissmissKeyboard() {
         searchTextField.resignFirstResponder()
@@ -270,7 +271,6 @@ extension StationSearchViewController {
     
 }
 
-
 extension StationSearchViewController: UITextFieldDelegate {
     
 }
@@ -289,6 +289,13 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
         //print("did select")
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row]{
+            
+            NotificationCenter.default.post(
+                name: .didSelectStation,
+                object: stationInfoItem,
+                userInfo: ["fieldType": fieldType]
+            )
+            
             //delegate?.didSelectStation(stationInfoItem, for: fieldType)
             dissmissKeyboard()
             dismiss(animated: true)
