@@ -11,6 +11,8 @@ import UIKitTools
 import CoreData
 
 class StationsListViewController: UIViewController {
+    var fieldType: InputFieldType = .from
+    
     private let tableView = UITableView()
     
     private var alphabeticallyGroupedStations: [String: [CDStationInfo]] = [:] {
@@ -80,9 +82,16 @@ extension StationsListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] {
-            let vc = StationDetailViewController(stationInfo: stationInfoItem)
-            tableView.deselectRow(at: indexPath, animated: true)
-            navigationController?.pushViewController(vc, animated: true)
+//            let vc = StationDetailViewController(stationInfo: stationInfoItem)
+//            tableView.deselectRow(at: indexPath, animated: true)
+//            navigationController?.pushViewController(vc, animated: true)
+            
+            NotificationCenter.default.post(
+                name: .didSelectStation,
+                object: stationInfoItem,
+                userInfo: ["fieldType": fieldType]
+            )
+            self.view.window?.rootViewController?.dismiss(animated: false)
         }
     }
     
