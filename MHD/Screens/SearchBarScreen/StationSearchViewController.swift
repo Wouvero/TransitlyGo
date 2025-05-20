@@ -206,6 +206,11 @@ class StationSearchViewController: UIViewController {
             spacing: 8
         )
         
+        let tapGestureRecohnizer = UITapGestureRecognizer(target: self, action: #selector(pushToMapController))
+        let tapGestureRecohnizer_1 = UITapGestureRecognizer(target: self, action: #selector(pushToStationController))
+        optionStack_3.addGestureRecognizer(tapGestureRecohnizer)
+        optionStack_1.addGestureRecognizer(tapGestureRecohnizer_1)
+        
         let optionsStack = UIStackView(
             arrangedSubviews: [optionStack_1, optionStack_2, optionStack_3],
             axis: .vertical,
@@ -220,12 +225,24 @@ class StationSearchViewController: UIViewController {
         
     }
     
+    @objc private func pushToStationController(_ sender: UITapGestureRecognizer) {
+        let mapController = StationsListViewController()
+        mapController.modalPresentationStyle = .fullScreen
+        present(mapController, animated: false, completion: nil)
+    }
+    
+    @objc private func pushToMapController(_ sender: UITapGestureRecognizer) {
+        let mapController = MapViewController()
+        mapController.modalPresentationStyle = .fullScreen
+        present(mapController, animated: false, completion: nil)
+    }
+    
     @objc private func dissmissKeyboard() {
         searchTextField.resignFirstResponder()
     }
     
     @objc private func dissmissViewController(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true)
+        self.dismiss(animated: false)
     }
     
     @objc private func searchTextFieldChanged(_ sender: UITextField) {
@@ -255,8 +272,6 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
         let key = alphabetSectionTitles[section]
         return alphabeticallyGroupedStations[key]?.count ?? 0
     }
-    
-   
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("did select")
