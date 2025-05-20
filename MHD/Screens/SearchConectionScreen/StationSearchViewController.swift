@@ -11,9 +11,6 @@ import UIKit
 import CoreData
 import UIKitTools
 
-//protocol StationSearchDelegate: AnyObject {
-//    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType)
-//}
 
 class StationSearchViewController: UIViewController {
     
@@ -242,12 +239,6 @@ extension StationSearchViewController {
         present(stationsListController, animated: false, completion: nil)
     }
     
-//    @objc private func pushToMapController(_ sender: UITapGestureRecognizer) {
-//        let mapController = MapViewController()
-//        mapController.modalPresentationStyle = .fullScreen
-//        present(mapController, animated: false, completion: nil)
-//    }
-    
     @objc private func dissmissKeyboard() {
         searchTextField.resignFirstResponder()
     }
@@ -286,7 +277,6 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("did select")
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row]{
             
@@ -296,7 +286,6 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
                 userInfo: ["fieldType": fieldType]
             )
             
-            //delegate?.didSelectStation(stationInfoItem, for: fieldType)
             dissmissKeyboard()
             dismiss(animated: true)
         }
