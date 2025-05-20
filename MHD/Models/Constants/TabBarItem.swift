@@ -29,18 +29,18 @@ extension TabBarItem {
         TabBarItem(
             title: "SearchBar",
             icon: SFSymbols.search,
-            viewController: SearchBarViewController()
+            viewController: SearchConectionViewController()
         ),
-        TabBarItem(
-            title: "Map",
-            icon: SFSymbols.map,
-            viewController: MapViewController()
-        ),
-        TabBarItem(
-            title: "Route",
-            icon: SFSymbols.station,
-            viewController: StationsListViewController()
-        )
+//        TabBarItem(
+//            title: "Map",
+//            icon: SFSymbols.map,
+//            viewController: MapViewController()
+//        ),
+//        TabBarItem(
+//            title: "Route",
+//            icon: SFSymbols.station,
+//            viewController: StationsListViewController()
+//        )
     ]
 }
 
