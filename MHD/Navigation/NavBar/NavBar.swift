@@ -23,7 +23,7 @@ extension UIView {
 class NavigationController: UINavigationController {
     let customNavigationBar = UIView(color: Colors.primary)
     let navigationContent = UIView()
-    let navigationContentHeight: CGFloat = 44
+    private var navigationContentHeight: CGFloat = 44
     
     let titleLabel = UILabel(
         font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .semibold),
@@ -146,6 +146,10 @@ class NavigationController: UINavigationController {
         titleLabel.attributedText = attributedText
     }
     
+    func setNavigationContentHeight(_ height: CGFloat) {
+        navigationContentHeight = height
+    }
+    
     private func updateBackButtonVisibility() {
         backButton.isHidden = viewControllers.count <= 1 && presentingViewController == nil
     }
@@ -180,6 +184,8 @@ class NavBarController_1: UIViewController {
         
         if let navController = navigationController as? NavigationController {
             navController.setTitle("My title")
+            navController.setNavigationContentHeight(55)
+            
         }
     }
 }
