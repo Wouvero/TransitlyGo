@@ -14,7 +14,17 @@ enum InputFieldType: String {
     case to = "Na zastávku"
 }
 
-class SearchBarViewController: UIViewController, StationSearchDelegate {
+
+extension Notification.Name {
+    static let didSelectStation = Notification.Name("didSelectStation")
+}
+
+struct NotificationKey {
+    static let station: String = "Station"
+    static let inputFieldType: String = "InputFieldType"
+}
+
+class SearchBarViewController: UIViewController {
     
     private let fromInputLabel = UILabel(
         text: "Začiatok",
@@ -23,6 +33,7 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         textAlignment: .left,
         numberOfLines: 0
     )
+    
     private let toInputLabel = UILabel(
         text: "Koniec",
         font: UIFont.systemFont(ofSize: 16, weight: .regular),
@@ -62,7 +73,9 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         return view
     }()
     
-    private let changeButtonIcon = IconImageView(systemName: SFSymbols.changePosition,config: UIImage.SymbolConfiguration(pointSize: tabBarIconSize, weight: .regular, scale: .default), tintColor: .white)
+    private let changeButtonIcon = IconImageView(
+        systemName: SFSymbols.changePosition,config: UIImage.SymbolConfiguration(pointSize: tabBarIconSize, weight: .regular, scale: .default),
+        tintColor: .white)
     
     private let searchButton: UIView = {
         let view = UIView()
@@ -78,7 +91,17 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
 
         setupUI()
         setupGestures()
+        setupObserver()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+    }
+
+}
+
+extension SearchBarViewController {
     
     private func setupUI() {
         fromInputButton.setDimensions(height: 50)
@@ -94,9 +117,6 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         changeButton.setDimensions(width: 40, height: 40)
         changeButton.addSubview(changeButtonIcon)
         changeButtonIcon.center()
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleChangeButtonTap))
-        changeButton.addGestureRecognizer(tapGestureRecognizer)
         
         let inputStackView = UIStackView(
             arrangedSubviews: [fromInputButton, toInputButton],
@@ -126,19 +146,30 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         ])
     }
     
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-    
     private func setupGestures() {
         let fromTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleFromTap))
         fromInputButton.addGestureRecognizer(fromTapGesture)
         
         let toTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleToTap))
         toInputButton.addGestureRecognizer(toTapGesture)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleChangeButtonTap))
+        changeButton.addGestureRecognizer(tapGestureRecognizer)
+        
     }
+    
+    private func setupNavigationBar() {
+        if let navController = navigationController as? NavigationController {
+            let attributedText = NSAttributedStringBuilder()
+                .add(text: "Vyhľadanie spojenia", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
+                .build()
+            
+            navController.setTitle(attributedText)
+        }
+    }
+}
+
+extension SearchBarViewController {
     
     @objc private func handleChangeButtonTap() {
         print("Handle change button tap")
@@ -154,37 +185,42 @@ class SearchBarViewController: UIViewController, StationSearchDelegate {
         presentSearchController(for: .to)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNavigationBar()
-    }
-    
     private func presentSearchController(for fieldType: InputFieldType = .from) {
         let searchController = StationSearchViewController()
-        searchController.delegate = self
         searchController.fieldType = fieldType
         searchController.modalPresentationStyle = .fullScreen
         
-        present(searchController, animated: true)
+        present(searchController, animated: false)
     }
     
-    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType) {
-        switch fieldType {
-        case .from:
-            fromInputLabel.text = station.stationName
-        case .to:
-            toInputLabel.text = station.stationName
+}
+
+extension SearchBarViewController {
+    
+    private func setupObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didSelectStation),
+            name: .didSelectStation,
+            object: nil
+        )
+    }
+    
+    @objc private func didSelectStation(_ notification: Notification) {
+        if let userInfo = notification.object as? [String: Any],
+           let stationData = userInfo["data"] as? String {
+            print("Received station:", stationData)
         }
     }
 
+    
+//    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType) {
+//        switch fieldType {
+//        case .from:
+//            fromInputLabel.text = station.stationName
+//        case .to:
+//            toInputLabel.text = station.stationName
+//        }
+//    }
 
-    private func setupNavigationBar() {
-        if let navController = navigationController as? NavigationController {
-            let attributedText = NSAttributedStringBuilder()
-                .add(text: "Vyhľadanie spojenia", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
-                .build()
-            
-            navController.setTitle(attributedText)
-        }
-    }
 }
