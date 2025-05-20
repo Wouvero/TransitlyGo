@@ -11,15 +11,18 @@ import UIKit
 import CoreData
 import UIKitTools
 
-protocol StationSearchDelegate: AnyObject {
-    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType)
-}
+//protocol StationSearchDelegate: AnyObject {
+//    func didSelectStation(_ station: CDStationInfo, for fieldType: InputFieldType)
+//}
 
 class StationSearchViewController: UIViewController {
     
-    weak var delegate: StationSearchDelegate?
+    //weak var delegate: StationSearchDelegate?
+    
+    var fieldType: InputFieldType = .from
     
     private let searchTextField = UITextField()
+    
     private let tableView = UITableView()
     
     private var alphabeticallyGroupedStations: [String: [CDStationInfo]] = [:] {
@@ -28,9 +31,8 @@ class StationSearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    private var alphabetSectionTitles: [String] = []
     
-    var fieldType: InputFieldType = .from
+    private var alphabetSectionTitles: [String] = []
     
     private var context: NSManagedObjectContext {
         return CoreDataManager.shared.viewContext
@@ -47,7 +49,11 @@ class StationSearchViewController: UIViewController {
         setupTable()
         setupOptionsView()
     }
+    
+}
 
+extension StationSearchViewController {
+    
     private func setupSafeAreaBackground() {
         let safeAreaBackground = UIView(color: Colors.primary)
         safeAreaBackground.translatesAutoresizingMaskIntoConstraints = false
@@ -225,6 +231,10 @@ class StationSearchViewController: UIViewController {
         
     }
     
+}
+
+extension StationSearchViewController {
+    
     @objc private func pushToStationController(_ sender: UITapGestureRecognizer) {
         let mapController = StationsListViewController()
         mapController.modalPresentationStyle = .fullScreen
@@ -257,7 +267,9 @@ class StationSearchViewController: UIViewController {
         
         alphabeticallyGroupedStations = CDStationInfo.searchStationInfosGroupedAlphabetically(context: context, contains: searchText)
     }
+    
 }
+
 
 extension StationSearchViewController: UITextFieldDelegate {
     
@@ -274,10 +286,10 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("did select")
+        //print("did select")
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row]{
-            delegate?.didSelectStation(stationInfoItem, for: fieldType)
+            //delegate?.didSelectStation(stationInfoItem, for: fieldType)
             dissmissKeyboard()
             dismiss(animated: true)
         }
