@@ -8,19 +8,7 @@
 
 import UIKit
 
-extension UIView {
-    public func pinInTopSafeArea() {
-        guard let superview = superview else { return }
-        
-        self.topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor).isActive = true
-        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
-        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
-    }
-}
-
-
-class NavigationController: UINavigationController {
+class _NavigationController: UINavigationController {
     let customNavigationBar = UIView(color: Colors.primary)
     let navigationContent = UIView()
     private var navigationContentHeight: CGFloat = 44
@@ -182,9 +170,9 @@ class NavBarController_1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let navController = navigationController as? NavigationController {
+        if let navController = navigationController as? _NavigationController {
             navController.setTitle("My title")
-            navController.setNavigationContentHeight(55)
+            navController.setNavigationContentHeight(60)
             
         }
     }
@@ -197,7 +185,7 @@ import SwiftUI
 struct NavBarController_1_Preview: PreviewProvider {
     static var previews: some View {
         ViewControllerPreview {
-            let navController = NavigationController(rootViewController: NavBarController_1())
+            let navController = _NavigationController(rootViewController: NavBarController_1())
             return navController
         }
         .ignoresSafeArea()
