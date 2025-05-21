@@ -27,6 +27,18 @@ private class TapGestureRecognizer: UITapGestureRecognizer {
 }
 
 
+extension UIView {
+    public func pinInTopSafeArea() {
+        guard let superview = superview else { return }
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
+    }
+}
+
+
 
 extension UIView {
     /// Function for finding UIViewController
