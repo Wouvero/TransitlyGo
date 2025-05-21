@@ -24,7 +24,7 @@ extension TabBarItem {
         TabBarItem(
             title: "Favorite",
             icon: SFSymbols.favorite,
-            viewController: UIViewController()
+            viewController: FavoriteRoutesViewController()
         ),
         TabBarItem(
             title: "SearchBar",

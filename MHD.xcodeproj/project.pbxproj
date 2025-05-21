@@ -81,6 +81,7 @@
 		377AEBD62DDB63B400929129 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD52DDB63B100929129 /* Data.swift */; };
 		377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBDC2DDB683C00929129 /* MapViewController.swift */; };
 		377AEBDF2DDD0FC300929129 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBDE2DDD0FB700929129 /* NavBar.swift */; };
+		377AEBE22DDDDADB00929129 /* FavoriteRoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,7 @@
 		377AEBD52DDB63B100929129 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		377AEBDC2DDB683C00929129 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		377AEBDE2DDD0FB700929129 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
+		377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRoutesViewController.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -199,6 +201,7 @@
 		37370BD42DA6CB5A007BB225 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				377AEBE02DDDDAC200929129 /* FavoriteRoutesScreen */,
 				377AEBBA2DD9DE4A00929129 /* StationDetailScreen */,
 				377AEBDB2DDB683500929129 /* MapScreen */,
 				377AEBB72DD8CEBB00929129 /* StationsListScreen */,
@@ -534,6 +537,14 @@
 			path = MapScreen;
 			sourceTree = "<group>";
 		};
+		377AEBE02DDDDAC200929129 /* FavoriteRoutesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */,
+			);
+			path = FavoriteRoutesScreen;
+			sourceTree = "<group>";
+		};
 		37E0CC622D93F1BB003770B1 = {
 			isa = PBXGroup;
 			children = (
@@ -643,6 +654,7 @@
 				377246C12D947484000ED98C /* TransportLinesViewController.swift in Sources */,
 				377AEB9A2DD3E17F00929129 /* TimeInterval.swift in Sources */,
 				374872C72DC0D73B006126B2 /* CDAlert+CoreDataClass.swift in Sources */,
+				377AEBE22DDDDADB00929129 /* FavoriteRoutesViewController.swift in Sources */,
 				374873012DC2D38F006126B2 /* StationViewCell.swift in Sources */,
 				374872C82DC0D73B006126B2 /* CDAlert+CoreDataProperties.swift in Sources */,
 				3748730B2DC50427006126B2 /* _TimetableCollectionViewCell.swift in Sources */,
