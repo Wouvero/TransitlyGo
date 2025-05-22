@@ -50,6 +50,7 @@ class StationSearchViewCell: UITableViewCell {
     }
     
     private func setupCell() {
+        backgroundColor = .clear
         addSubviews(rootView)
         rootView.pinInSuperview()
         rootView.addBorder(for: [.bottom], in: .systemGray5, width: 1)

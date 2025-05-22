@@ -97,8 +97,8 @@ class SearchConectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        setTabBarHidden(false)
     }
-
 }
 
 extension SearchConectionViewController {
@@ -147,6 +147,7 @@ extension SearchConectionViewController {
     }
     
     private func setupGestures() {
+        
         let fromTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleFromTap))
         fromInputButton.addGestureRecognizer(fromTapGesture)
         
@@ -207,9 +208,8 @@ extension SearchConectionViewController {
     private func presentSearchController(for fieldType: InputFieldType = .from) {
         let searchController = StationSearchViewController()
         searchController.fieldType = fieldType
-        searchController.modalPresentationStyle = .fullScreen
-        
-        present(searchController, animated: false)
+
+        navigationController?.pushViewController(searchController, animated: false)
     }
     
 }

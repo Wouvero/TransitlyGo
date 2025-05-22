@@ -16,15 +16,17 @@ protocol TabBarDelegate: AnyObject {
 
 class TabBarController: UITabBarController, UINavigationControllerDelegate, UITabBarControllerDelegate {
     
-    private var tabBarHeight: CGFloat = 70
+    
     private var tabBarView: TabBarView!
     private var tabBarItems: [TabBarItem] = []
     private var isTabBarContentHidden: Bool = false {
         didSet {
-            tabBarHeight = isTabBarContentHidden ? 0 : 70
+            //tabBarHeight = isTabBarContentHidden ? 0 : 70
             tabBarView.isHidden = isTabBarContentHidden ? true : false
         }
     }
+    
+    private var tabBarHeight: CGFloat = 70
     
     init(tabBatItems: [TabBarItem]) {
         self.tabBarItems = tabBatItems
@@ -69,16 +71,19 @@ extension TabBarController {
     }
     
     private func updateSafeAreaInsets() {
+        let height = isTabBarContentHidden ? 0 : tabBarHeight
         let safeAreaBottom = view.safeAreaInsets.bottom
-        let totalBottomInset = tabBarHeight + safeAreaBottom
+        let totalBottomInset = height + safeAreaBottom
         let additionalInset = max(0, totalBottomInset - safeAreaBottom)
         self.additionalSafeAreaInsets.bottom = additionalInset
+        
+        print(safeAreaBottom, height)
         
         NSLayoutConstraint.activate([
             tabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tabBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            //tabBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     

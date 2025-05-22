@@ -38,6 +38,7 @@ class StationsListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationBar()
+        setTabBarHidden(true)
     }
     
     private func setupTable() {
@@ -60,10 +61,11 @@ class StationsListViewController: UIViewController {
             let attributedText = NSAttributedStringBuilder()
                 .add(text: "Všetky zastávky", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
                 .build()
-            
+            navController.navigationControllerState = .visible
             navController.setTitle(attributedText)
         }
     }
+    
 }
 
 extension StationsListViewController: UITableViewDelegate, UITableViewDataSource {

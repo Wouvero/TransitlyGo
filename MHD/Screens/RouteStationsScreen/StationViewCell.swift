@@ -116,48 +116,7 @@ class StationViewCell: UITableViewCell {
         updateAppearance()
     }
     
-    //    override func layoutSubviews() {
-    //        super.layoutSubviews()
-    //        print("Cell final height: \(self.frame.height)")
-    //    }
-    
-    
-    
-    //    private func setupTouchHandling() {
-    //        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-    //        longPress.minimumPressDuration = 0.05
-    //        longPress.delegate = self
-    //        addGestureRecognizer(longPress)
-    //    }
-    
-    //    @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
-    //        switch gesture.state {
-    //        case .began:
-    //            print("Began")
-    //            isHighlighted = true
-    //            updateAppearance()
-    //        case .changed:
-    //            print("Change")
-    //            isHighlighted = true
-    //            updateAppearance()
-    //        case .ended, .cancelled:
-    //            print("End/canceled")
-    //            isHighlighted = false
-    //            updateAppearance()
-    //        default:
-    //            break
-    //        }
-    //    }
-    
-    
-    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 }
-
-//extension StationViewCell {
-//    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-//        return true
-//    }
-//}

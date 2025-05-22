@@ -31,9 +31,9 @@ class StationSearchViewController: UIViewController {
     
     private var alphabetSectionTitles: [String] = []
     
-    private var context: NSManagedObjectContext {
+    private lazy var context: NSManagedObjectContext = {
         return CoreDataManager.shared.viewContext
-    }
+    }()
     
     private let optionsView = UIView(color: .systemBackground)
     
@@ -41,80 +41,104 @@ class StationSearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        setupSafeAreaBackground()
         setupSearchTextField()
         setupTable()
-        setupOptionsView()
+        //setupSearchOptionsView()
+        
+        let v = UIView(color: .systemBlue)
+        v.setDimensions(width: 100, height: 100)
+        view.addSubview(v)
+        v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushToMapController)))
+        v.center()
+        
+//        let button = UIButton()
+//        button.titleLabel?.textColor = .black
+//        button.titleLabel?.text = "test"
+//        button.addTarget(self, action: #selector(pushToStationController), for: .touchUpInside)
+//        
+//        view.addSubview(button)
+//        button.center()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+        
+        tabBarController?.setTabBarContentHidden(true)
+        searchTextField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        searchTextField.resignFirstResponder()
+    }
 }
 
 extension StationSearchViewController {
     
-    private func setupSafeAreaBackground() {
-        let safeAreaBackground = UIView(color: Colors.primary)
-        safeAreaBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(safeAreaBackground)
-        
-        NSLayoutConstraint.activate([
-            safeAreaBackground.topAnchor.constraint(equalTo: view.topAnchor),
-            safeAreaBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            safeAreaBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            safeAreaBackground.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
-    }
-    
     private func setupSearchTextField() {
-        searchTextField.placeholder = fieldType.rawValue
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        searchTextField.backgroundColor = .white
-        searchTextField.addBorder(for: [.bottom], in: .systemGray3, width: 1)
-        
-        // Add text field delegate
-        searchTextField.delegate = self
-        searchTextField.addTarget(self, action: #selector(searchTextFieldChanged), for: .editingChanged)
-        
+        // Setup placeholder
+        searchTextField.attributedPlaceholder = NSAttributedString(
+            string: fieldType.rawValue,
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.systemGray,
+            ]
+        )
+        // Setup text
+        searchTextField.attributedText = NSAttributedString(
+            string: "",
+            attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.black,
+            ]
+        )
+        // Setup cursor color
+        searchTextField.tintColor = Colors.primary
+        searchTextField.layer.backgroundColor = UIColor.systemBackground.cgColor
+                
         // Setup left view
-        let leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 56))
+        let leftView = UIView()
+        leftView.setDimensions(width: 16, height: 50)
         searchTextField.leftViewMode = .always
         searchTextField.leftView = leftView
         
         // Setup right view
         let rightView = UIView()
-        rightView.setDimensions(width: 60, height: 56)
-        
-        // -> Setup xmark view
-        let xmarkView = UIView()
-        xmarkView.setDimensions(width: 56, height: 56)
-        xmarkView.isUserInteractionEnabled = true
-        // -> Setup xmark view tap gesture
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dissmissViewController(_:)))
-        xmarkView.addGestureRecognizer(tapGesture)
-        
-        let xmarkIcon = IconImageView(systemName: SFSymbols.xmark, config: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .medium))
-        xmarkView.addSubview(xmarkIcon)
-        xmarkIcon.center()
-        
-        rightView.addSubview(xmarkView)
-        xmarkView.leading(offset: .init(x: 5, y: 0))
-        
+        rightView.setDimensions(width: 60, height: 50)
         searchTextField.rightViewMode = .always
         searchTextField.rightView = rightView
         
+        let clearTextButton = UIButton()
+        clearTextButton.setDimensions(width: 50, height: 50)
+        let xmarkCircleIcon = IconImageView(systemName: "xmark.circle", config: UIImage.SymbolConfiguration(pointSize: 16, weight: .semibold, scale: .medium), tintColor: UIColor.systemGray)
+        
+        rightView.addSubview(clearTextButton)
+        clearTextButton.trailing()
+        
+        clearTextButton.addSubview(xmarkCircleIcon)
+        xmarkCircleIcon.center()
+        
+        clearTextButton.addTarget(self, action: #selector(clearTextField), for: .touchUpInside)
+        
         // Setup toolbar
+        searchTextField.keyboardType = .default
         setupToolBar()
         
-        // Setup layout
+        // Add bottom border
+        searchTextField.addBorder(for: .bottom, in: .systemGray3, width: 1)
+        
         view.addSubview(searchTextField)
+        
+        // Setup constrains
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             searchTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             searchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            searchTextField.heightAnchor.constraint(equalToConstant: 56)
+            searchTextField.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        // Activate the text field and show keyboard
-        searchTextField.becomeFirstResponder()
+        // Add target
+        searchTextField.addTarget(self, action: #selector(searchTextFieldChanged), for: .editingChanged)
     }
     
     private func setupToolBar() {
@@ -134,8 +158,8 @@ extension StationSearchViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
         tableView.register(StationSearchViewCell.self, forCellReuseIdentifier: StationSearchViewCell.reuseIdentifier)
-        
         
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -148,7 +172,7 @@ extension StationSearchViewController {
         ])
     }
     
-    private func setupOptionsView() {
+    private func setupSearchOptionsView() {
         
         optionsView.isHidden = false
         optionsView.translatesAutoresizingMaskIntoConstraints = false
@@ -209,10 +233,18 @@ extension StationSearchViewController {
             spacing: 8
         )
         
-        //let tapGestureRecohnizer = UITapGestureRecognizer(target: self, action: #selector(pushToMapController))
+        optionStack_1.isUserInteractionEnabled = true
+        optionStack_3.isUserInteractionEnabled = true
+        
+        optionStack_1.backgroundColor = .red.withAlphaComponent(0.3)
+        optionStack_3.backgroundColor = .blue.withAlphaComponent(0.3)
+        
         let tapGestureRecohnizer_1 = UITapGestureRecognizer(target: self, action: #selector(pushToStationController))
+        let tapGestureRecohnizer_3 = UITapGestureRecognizer(target: self, action: #selector(pushToMapController))
+      
+        
         optionStack_1.addGestureRecognizer(tapGestureRecohnizer_1)
-        //optionStack_3.addGestureRecognizer(tapGestureRecohnizer)
+        optionStack_3.addGestureRecognizer(tapGestureRecohnizer_3)
         
         let optionsStack = UIStackView(
             arrangedSubviews: [optionStack_1, optionStack_2, optionStack_3],
@@ -225,7 +257,6 @@ extension StationSearchViewController {
         
         optionsView.addSubview(optionsStack)
         optionsStack.top(offset: .init(x: 0, y: 64))
-        
     }
     
 }
@@ -233,18 +264,25 @@ extension StationSearchViewController {
 extension StationSearchViewController {
     
     @objc private func pushToStationController(_ sender: UITapGestureRecognizer) {
-        let stationsListController = StationsListViewController()
-        stationsListController.fieldType = fieldType
-        stationsListController.modalPresentationStyle = .fullScreen
-        present(stationsListController, animated: false, completion: nil)
+        print("Station")
+        let stationsListViewController = StationsListViewController()
+        navigationController?.pushViewController(stationsListViewController, animated: false)
+    }
+    
+    @objc private func pushToMapController(_ sender: UITapGestureRecognizer) {
+        print("Map")
+
+        let mapViewController = MapViewController()
+        navigationController?.pushViewController(mapViewController, animated: false)
     }
     
     @objc private func dissmissKeyboard() {
         searchTextField.resignFirstResponder()
     }
     
-    @objc private func dissmissViewController(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: false)
+    @objc private func clearTextField() {
+        searchTextField.text = ""
+        alphabeticallyGroupedStations = [:]
     }
     
     @objc private func searchTextFieldChanged(_ sender: UITextField) {
@@ -305,5 +343,19 @@ extension StationSearchViewController: UITableViewDelegate, UITableViewDataSourc
         
         tableView.deselectRow(at: indexPath, animated: true)
         return cell
+    }
+}
+
+extension StationSearchViewController {
+    
+    private func setupNavigationBar() {
+        if let navController = navigationController as? NavigationController {
+            let attributedText = NSAttributedStringBuilder()
+                .add(text: "Vyhľadavanie", attributes: [.font: UIFont.systemFont(ofSize: navigationBarTitleSize, weight: .bold)])
+                .build()
+            
+            navController.setTitle(attributedText)
+            navController.isTransitionEnabled = false
+        }
     }
 }

@@ -22,6 +22,7 @@ class NavigationController: UINavigationController {
             navigationContentHeight = navigationControllerState == .visible ? 44 : 0
         }
     }
+    var isTransitionEnabled: Bool = true
         
     private var navigationContentHeightConstraint: NSLayoutConstraint?
     private var navigationContentTopConstraint: NSLayoutConstraint?
@@ -79,12 +80,12 @@ class NavigationController: UINavigationController {
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        super.pushViewController(viewController, animated: animated)
+        super.pushViewController(viewController, animated: isTransitionEnabled ? animated : false)
         updateBackButtonVisibility()
     }
 
     override func popViewController(animated: Bool) -> UIViewController? {
-        let vc = super.popViewController(animated: animated)
+        let vc = super.popViewController(animated: isTransitionEnabled ? animated : false)
         updateBackButtonVisibility()
         return vc
     }

@@ -62,6 +62,7 @@ class StationsTable: UIView, UITableViewDelegate, UIGestureRecognizerDelegate {
         stationTableView.showsHorizontalScrollIndicator = false
         stationTableView.showsVerticalScrollIndicator = false
         stationTableView.delegate = self
+        stationTableView.backgroundColor = .systemBackground
         
         addSubview(stationTableView)
         stationTableView.pinInSuperview()

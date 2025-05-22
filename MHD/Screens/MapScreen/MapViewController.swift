@@ -12,11 +12,6 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupNavigationBar()
         
         let v = UIView(color: .cyan)
         v.setDimensions(width: 50, height: 50)
@@ -44,7 +39,7 @@ class MapViewController: UIViewController {
 //            let userInfo: [AnyHashable: Any] = [
 //                NotificationKey.inputFieldType: "from"
 //            ]
-//            
+//
 //            NotificationCenter.default.post(
 //                name: .selectStation,
 //                object: nil,
@@ -52,6 +47,12 @@ class MapViewController: UIViewController {
           //  )
             self.view.window?.rootViewController?.dismiss(animated: false)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupNavigationBar()
+        tabBarController?.setTabBarContentHidden(true)
     }
     
     private func setupNavigationBar() {
