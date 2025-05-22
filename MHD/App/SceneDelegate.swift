@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         window.rootViewController = TabBarController(tabBatItems: TabBarItem.tabBarItems)
-        
+        window.overrideUserInterfaceStyle = .light
         //generateDummyData()
         self.window = window
         window.makeKeyAndVisible()
