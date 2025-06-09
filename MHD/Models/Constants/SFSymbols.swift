@@ -17,5 +17,9 @@ struct SFSymbols {
     static let xmark = "xmark"
     static let map = "map"
     static let changePosition = "arrow.up.arrow.down.circle"
+    static let arrowUpForward = "arrow.up.forward"
+    static let arrowDownLeft = "arrow.down.left"
+    static let signpost = "signpost.right.and.left"
+    static let onSign = "hand.raised.fill"
     
 }
