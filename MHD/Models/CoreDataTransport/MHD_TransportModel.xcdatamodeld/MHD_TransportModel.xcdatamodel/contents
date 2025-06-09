@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24A348" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="MHD_Alert" representedClassName="MHD_Alert" syncable="YES">
+        <attribute name="endTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="message" attributeType="String"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="MHD_DaytimeSchedule" representedClassName="MHD_DaytimeSchedule" syncable="YES">
+        <attribute name="dayType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="directionStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_DirectionStation" inverseName="schedules" inverseEntity="MHD_DirectionStation"/>
+        <relationship name="timeTables" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_TimeTable" inverseName="daytimeSchedule" inverseEntity="MHD_TimeTable"/>
+    </entity>
+    <entity name="MHD_Direction" representedClassName="MHD_Direction" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="routeGeoJSONData" optional="YES" attributeType="Binary"/>
+        <attribute name="sortIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="directionStations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MHD_DirectionStation" inverseName="direction" inverseEntity="MHD_DirectionStation"/>
+        <relationship name="endDestination" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="endDestinations" inverseEntity="MHD_StationInfo"/>
+        <relationship name="transportLine" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_TransportLine" inverseName="directions" inverseEntity="MHD_TransportLine"/>
+    </entity>
+    <entity name="MHD_DirectionStation" representedClassName="MHD_DirectionStation" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="isOnSign" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="sortIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="travelTimeToNextStation" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="direction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_Direction" inverseName="directionStations" inverseEntity="MHD_Direction"/>
+        <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MHD_DaytimeSchedule" inverseName="directionStation" inverseEntity="MHD_DaytimeSchedule"/>
+        <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="directionStation" inverseEntity="MHD_StationInfo"/>
+    </entity>
+    <entity name="MHD_MinuteInfo" representedClassName="MHD_MinuteInfo" syncable="YES">
+        <attribute name="condition" optional="YES" attributeType="String"/>
+        <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="timeTable" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_TimeTable" inverseName="minuteInfos" inverseEntity="MHD_TimeTable"/>
+    </entity>
+    <entity name="MHD_StationInfo" representedClassName="MHD_StationInfo" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="stationName" attributeType="String"/>
+        <relationship name="directionStation" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_DirectionStation" inverseName="stationInfo" inverseEntity="MHD_DirectionStation"/>
+        <relationship name="endDestinations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_Direction" inverseName="endDestination" inverseEntity="MHD_Direction"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_StationLocation" inverseName="stationInfo" inverseEntity="MHD_StationLocation"/>
+        <relationship name="transportLines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_TransportLine" inverseName="stations" inverseEntity="MHD_TransportLine"/>
+    </entity>
+    <entity name="MHD_StationLocation" representedClassName="MHD_StationLocation" syncable="YES">
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="platform" optional="YES" attributeType="String"/>
+        <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_StationInfo" inverseName="location" inverseEntity="MHD_StationInfo"/>
+    </entity>
+    <entity name="MHD_TimeTable" representedClassName="MHD_TimeTable" syncable="YES">
+        <attribute name="hour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="daytimeSchedule" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_DaytimeSchedule" inverseName="timeTables" inverseEntity="MHD_DaytimeSchedule"/>
+        <relationship name="minuteInfos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_MinuteInfo" inverseName="timeTable" inverseEntity="MHD_MinuteInfo"/>
+    </entity>
+    <entity name="MHD_TransportLine" representedClassName="MHD_TransportLine" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="sortIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="directions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MHD_Direction" inverseName="transportLine" inverseEntity="MHD_Direction"/>
+        <relationship name="stations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MHD_StationInfo" inverseName="transportLines" inverseEntity="MHD_StationInfo"/>
+    </entity>
+</model>

@@ -14,7 +14,7 @@ func numberToString<T: Numeric>(_ num: T) -> String {
 }
 
 
-func formatMinute(_ minuteInfo: CDMinuteInfo) -> String {
+func formatMinute(_ minuteInfo: MHD_MinuteInfo) -> String {
     let formattedMinute = String(format: "%02d", minuteInfo.minute)
     if let condition = minuteInfo.condition {
         return "\(formattedMinute) \(condition.uppercased())"
@@ -54,7 +54,7 @@ func isHoliday(date: Date, calendar: Calendar) -> Bool {
     
     // Movable holidays (Easter-based)
     let easterDate = calculateEaster(year: year)
-    let easterComponents = calendar.dateComponents([.month, .day], from: easterDate)
+    //let easterComponents = calendar.dateComponents([.month, .day], from: easterDate)
     
     // Good Friday (2 days before Easter)
     if let goodFriday = calendar.date(byAdding: .day, value: -2, to: easterDate),
@@ -107,6 +107,12 @@ func isSchoolHoliday(date: Date, calendar: Calendar) -> Bool {
         let end = calendar.date(byAdding: .day, value: 2, to: easter)!
         return DateInterval(start: start, end: end)
     }()
+    
+    if springVacation.contains(date) || easterVacation.contains(date) || autumnVacation.contains(date) || christmasVacation.contains(date) {
+        return true
+    }
+    
+    
     return false
 }
 

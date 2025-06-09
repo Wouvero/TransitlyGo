@@ -17,25 +17,20 @@ struct TabBarItem {
 extension TabBarItem {
     static let tabBarItems: [TabBarItem] = [
         TabBarItem(
-            title: "Stations",
-            icon: SFSymbols.bus,
+            title: "View 1",
+            icon: "house",
             viewController: TransportLinesViewController()
         ),
         TabBarItem(
-            title: "Favorite",
-            icon: SFSymbols.favorite,
-            viewController: UIViewController()
+            title: "View 2",
+            icon: "heart",
+            viewController: FavoriteRoutesViewController()
         ),
         TabBarItem(
-            title: "Timetable",
-            icon: SFSymbols.search,
-            viewController: UIViewController()
+            title: "View 3",
+            icon: "magnifyingglass",
+            viewController: RouteSelectionViewController()
         ),
-        TabBarItem(
-            title: "Route",
-            icon: SFSymbols.station,
-            viewController: UIViewController()
-        )
     ]
 }
 

@@ -7,5 +7,6 @@
 //         
 import UIKit
 
-let tabBarIconSize: CGFloat = 20
+let tabBarIconSize: CGFloat = 24
 let navigationBarTitleSize: CGFloat = 14
+let horizontalPadding: CGFloat = 16
