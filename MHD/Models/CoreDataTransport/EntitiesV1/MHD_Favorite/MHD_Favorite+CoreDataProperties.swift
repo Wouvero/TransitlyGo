@@ -29,3 +29,17 @@ extension MHD_Favorite {
 extension MHD_Favorite : Identifiable {
 
 }
+
+extension MHD_Favorite {
+    static func getAll(in context: NSManagedObjectContext) -> [MHD_Favorite] {
+        let fetchRequest: NSFetchRequest<MHD_Favorite> = MHD_Favorite.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
+        do {
+            let result = try context.fetch(fetchRequest)
+            return result
+        } catch {
+            print("Faild to fetch favorites")
+            return []
+        }
+    }
+}
