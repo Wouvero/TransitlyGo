@@ -73,7 +73,7 @@ func isHoliday(date: Date, calendar: Calendar) -> Bool {
 
 func isSchoolHoliday(date: Date, calendar: Calendar) -> Bool {
     let components = calendar.dateComponents([.year, .month, .day], from: date)
-    guard let year = components.year, let month = components.month, let day = components.day else {
+    guard let year = components.year, let month = components.month /*let day = components.day*/ else {
         return false
     }
     
