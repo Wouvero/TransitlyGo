@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import UIKitPro
 
-class StationsListViewController: UIViewController, MHD_NavigationDelegate {
+class StationsListViewController: UIViewController, MHD_NavigationDelegate, FieldTypeHandling {
     var contentLabelText: NSAttributedString {
         return NSAttributedStringBuilder()
             .add(text: "Všetky zastávky", attributes: [.font: UIFont.interSemibold(size: 16)])
@@ -74,6 +74,7 @@ extension StationsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] {
             NotificationCenter.default.post(
                 name: .didSelectStation,
