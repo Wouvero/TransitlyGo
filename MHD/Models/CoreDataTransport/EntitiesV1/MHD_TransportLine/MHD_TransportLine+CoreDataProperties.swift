@@ -81,6 +81,18 @@ extension MHD_TransportLine {
         }
     }
     
+    static func getAll(in context: NSManagedObjectContext) -> [MHD_TransportLine] {
+        let fetchRequest = MHD_TransportLine.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
+        do {
+            let results = try context.fetch(fetchRequest)
+            return results
+        } catch {
+            print("Error fetching data")
+            return []
+        }
+    }
+    
     static func deleteAll(in context: NSManagedObjectContext) {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_TransportLine.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
