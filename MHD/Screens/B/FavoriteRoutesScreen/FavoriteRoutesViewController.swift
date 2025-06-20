@@ -142,8 +142,8 @@ struct FavoriteItem: View {
             Image(systemName: "trash")
                 .frame(width: buttonWidth)
                 .frame(maxHeight: .infinity)
-                .background(.red)
-                .foregroundStyle(.white)
+                .background(.danger200)
+                .foregroundStyle(.danger700)
                 .fontWeight(.semibold)
         }
     }
@@ -155,8 +155,8 @@ struct FavoriteItem: View {
             Image(systemName: "pencil")
                 .frame(width: buttonWidth)
                 .frame(maxHeight: .infinity)
-                .background(.orange)
-                .foregroundStyle(.white)
+                .background(.warning200)
+                .foregroundStyle(.warning700)
                 .fontWeight(.semibold)
         }
     }
