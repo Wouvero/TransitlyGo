@@ -17,6 +17,14 @@ struct NotificationKey {
     static let inputFieldType: String = "InputFieldType"
 }
 
+struct SearchRouteModel {
+    let fromStationInfo: MHD_StationInfo
+    let toStationInfo: MHD_StationInfo
+    let hour: String
+    let minute: String
+    let selectedDate: Date
+}
+
 
 enum InputFieldType: String {
     case from = "Zo zastávky"
@@ -37,16 +45,16 @@ class SearchRouteViewModel {
     }
     
     // Input fields
-    var fromInputText: String = "" {
+    var fromStationInfo: MHD_StationInfo? {
         didSet {
-            guard fromInputText != oldValue else { return }
-            onFromInputChanged?(fromInputText)
+            guard fromStationInfo != oldValue else { return }
+            onFromInputChanged?(fromStationInfo?.stationName ?? "")
         }
     }
-    var toInputText: String = "" {
+    var toStationInfo: MHD_StationInfo? {
         didSet {
-            guard toInputText != oldValue else { return }
-            onToInputChanged?(toInputText)
+            guard toStationInfo != oldValue else { return }
+            onToInputChanged?(toStationInfo?.stationName ?? "")
         }
     }
     
@@ -81,8 +89,25 @@ class SearchRouteViewModel {
     }
     
     func switchInputs() {
-        guard !fromInputText.isEmpty || !toInputText.isEmpty else { return }
-        swap(&fromInputText, &toInputText)
+        switch (fromStationInfo, toStationInfo) {
+        case let (from?, to?):
+            // Both have values - simple swap
+            (fromStationInfo, toStationInfo) = (to, from)
+            
+        case (nil, let to?):
+            // Only "to" has value - move it to "from"
+            fromStationInfo = to
+            toStationInfo = nil
+            
+        case (let from?, nil):
+            // Only "from" has value - move it to "to"
+            toStationInfo = from
+            fromStationInfo = nil
+            
+        case (nil, nil):
+            // Both are nil - nothing to do
+            break
+        }
     }
     
     func showExtendedOptions() {
@@ -90,26 +115,35 @@ class SearchRouteViewModel {
     }
     
     func search() {
-        guard !fromInputText.isEmpty else {
+        guard let fromStationInfo else {
             print("Missing fromInputText")
             return
         }
         
-        guard !toInputText.isEmpty else {
+        guard let toStationInfo else {
             print("Missing toInputText")
             return
         }
         
+        let searchRouteModel = SearchRouteModel(
+            fromStationInfo: fromStationInfo,
+            toStationInfo: toStationInfo,
+            hour: hour,
+            minute: minute,
+            selectedDate: selectedDate
+        )
         
+//        print("-----------------------------")
+//        print("Zo zastavky: ",fromInputText)
+//        print("Na zastavku: ",toStationInfo)
+//        
+//        print("Den: ", formatDate(selectedDate))
+//        print("Hodina: ", hour)
+//        print("Minuta: ", minute)
+//        print("-----------------------------")
         
-        print("-----------------------------")
-        print("Zo zastavky: ",fromInputText)
-        print("Na zastavku: ",toInputText)
-        
-        print("Den: ", formatDate(selectedDate))
-        print("Hodina: ", hour)
-        print("Minuta: ", minute)
-        print("-----------------------------")
+        let vc = ResultScreenViewController(searchRouteModel: searchRouteModel)
+        router.pushViewController(vc, animated: true)
     }
     
 }
@@ -145,9 +179,9 @@ extension SearchRouteViewModel {
            let textFieldType = userInfo["fieldType"] as? InputFieldType {
             switch textFieldType {
             case .from:
-                fromInputText = stationInfo.stationName ?? ""
+                fromStationInfo = stationInfo
             case .to:
-                toInputText = stationInfo.stationName ?? ""
+                toStationInfo = stationInfo
             }
         }
     }
@@ -171,9 +205,6 @@ extension SearchRouteViewModel {
         let dateComponents = calendar.dateComponents([.hour, .minute], from: today)
         guard let curentHour = dateComponents.hour,
               let currentMinute = dateComponents.minute else { return }
-        
-        print(curentHour)
-        print(currentMinute)
         
         hour = String(curentHour)
         minute = String(currentMinute)
