@@ -5,43 +5,23 @@
 // Copyright (c) 2025 MHD
 //
 //
+
 import UIKit
-
-//extension UIViewController {
-//    func addDefaultBackButton(tintColor: UIColor = .white) {
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(
-//            image: UIImage(systemName: "chevron.left"),
-//            style: .plain,
-//            target: self,
-//            action: #selector(backButtonTapped)
-//        )
-//        navigationItem.leftBarButtonItem?.tintColor = tintColor
-//    }
-//    
-//    @objc func backButtonTapped() {
-//        print("<<")
-//        // Handle both navigation stack and modal presentation
-//        if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
-//            navigationController.popViewController(animated: true)
-//        } else {
-//            dismiss(animated: true)
-//        }
-//    }
-//}
-
-
 
 extension UIViewController {
     func navigate(to viewController: UIViewController, animation: Bool = true) {
-        navigationController?.pushViewController(viewController, animated: animation)
+        guard let navBarController = self.navigationController as? MHD_NavigationBarController else { return }
+        navBarController.pushViewController(viewController, animated: animation)
     }
     
     func pop(animated: Bool = true) {
-        navigationController?.popViewController(animated: animated)
+        guard let navBarController = self.navigationController as? MHD_NavigationBarController else { return }
+        _ = navBarController.popViewController(animated: animated)
     }
     
     func popToRoot(animated: Bool = true) {
-        navigationController?.popToRootViewController(animated: animated)
+        guard let navBarController = self.navigationController as? MHD_NavigationBarController else { return }
+        _ = navBarController.popToRootViewController(animated: animated)
     }
     
     
@@ -62,6 +42,30 @@ extension UIViewController {
     func callSetNavBarHidden(to hide: Bool, animated: Bool = false) {
         guard let navBarController = self.navigationController as? MHD_NavigationBarController else { return }
         navBarController.setNavBarHidden(to: hide, animated: animated)
+    }
+}
+
+extension UIViewController {
+    func previousViewController<T: UIViewController>(ofType type: T.Type) -> T? {
+        guard let navController = self.navigationController else { return nil }
+
+        let viewControllers = navController.viewControllers
+        
+        guard viewControllers.count >= 2 else { return nil}
+        
+        guard let previousController = viewControllers[viewControllers.count - 2] as? T else { return nil }
+        
+        return previousController
+    }
+    
+    var previousViewController: UIViewController? {
+        guard let navController = self.navigationController else { return nil }
+
+        let viewControllers = navController.viewControllers
+        
+        guard viewControllers.count >= 2 else { return nil}
+    
+        return viewControllers[viewControllers.count - 2]
     }
 }
 
