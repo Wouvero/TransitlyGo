@@ -8,11 +8,6 @@
 
 import UIKit
 
-enum InputFieldType: String {
-    case from = "Zo zastávky"
-    case to = "Na zastávku"
-}
-
 extension Notification.Name {
     static let didSelectStation = Notification.Name("didSelectStation")
 }
@@ -23,6 +18,171 @@ struct NotificationKey {
 }
 
 
+enum InputFieldType: String {
+    case from = "Zo zastávky"
+    case to = "Na zastávku"
+}
+
+class SearchRouteViewModel {
+    // UI State
+    var isOptionsExpanded: Bool = false {
+        didSet {
+            guard isOptionsExpanded != oldValue else { return }
+            if !isOptionsExpanded {
+                selectedDate = Date()
+                getCurentTime()
+            }
+            onIsOptionsExpandedChanged?(isOptionsExpanded)
+        }
+    }
+    
+    // Input fields
+    var fromInputText: String = "" {
+        didSet {
+            guard fromInputText != oldValue else { return }
+            onFromInputChanged?(fromInputText)
+        }
+    }
+    var toInputText: String = "" {
+        didSet {
+            guard toInputText != oldValue else { return }
+            onToInputChanged?(toInputText)
+        }
+    }
+    
+    // Time selection
+    var hour: String = ""
+    var minute: String = ""
+    var selectedDate: Date = Date() {
+        didSet {
+            guard selectedDate != oldValue else { return }
+            onSelectedDateChanged?(selectedDate)
+        }
+    }
+    var dateOptions: [Date] = []
+    
+    // Callbacks
+    var onFromInputChanged:         ((String) -> Void)?
+    var onToInputChanged:           ((String) -> Void)?
+    var onIsOptionsExpandedChanged: ((Bool) -> Void)?
+    var onHourChanged:              ((String) -> Void)?
+    var onMinuteChanged:            ((String) -> Void)?
+    var onSelectedDateChanged:      ((Date) -> Void)?
+    
+    
+    // Dependencies
+    private var router: UINavigationController
+    
+    init(router: UINavigationController) {
+        self.router = router
+        self.dateOptions = generateDateOptions()
+        getCurentTime()
+        setupObserver()
+    }
+    
+    func switchInputs() {
+        guard !fromInputText.isEmpty || !toInputText.isEmpty else { return }
+        swap(&fromInputText, &toInputText)
+    }
+    
+    func showExtendedOptions() {
+        isOptionsExpanded.toggle()
+    }
+    
+    func search() {
+        guard !fromInputText.isEmpty else {
+            print("Missing fromInputText")
+            return
+        }
+        
+        guard !toInputText.isEmpty else {
+            print("Missing toInputText")
+            return
+        }
+        
+        
+        
+        print("-----------------------------")
+        print("Zo zastavky: ",fromInputText)
+        print("Na zastavku: ",toInputText)
+        
+        print("Den: ", formatDate(selectedDate))
+        print("Hodina: ", hour)
+        print("Minuta: ", minute)
+        print("-----------------------------")
+    }
+    
+}
+
+extension SearchRouteViewModel {
+    
+    func handleTap(for fieldType: InputFieldType = .from) {
+        presentSearchController(for: fieldType)
+    }
+    
+    private func presentSearchController(for fieldType: InputFieldType = .from) {
+        let searchController = DestinationSearchViewController()
+        searchController.fieldType = fieldType
+        router.pushViewController(searchController, animated: true)
+    }
+    
+}
+
+extension SearchRouteViewModel {
+    
+    private func setupObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(didSelectStation),
+            name: .didSelectStation,
+            object: nil
+        )
+    }
+    
+    @objc private func didSelectStation(_ notification: Notification) {
+        if let stationInfo = notification.object as? MHD_StationInfo,
+           let userInfo = notification.userInfo,
+           let textFieldType = userInfo["fieldType"] as? InputFieldType {
+            switch textFieldType {
+            case .from:
+                fromInputText = stationInfo.stationName ?? ""
+            case .to:
+                toInputText = stationInfo.stationName ?? ""
+            }
+        }
+    }
+}
+
+extension SearchRouteViewModel {
+    // Generate options for current day + next 7 days
+    private func generateDateOptions() -> [Date] {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        return (0..<8).compactMap { dayOffset in
+            calendar.date(byAdding: .day, value: dayOffset, to: today)
+        }
+    }
+    
+    private func getCurentTime() {
+        let calendar = Calendar.current
+        let today = Date()
+        
+        let dateComponents = calendar.dateComponents([.hour, .minute], from: today)
+        guard let curentHour = dateComponents.hour,
+              let currentMinute = dateComponents.minute else { return }
+        
+        print(curentHour)
+        print(currentMinute)
+        
+        hour = String(curentHour)
+        minute = String(currentMinute)
+    }
+}
+
+
+
+
 class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
     // MARK: - Navigation variables
     var contentLabelText: NSAttributedString {
@@ -31,38 +191,49 @@ class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
             .build()
     }
     
+    lazy var searchRouteVM: SearchRouteViewModel = {
+        guard let navController = navigationController else {
+            fatalError("NavigationController is not available")
+        }
+        return SearchRouteViewModel(router: navController)
+    }()
+    
     // MARK: - Variables
-    private let fromInputLabel = UILabel(
-        text: InputFieldType.from.rawValue,
-        font: UIFont.interMedium(size: 16),
-        textColor: .neutral800,
-        textAlignment: .left,
-        numberOfLines: 0
-    )
-    
-    private let toInputLabel = UILabel(
-        text: InputFieldType.to.rawValue,
-        font: UIFont.interMedium(size: 16),
-        textColor: .neutral800,
-        textAlignment: .left,
-        numberOfLines: 0
-    )
-    
-    private let fromInputButton: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 8
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.neutral200.cgColor
-        return view
+    private let fromInputTextField: CustomInactiveTextField = {
+        let tf = CustomInactiveTextField()
+        tf.setupPlaceholder(InputFieldType.from.rawValue)
+        return tf
     }()
     
-    private let toInputButton: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 8
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor.neutral200.cgColor
-        return view
+    private let toInputTextField: CustomInactiveTextField = {
+        let tf = CustomInactiveTextField()
+        tf.setupPlaceholder(InputFieldType.to.rawValue)
+        return tf
     }()
+    
+    private let hourTextField: CustomTimeTextField = {
+        let tf = CustomTimeTextField(type: .hour)
+        tf.setDimensions(width: 60, height: 50)
+        tf.setupPlaceholder("Hod.")
+        return tf
+    }()
+    
+    private let minuteTextField: CustomTimeTextField = {
+        let tf = CustomTimeTextField(type: .minute)
+        tf.setDimensions(width: 60, height: 50)
+        tf.setupPlaceholder("Min.")
+        return tf
+    }()
+    
+    let doubleDotLabel = UILabel(
+        text: ":",
+        font: UIFont.interRegular(size: 16),
+        textColor: .neutral800,
+        textAlignment: .center,
+        numberOfLines: 1
+    )
+    
+    private var optionPicker: MenuPicker<Date>!
     
     private let changeButton = CustomButton(
         type: .iconOnly(
@@ -98,16 +269,6 @@ class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
         size: .auto(pTop: 16, pTrailing: 16, pBottom: 16, pLeading: 16)
     )
     
-    private var expandButtonState: Bool = false {
-        didSet {
-            expandContentView.isHidden = !expandButtonState
-            expandButton.setButtonLabelText(expandButtonState ? "Menej" : "Viac")
-            if expandButtonState == false {
-                view.endEditing(true)
-            }
-        }
-    }
-    
     private let expandContentView = UIStackView(
         axis: .vertical,
         spacing: 8
@@ -117,74 +278,127 @@ class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutral10
-
-        setupFromInputView()
-        setupToIntoView()
-        setupSearchButton()
-        setupChangeButton()
-        setupExpandButton()
-        setupContent()
-
-        setupObserver()
+        
+        setupUI()
+        setupViewModelBinding()
+        setupTimeTextFields()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         view.endEditing(false)
     }
+    
+    private func setupViewModelBinding() {
+        searchRouteVM.onFromInputChanged = { [weak self] newValue in
+            guard let self = self else { return }
+            fromInputTextField.text = newValue
+        }
+        
+        searchRouteVM.onToInputChanged = { [weak self] newValue in
+            guard let self = self else { return }
+            toInputTextField.text = newValue
+        }
+        
+        searchRouteVM.onIsOptionsExpandedChanged = { [weak self] newState in
+            guard let self = self else { return }
+            expandContentView.isHidden = !newState
+            expandButton.setButtonLabelText(newState ? "Menej" : "Viac")
+            if newState == false {
+                view.endEditing(true)
+            }
+        }
+        
+        searchRouteVM.onSelectedDateChanged = { [weak self] newValue in
+            guard let self = self else { return }
+            optionPicker.selectedOption = newValue
+        }
+        
+        searchRouteVM.onHourChanged = { [weak self] newValue in
+            guard let self = self else { return }
+            hourTextField.text = newValue
+        }
+        
+        searchRouteVM.onMinuteChanged = { [weak self] newValue in
+            guard let self = self else { return }
+            minuteTextField.text = newValue
+        }
+    }
+    
+    private func setupTimeTextFields() {
+        hourTextField.onTextChanged = { [weak self] changedText in
+            guard let self = self else { return }
+            searchRouteVM.hour = changedText
+        }
+        
+        minuteTextField.onTextChanged = { [weak self] changedText in
+            guard let self = self else { return }
+            searchRouteVM.minute = changedText
+        }
+    }
+        
 }
 
 
 // MARK: - Setup UI
 extension RouteSelectionViewController {
     
-    private func setupFromInputView() {
-        fromInputButton.setDimensions(height: 50)
-        fromInputButton.addSubview(fromInputLabel)
-        fromInputLabel.pinInSuperview(padding: .vertical(16))
-        fromInputButton.onTapGesture { [weak self] in
+    private func setupFromInputTextField() {
+        fromInputTextField.onTapGesture { [weak self] in
             guard let self = self else { return }
-            self.handleFromTap()
+            searchRouteVM.handleTap(for: .from)
         }
     }
     
-    private func setupToIntoView() {
-        toInputButton.setDimensions(height: 50)
-        toInputButton.addSubview(toInputLabel)
-        toInputLabel.pinInSuperview(padding: .vertical(16))
-        toInputButton.onTapGesture {[weak self] in
+    private func setupToInputTextField() {
+        toInputTextField.onTapGesture {[weak self] in
             guard let self = self else { return }
-            self.handleToTap()
+            searchRouteVM.handleTap(for: .to)
         }
     }
     
     private func setupSearchButton() {
         searchButton.onRelease = { [weak self] in
             guard let self = self else { return }
-            self.search()
+            searchRouteVM.search()
         }
     }
     
     private func setupChangeButton() {
         changeButton.onTapGesture { [weak self] in
             guard let self = self else { return }
-            self.handleChangeButtonTap()
+            searchRouteVM.switchInputs()
         }
     }
     
     private func setupExpandButton() {
         expandButton.onTapGesture { [weak self] in
             guard let self = self else { return }
-            self.expandButtonState.toggle()
+            searchRouteVM.showExtendedOptions()
         }
     }
     
-    private func setupContent() {
+    private func setupOptionPicker() {
+        optionPicker = MenuPicker(
+            selectedOption: searchRouteVM.selectedDate,
+            options: searchRouteVM.dateOptions) { formatDate($0) }
         
+        optionPicker.onSelectedOptionChanged = { [weak self] newValue in
+            guard let self else { return }
+            searchRouteVM.selectedDate = newValue
+        }
+        
+        optionPicker.backgroundColor = .clear
+        optionPicker.layer.borderColor = UIColor.neutral200.cgColor
+        optionPicker.layer.borderWidth = 1
+        optionPicker.setTintColor(UIColor.neutral800)
+    }
+    
+    private func setupContent() {
         // Setup search inputs stack
         let searchInputsStack = UIStackView(
             arrangedSubviews: [
-                fromInputButton,
-                toInputButton
+                fromInputTextField,
+                toInputTextField
             ],
             spacing: 8
         )
@@ -192,47 +406,24 @@ extension RouteSelectionViewController {
         searchInputsStack.addSubview(changeButton)
         changeButton.trailing(offset: .init(x: -20, y: 0))
         
-       
-        // Setup expand contet stack
-        // Setup time and day stack
-        let hourView = CustomTimeTextField()
-        hourView.setDimensions(width: 60, height: 50)
-        hourView.setupPlaceholder("Hod.") 
-        
-        let minuteView = CustomTimeTextField()
-        minuteView.setDimensions(width: 60, height: 50)
-        minuteView.setupPlaceholder("Min.")
-        
-        
-        
-        let dayView = UIView()
-        dayView.setDimensions(width: 150, height: 50)
-        dayView.layer.cornerRadius = 8
-        dayView.layer.borderWidth = 1
-        dayView.layer.borderColor = UIColor.neutral200.cgColor
-        
-        let doubleDotLabel = UILabel(
-            text: ":",
-            font: UIFont.interRegular(size: 16),
-            textColor: .neutral800,
-            textAlignment: .center,
-            numberOfLines: 1
-        )
-        
+        hourTextField.text = searchRouteVM.hour
+        minuteTextField.text = searchRouteVM.minute
+
         let timeStackView = UIStackView(
             arrangedSubviews: [
-                hourView,
+                hourTextField,
                 doubleDotLabel,
-                minuteView,
+                minuteTextField,
                 UIView()
             ],
             axis: .horizontal,
-            spacing: 4,
+            spacing: 8,
             alignment: .center,
             distribution: .fill
             
         )
-    
+        
+        expandContentView.addArrangedSubview(optionPicker)
         expandContentView.addArrangedSubview(timeStackView)
         expandContentView.isHidden = true
         
@@ -257,76 +448,15 @@ extension RouteSelectionViewController {
             rootStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-}
-
-extension RouteSelectionViewController {
     
-    @objc private func handleChangeButtonTap() {
-        if fromInputLabel.text != InputFieldType.from.rawValue &&
-            toInputLabel.text != InputFieldType.to.rawValue {
-            let tempFromInputLabel = fromInputLabel.text
-            let tempToInputLabel = toInputLabel.text
-            
-            fromInputLabel.text = tempToInputLabel
-            toInputLabel.text = tempFromInputLabel
-        }
-        else if fromInputLabel.text != InputFieldType.from.rawValue &&
-            toInputLabel.text == InputFieldType.to.rawValue {
-            let tempFromInputLabel = fromInputLabel.text
-            
-            fromInputLabel.text = InputFieldType.from.rawValue
-            toInputLabel.text = tempFromInputLabel
-        }
-        else if fromInputLabel.text == InputFieldType.from.rawValue &&
-            toInputLabel.text != InputFieldType.to.rawValue {
-            let tempToInputLabel = toInputLabel.text
-            
-            fromInputLabel.text = tempToInputLabel
-            toInputLabel.text = InputFieldType.to.rawValue
-        }
-    }
-    
-    @objc private func handleFromTap() {
-        presentSearchController(for: .from)
-    }
-    
-    @objc private func handleToTap() {
-        presentSearchController(for: .to)
-    }
-    
-    private func search() {}
-    
-    private func presentSearchController(for fieldType: InputFieldType = .from) {
-        let searchController = DestinationSearchViewController()
-        searchController.fieldType = fieldType
-
-        navigationController?.pushViewController(searchController, animated: false)
-    }
-    
-}
-
-extension RouteSelectionViewController {
-    
-    private func setupObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didSelectStation),
-            name: .didSelectStation,
-            object: nil
-        )
-    }
-    
-    @objc private func didSelectStation(_ notification: Notification) {
-        if let stationInfo = notification.object as? MHD_StationInfo,
-           let userInfo = notification.userInfo,
-           let textFieldType = userInfo["fieldType"] as? InputFieldType {
-            switch textFieldType {
-            case .from:
-                fromInputLabel.text = stationInfo.stationName
-            case .to:
-                toInputLabel.text = stationInfo.stationName
-            }
-        }
+    private func setupUI() {
+        setupFromInputTextField()
+        setupToInputTextField()
+        setupSearchButton()
+        setupChangeButton()
+        setupExpandButton()
+        setupOptionPicker()
+        setupContent()
     }
     
 }
