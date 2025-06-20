@@ -58,11 +58,8 @@ extension MHD_StationAnnotationView {
         onTapGesture { [weak self] in
             guard let self else { return }
             if let annotation = self.annotation as? MHD_StationAnnotation {
-                print(annotation.station.stationName ?? "")
-                
-                guard let vc = self.findViewController() else { return }
-                print("Show popup okno so zastavkou a info (nazov zastavky a tlacidlom zvolit zastavku)")
-                
+                guard let vc = self.findViewController() as? MapViewController else { return }
+               
                 let popup = StationInformationPopupView(station: annotation.station)
                 popup.show(on: vc)
             }
