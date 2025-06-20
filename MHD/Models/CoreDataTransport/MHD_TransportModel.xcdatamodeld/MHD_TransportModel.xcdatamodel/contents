@@ -9,7 +9,7 @@
     <entity name="MHD_DaytimeSchedule" representedClassName="MHD_DaytimeSchedule" syncable="YES">
         <attribute name="dayType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="directionStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_DirectionStation" inverseName="schedules" inverseEntity="MHD_DirectionStation"/>
-        <relationship name="timeTables" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_TimeTable" inverseName="daytimeSchedule" inverseEntity="MHD_TimeTable"/>
+        <relationship name="hours" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_Hour" inverseName="daytimeSchedule" inverseEntity="MHD_Hour"/>
     </entity>
     <entity name="MHD_Direction" representedClassName="MHD_Direction" syncable="YES">
         <attribute name="id" attributeType="String"/>
@@ -35,10 +35,15 @@
         <attribute name="sortIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="to" attributeType="String"/>
     </entity>
-    <entity name="MHD_MinuteInfo" representedClassName="MHD_MinuteInfo" syncable="YES">
+    <entity name="MHD_Hour" representedClassName="MHD_Hour" syncable="YES">
+        <attribute name="hourInfo" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="daytimeSchedule" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_DaytimeSchedule" inverseName="hours" inverseEntity="MHD_DaytimeSchedule"/>
+        <relationship name="minutes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_Minute" inverseName="hour" inverseEntity="MHD_Minute"/>
+    </entity>
+    <entity name="MHD_Minute" representedClassName="MHD_Minute" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String"/>
-        <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="timeTable" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_TimeTable" inverseName="minuteInfos" inverseEntity="MHD_TimeTable"/>
+        <attribute name="minuteInfo" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="hour" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_Hour" inverseName="minutes" inverseEntity="MHD_Hour"/>
     </entity>
     <entity name="MHD_StationInfo" representedClassName="MHD_StationInfo" syncable="YES">
         <attribute name="id" attributeType="String"/>
@@ -53,11 +58,6 @@
         <attribute name="longitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="platform" optional="YES" attributeType="String"/>
         <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_StationInfo" inverseName="location" inverseEntity="MHD_StationInfo"/>
-    </entity>
-    <entity name="MHD_TimeTable" representedClassName="MHD_TimeTable" syncable="YES">
-        <attribute name="hour" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="daytimeSchedule" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_DaytimeSchedule" inverseName="timeTables" inverseEntity="MHD_DaytimeSchedule"/>
-        <relationship name="minuteInfos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_MinuteInfo" inverseName="timeTable" inverseEntity="MHD_MinuteInfo"/>
     </entity>
     <entity name="MHD_TransportLine" representedClassName="MHD_TransportLine" syncable="YES">
         <attribute name="id" attributeType="String"/>

@@ -108,7 +108,7 @@ class TimeTableViewCell: UITableViewCell {
     
 
     func configure(
-        with departure: MHD_TimeTable,
+        with departure: MHD_Hour,
         index: Int,
         currentTable: Bool,
         highlightRowIndex: Int? = nil,
@@ -124,7 +124,7 @@ class TimeTableViewCell: UITableViewCell {
                 ? .neutral30
                 : .neutral10
         
-        departureHourLabel.text = numberToString(departure.hour)
+        departureHourLabel.text = numberToString(departure.hourInfo)
         departureHourLabel.textColor = currentTable && (highlightRowIndex == cellIndex) ? .neutral : .neutral800
 
         countdownLabel.text = timeRemaining
@@ -146,8 +146,8 @@ class TimeTableViewCell: UITableViewCell {
         var currentRowWidth: CGFloat = 0
         
         
-        let minuteInfoData = departure.minuteInfos?.allObjects as? [MHD_MinuteInfo] ?? []
-        let sortedMinuteInfoData = minuteInfoData.sorted { $0.minute < $1.minute }
+        let minuteInfoData = departure.minutes?.allObjects as? [MHD_Minute] ?? []
+        let sortedMinuteInfoData = minuteInfoData.sorted { $0.minuteInfo < $1.minuteInfo }
         
         for (minuteInfoIndex, minuteInfo) in sortedMinuteInfoData.enumerated() {
             if currentRowWidth + availableMinuteViewWidth + itemMargin > availbaleWidth {

@@ -21,7 +21,7 @@ class TimeTableView: UIView {
 
     
     private let tableView = UITableView()
-    private var tableViewData: [MHD_TimeTable] = [] {
+    private var tableViewData: [MHD_Hour] = [] {
         didSet {
             guard window != nil else { return }
             tableView.reloadData()
@@ -227,7 +227,7 @@ private extension TimeTableView {
         ///     - if not check if we current day type didnt change.
         ///              - if currant day type change -> getCurentHourData -> currentDayTypeIndex and set hout and minute index 0, 0
         ///              - if current day is same set  hout and minute index 0, 0
-        guard currentHour >= firstItem.hour && currentHour <= lastItem.hour else {
+        guard currentHour >= firstItem.hourInfo && currentHour <= lastItem.hourInfo else {
             //print("We are out of the time range")
             if currentDayTypeIndex == determineCurrentDayType().rawValue {
                 //print("Day type didn't change")
@@ -256,10 +256,10 @@ private extension TimeTableView {
                 continue
             }
             
-            let matchingHourIdx = hourInfoData.firstIndex(where: { $0.hour == hourInfoItem.hour })
+            let matchingHourIdx = hourInfoData.firstIndex(where: { $0.hourInfo == hourInfoItem.hourInfo })
         
             let matchingMinuteIdx = hourInfoIndex == 0
-                ? minuteInfoData.firstIndex(where: { $0.minute > currentMinute })
+            ? minuteInfoData.firstIndex(where: { $0.minuteInfo > currentMinute })
                 : 0
             
             
@@ -268,8 +268,8 @@ private extension TimeTableView {
                 matchingMinuteIndex = matchingMinuteIdx
                 matchingHourIndex = matchingHourIdx
                 
-                currentNextHour = Int(hourInfoItem.hour)
-                currentNextMinute = Int(minuteInfoData[matchingMinuteIdx].minute)
+                currentNextHour = Int(hourInfoItem.hourInfo)
+                currentNextMinute = Int(minuteInfoData[matchingMinuteIdx].minuteInfo)
                 break
             }
         }
@@ -297,8 +297,8 @@ private extension TimeTableView {
                 matchingHourIndex = index
                 matchingMinuteIndex = 0
                 
-                currentNextHour = Int(hourInfoItem.hour)
-                currentNextMinute = Int(minuteInfoData[0].minute)
+                currentNextHour = Int(hourInfoItem.hourInfo)
+                currentNextMinute = Int(minuteInfoData[0].minuteInfo)
                 break
             }
         }
@@ -379,23 +379,23 @@ extension TimeTableView: CustomSegmentedControlProtocol {
 // MARK: - Schedule Data Access
 private extension TimeTableView {
     
-    func getMinuteInfoData(for hourEntity: MHD_TimeTable) -> [MHD_MinuteInfo] {
-        hourEntity.minuteInfos?
+    func getMinuteInfoData(for hourEntity: MHD_Hour) -> [MHD_Minute] {
+        hourEntity.minutes?
             .allObjects
-            .compactMap { $0 as? MHD_MinuteInfo }
-            .sorted { $0.minute < $1.minute} ?? []
+            .compactMap { $0 as? MHD_Minute }
+            .sorted { $0.minuteInfo < $1.minuteInfo} ?? []
     }
     
-    func getHourInfoData(for dayTypeIndex: Int) -> [MHD_TimeTable] {
-        dayTypeSchedules[dayTypeIndex].timeTables?
+    func getHourInfoData(for dayTypeIndex: Int) -> [MHD_Hour] {
+        dayTypeSchedules[dayTypeIndex].hours?
             .allObjects
-            .compactMap { $0 as? MHD_TimeTable }
-            .sorted { $0.hour < $1.hour } ?? []
+            .compactMap { $0 as? MHD_Hour }
+            .sorted { $0.hourInfo < $1.hourInfo } ?? []
     }
     
-    func getTransformedHourInfoData(for hourInfoData: [MHD_TimeTable], matchingHour: Int) -> [MHD_TimeTable] {
+    func getTransformedHourInfoData(for hourInfoData: [MHD_Hour], matchingHour: Int) -> [MHD_Hour] {
         guard !hourInfoData.isEmpty,
-              let index = hourInfoData.firstIndex(where: { $0.hour == matchingHour }) else { return [] }
+              let index = hourInfoData.firstIndex(where: { $0.hourInfo == matchingHour }) else { return [] }
         
   
         var transformed = [hourInfoData[index]]     // Matching hour first

@@ -71,14 +71,10 @@
 		3789FDAA2DF088BA00CE795D /* MHD_Direction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD982DF088BA00CE795D /* MHD_Direction+CoreDataProperties.swift */; };
 		3789FDAB2DF088BA00CE795D /* MHD_DirectionStation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD992DF088BA00CE795D /* MHD_DirectionStation+CoreDataClass.swift */; };
 		3789FDAC2DF088BA00CE795D /* MHD_DirectionStation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9A2DF088BA00CE795D /* MHD_DirectionStation+CoreDataProperties.swift */; };
-		3789FDAD2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9B2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataClass.swift */; };
-		3789FDAE2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9C2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataProperties.swift */; };
 		3789FDAF2DF088BA00CE795D /* MHD_StationInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9D2DF088BA00CE795D /* MHD_StationInfo+CoreDataClass.swift */; };
 		3789FDB02DF088BA00CE795D /* MHD_StationInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9E2DF088BA00CE795D /* MHD_StationInfo+CoreDataProperties.swift */; };
 		3789FDB12DF088BA00CE795D /* MHD_StationLocation+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD9F2DF088BA00CE795D /* MHD_StationLocation+CoreDataClass.swift */; };
 		3789FDB22DF088BA00CE795D /* MHD_StationLocation+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDA02DF088BA00CE795D /* MHD_StationLocation+CoreDataProperties.swift */; };
-		3789FDB32DF088BA00CE795D /* MHD_TimeTable+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDA12DF088BA00CE795D /* MHD_TimeTable+CoreDataClass.swift */; };
-		3789FDB42DF088BA00CE795D /* MHD_TimeTable+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDA22DF088BA00CE795D /* MHD_TimeTable+CoreDataProperties.swift */; };
 		3789FDB52DF088BA00CE795D /* MHD_TransportLine+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDA32DF088BA00CE795D /* MHD_TransportLine+CoreDataClass.swift */; };
 		3789FDB62DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDA42DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift */; };
 		3789FDC12DF08A0700CE795D /* MHD_CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FDC02DF089FF00CE795D /* MHD_CoreDataManager.swift */; };
@@ -101,6 +97,10 @@
 		37E8625F2DF5762300E2C5AD /* 38.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8625E2DF5761F00E2C5AD /* 38.swift */; };
 		37E862612DF5B3C200E2C5AD /* AllStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E862602DF5B3BE00E2C5AD /* AllStations.swift */; };
 		37E862632DF5FD0900E2C5AD /* 8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E862622DF5FD0700E2C5AD /* 8.swift */; };
+		37FED5C52E05A81F0024649C /* MHD_Hour+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5BF2E05A81F0024649C /* MHD_Hour+CoreDataClass.swift */; };
+		37FED5C62E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C02E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift */; };
+		37FED5C72E05A81F0024649C /* MHD_Minute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C12E05A81F0024649C /* MHD_Minute+CoreDataClass.swift */; };
+		37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,14 +169,10 @@
 		3789FD982DF088BA00CE795D /* MHD_Direction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Direction+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3789FD992DF088BA00CE795D /* MHD_DirectionStation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_DirectionStation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3789FD9A2DF088BA00CE795D /* MHD_DirectionStation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_DirectionStation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		3789FD9B2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_MinuteInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3789FD9C2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_MinuteInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3789FD9D2DF088BA00CE795D /* MHD_StationInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_StationInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3789FD9E2DF088BA00CE795D /* MHD_StationInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_StationInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3789FD9F2DF088BA00CE795D /* MHD_StationLocation+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_StationLocation+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3789FDA02DF088BA00CE795D /* MHD_StationLocation+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_StationLocation+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		3789FDA12DF088BA00CE795D /* MHD_TimeTable+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_TimeTable+CoreDataClass.swift"; sourceTree = "<group>"; };
-		3789FDA22DF088BA00CE795D /* MHD_TimeTable+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_TimeTable+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3789FDA32DF088BA00CE795D /* MHD_TransportLine+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_TransportLine+CoreDataClass.swift"; sourceTree = "<group>"; };
 		3789FDA42DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_TransportLine+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		3789FDC02DF089FF00CE795D /* MHD_CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHD_CoreDataManager.swift; sourceTree = "<group>"; };
@@ -199,6 +195,10 @@
 		37E8625E2DF5761F00E2C5AD /* 38.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 38.swift; sourceTree = "<group>"; };
 		37E862602DF5B3BE00E2C5AD /* AllStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStations.swift; sourceTree = "<group>"; };
 		37E862622DF5FD0700E2C5AD /* 8.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 8.swift; sourceTree = "<group>"; };
+		37FED5BF2E05A81F0024649C /* MHD_Hour+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Hour+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37FED5C02E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Hour+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37FED5C12E05A81F0024649C /* MHD_Minute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Minute+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Minute+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,8 +539,8 @@
 				3789FDBF2DF0897900CE795D /* MHD_StationInfo */,
 				3789FDBA2DF088FA00CE795D /* MHD_StationLocation */,
 				3789FDBD2DF0892E00CE795D /* MHD_DaytimeSchedule */,
-				3789FDB92DF088F200CE795D /* MHD_TimeTable */,
-				3789FDBB2DF0890400CE795D /* MHD_MinuteInfo */,
+				3789FDB92DF088F200CE795D /* MHD_Hour */,
+				3789FDBB2DF0890400CE795D /* MHD_Minute */,
 				3789FDB72DF088D900CE795D /* MHD_Alert */,
 			);
 			path = EntitiesV1;
@@ -564,13 +564,13 @@
 			path = MHD_TransportLine;
 			sourceTree = "<group>";
 		};
-		3789FDB92DF088F200CE795D /* MHD_TimeTable */ = {
+		3789FDB92DF088F200CE795D /* MHD_Hour */ = {
 			isa = PBXGroup;
 			children = (
-				3789FDA12DF088BA00CE795D /* MHD_TimeTable+CoreDataClass.swift */,
-				3789FDA22DF088BA00CE795D /* MHD_TimeTable+CoreDataProperties.swift */,
+				37FED5BF2E05A81F0024649C /* MHD_Hour+CoreDataClass.swift */,
+				37FED5C02E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift */,
 			);
-			path = MHD_TimeTable;
+			path = MHD_Hour;
 			sourceTree = "<group>";
 		};
 		3789FDBA2DF088FA00CE795D /* MHD_StationLocation */ = {
@@ -582,13 +582,13 @@
 			path = MHD_StationLocation;
 			sourceTree = "<group>";
 		};
-		3789FDBB2DF0890400CE795D /* MHD_MinuteInfo */ = {
+		3789FDBB2DF0890400CE795D /* MHD_Minute */ = {
 			isa = PBXGroup;
 			children = (
-				3789FD9B2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataClass.swift */,
-				3789FD9C2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataProperties.swift */,
+				37FED5C12E05A81F0024649C /* MHD_Minute+CoreDataClass.swift */,
+				37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */,
 			);
-			path = MHD_MinuteInfo;
+			path = MHD_Minute;
 			sourceTree = "<group>";
 		};
 		3789FDBC2DF0891300CE795D /* MHD_DirectionStation */ = {
@@ -820,14 +820,10 @@
 				3789FDAA2DF088BA00CE795D /* MHD_Direction+CoreDataProperties.swift in Sources */,
 				3789FDAB2DF088BA00CE795D /* MHD_DirectionStation+CoreDataClass.swift in Sources */,
 				3789FDAC2DF088BA00CE795D /* MHD_DirectionStation+CoreDataProperties.swift in Sources */,
-				3789FDAD2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataClass.swift in Sources */,
-				3789FDAE2DF088BA00CE795D /* MHD_MinuteInfo+CoreDataProperties.swift in Sources */,
 				3789FDAF2DF088BA00CE795D /* MHD_StationInfo+CoreDataClass.swift in Sources */,
 				3789FDB02DF088BA00CE795D /* MHD_StationInfo+CoreDataProperties.swift in Sources */,
 				3789FDB12DF088BA00CE795D /* MHD_StationLocation+CoreDataClass.swift in Sources */,
 				3789FDB22DF088BA00CE795D /* MHD_StationLocation+CoreDataProperties.swift in Sources */,
-				3789FDB32DF088BA00CE795D /* MHD_TimeTable+CoreDataClass.swift in Sources */,
-				3789FDB42DF088BA00CE795D /* MHD_TimeTable+CoreDataProperties.swift in Sources */,
 				3789FDB52DF088BA00CE795D /* MHD_TransportLine+CoreDataClass.swift in Sources */,
 				3789FDB62DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift in Sources */,
 				37370BD32DA6CB1E007BB225 /* Constants.swift in Sources */,
@@ -861,6 +857,10 @@
 				37AE57352DE45EB10074B3E2 /* CustomButton.swift in Sources */,
 				3748730D2DC63725006126B2 /* Helper.swift in Sources */,
 				371CB6B42DF1F2D30007E67E /* MHD_Map.swift in Sources */,
+				37FED5C52E05A81F0024649C /* MHD_Hour+CoreDataClass.swift in Sources */,
+				37FED5C62E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift in Sources */,
+				37FED5C72E05A81F0024649C /* MHD_Minute+CoreDataClass.swift in Sources */,
+				37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */,
 				377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */,
 				371CB6D12DF456570007E67E /* MHD_GlobalStationMap.swift in Sources */,
 				377AEBD22DDB30D900929129 /* DestinationSearchTableCell.swift in Sources */,
