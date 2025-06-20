@@ -36,6 +36,12 @@ This is an active prototype project. Current focus areas:
 
 ## Installation
 
+### Requirements
+- Xcode 15 or later
+- iOS 18+ device or simulator
+- macOS Ventura or later (for development)
+
+### Steps
 1. Clone the repository:
    ```bash
    git clone https://github.com/Wouvero/TransitlyGo
