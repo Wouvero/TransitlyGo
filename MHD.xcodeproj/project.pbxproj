@@ -101,6 +101,7 @@
 		37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */; };
 		37FED5CB2E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */; };
 		37FED5CC2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */; };
+		37FED5CF2E05B9880024649C /* ResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Minute+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -496,6 +498,7 @@
 		377AEBB32DD7397D00929129 /* RouteSelectionScreen */ = {
 			isa = PBXGroup;
 			children = (
+				37FED5CD2E05B95D0024649C /* ResultScreen */,
 				377AEBB72DD8CEBB00929129 /* StationsListScreen */,
 				377AEBDB2DDB683500929129 /* AllStationsMapScreen */,
 				378AFD192DEA0C7700BFDF2D /* DestinationSearchScreen */,
@@ -730,6 +733,14 @@
 			path = DummyData;
 			sourceTree = "<group>";
 		};
+		37FED5CD2E05B95D0024649C /* ResultScreen */ = {
+			isa = PBXGroup;
+			children = (
+				37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */,
+			);
+			path = ResultScreen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -833,6 +844,7 @@
 				376832732DED94CE00FAC3FE /* CustomTextField.swift in Sources */,
 				37AE57312DE377E80074B3E2 /* CustomButton+Properties.swift in Sources */,
 				375BA6022DB00F1400FD8477 /* UIView.swift in Sources */,
+				37FED5CF2E05B9880024649C /* ResultScreenViewController.swift in Sources */,
 				3789FD602DF05C7500CE795D /* MHD_StationAnnotation.swift in Sources */,
 				378AFCCB2DE87F6400BFDF2D /* MHD_TabBarController.swift in Sources */,
 				37370BCA2DA6CAAE007BB225 /* Colors.swift in Sources */,
