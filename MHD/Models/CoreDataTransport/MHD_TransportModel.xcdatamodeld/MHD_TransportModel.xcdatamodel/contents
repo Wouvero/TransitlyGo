@@ -29,11 +29,11 @@
         <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="directionStation" inverseEntity="MHD_StationInfo"/>
     </entity>
     <entity name="MHD_Favorite" representedClassName="MHD_Favorite" syncable="YES">
-        <attribute name="from" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="sortIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="to" attributeType="String"/>
+        <relationship name="fromStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="fromFavorite" inverseEntity="MHD_StationInfo"/>
+        <relationship name="toStation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo"/>
     </entity>
     <entity name="MHD_Hour" representedClassName="MHD_Hour" syncable="YES">
         <attribute name="hourInfo" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -50,7 +50,9 @@
         <attribute name="stationName" attributeType="String"/>
         <relationship name="directionStation" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_DirectionStation" inverseName="stationInfo" inverseEntity="MHD_DirectionStation"/>
         <relationship name="endDestinations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_Direction" inverseName="endDestination" inverseEntity="MHD_Direction"/>
+        <relationship name="fromFavorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_Favorite" inverseName="fromStation" inverseEntity="MHD_Favorite"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MHD_StationLocation" inverseName="stationInfo" inverseEntity="MHD_StationLocation"/>
+        <relationship name="toFavorite" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="toFavorite" inverseEntity="MHD_StationInfo"/>
         <relationship name="transportLines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MHD_TransportLine" inverseName="stations" inverseEntity="MHD_TransportLine"/>
     </entity>
     <entity name="MHD_StationLocation" representedClassName="MHD_StationLocation" syncable="YES">

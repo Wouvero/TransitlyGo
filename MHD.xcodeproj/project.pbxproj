@@ -20,8 +20,6 @@
 		371CB6D62DF475750007E67E /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6D52DF475730007E67E /* PopupView.swift */; };
 		37247C852DF6F89B00728290 /* FadeInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37247C842DF6F89B00728290 /* FadeInTransition.swift */; };
 		37268EDF2E00687A0011353E /* MenuPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EDE2E00687A0011353E /* MenuPicker.swift */; };
-		37268EE42E01A21E0011353E /* MHD_Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE22E01A21E0011353E /* MHD_Favorite+CoreDataClass.swift */; };
-		37268EE52E01A21E0011353E /* MHD_Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE32E01A21E0011353E /* MHD_Favorite+CoreDataProperties.swift */; };
 		37268EE72E01A8650011353E /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE62E01A84E0011353E /* WelcomeScreen.swift */; };
 		37268EE92E02BEF70011353E /* CustomInactiveTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE82E02BEEB0011353E /* CustomInactiveTextField.swift */; };
 		37268EEB2E02D2580011353E /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EEA2E02D2530011353E /* DateFormatter.swift */; };
@@ -101,6 +99,8 @@
 		37FED5C62E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C02E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift */; };
 		37FED5C72E05A81F0024649C /* MHD_Minute+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C12E05A81F0024649C /* MHD_Minute+CoreDataClass.swift */; };
 		37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */; };
+		37FED5CB2E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */; };
+		37FED5CC2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,8 +117,6 @@
 		371CB6D52DF475730007E67E /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		37247C842DF6F89B00728290 /* FadeInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInTransition.swift; sourceTree = "<group>"; };
 		37268EDE2E00687A0011353E /* MenuPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPicker.swift; sourceTree = "<group>"; };
-		37268EE22E01A21E0011353E /* MHD_Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
-		37268EE32E01A21E0011353E /* MHD_Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37268EE62E01A84E0011353E /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
 		37268EE82E02BEEB0011353E /* CustomInactiveTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInactiveTextField.swift; sourceTree = "<group>"; };
 		37268EEA2E02D2530011353E /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
@@ -199,6 +197,8 @@
 		37FED5C02E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Hour+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37FED5C12E05A81F0024649C /* MHD_Minute+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Minute+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37FED5C22E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Minute+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
+		37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,8 +300,8 @@
 		37268EE12E01A2000011353E /* MHD_Favorite */ = {
 			isa = PBXGroup;
 			children = (
-				37268EE22E01A21E0011353E /* MHD_Favorite+CoreDataClass.swift */,
-				37268EE32E01A21E0011353E /* MHD_Favorite+CoreDataProperties.swift */,
+				37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */,
+				37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */,
 			);
 			path = MHD_Favorite;
 			sourceTree = "<group>";
@@ -812,6 +812,8 @@
 				371CB6C72DF249D50007E67E /* SegmentedControl.swift in Sources */,
 				376832772DEDB42600FAC3FE /* CustomSearchTextField.swift in Sources */,
 				377246C02D947484000ED98C /* AppDelegate.swift in Sources */,
+				37FED5CB2E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift in Sources */,
+				37FED5CC2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift in Sources */,
 				3789FDA52DF088BA00CE795D /* MHD_Alert+CoreDataClass.swift in Sources */,
 				3789FDA62DF088BA00CE795D /* MHD_Alert+CoreDataProperties.swift in Sources */,
 				3789FDA72DF088BA00CE795D /* MHD_DaytimeSchedule+CoreDataClass.swift in Sources */,
@@ -828,8 +830,6 @@
 				3789FDB62DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift in Sources */,
 				37370BD32DA6CB1E007BB225 /* Constants.swift in Sources */,
 				371CB6B62DF207330007E67E /* MHD_MapViewDelegate.swift in Sources */,
-				37268EE42E01A21E0011353E /* MHD_Favorite+CoreDataClass.swift in Sources */,
-				37268EE52E01A21E0011353E /* MHD_Favorite+CoreDataProperties.swift in Sources */,
 				376832732DED94CE00FAC3FE /* CustomTextField.swift in Sources */,
 				37AE57312DE377E80074B3E2 /* CustomButton+Properties.swift in Sources */,
 				375BA6022DB00F1400FD8477 /* UIView.swift in Sources */,
