@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 
-class MapViewController: UIViewController, MHD_NavigationDelegate, FieldTypeHandling {
+class MapViewController: UIViewController, MHD_NavigationDelegate {
     // MARK: - Properties
     var contentLabelText: NSAttributedString {
         return NSAttributedStringBuilder()

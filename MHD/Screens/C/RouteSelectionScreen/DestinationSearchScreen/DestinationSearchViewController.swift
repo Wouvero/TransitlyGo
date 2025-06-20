@@ -10,11 +10,11 @@
 import UIKit
 import UIKitPro
 
-protocol FieldTypeHandling: AnyObject {
-    var fieldType: InputFieldType { get set }
-}
+//protocol FieldTypeHandling: AnyObject {
+//    var fieldType: InputFieldType { get set }
+//}
 
-class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate, FieldTypeHandling {
+class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate {
     
     var fieldType: InputFieldType = .from
     

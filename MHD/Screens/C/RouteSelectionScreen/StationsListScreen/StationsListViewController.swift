@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import UIKitPro
 
-class StationsListViewController: UIViewController, MHD_NavigationDelegate, FieldTypeHandling {
+class StationsListViewController: UIViewController, MHD_NavigationDelegate {
     var contentLabelText: NSAttributedString {
         return NSAttributedStringBuilder()
             .add(text: "Všetky zastávky", attributes: [.font: UIFont.interSemibold(size: 16)])
