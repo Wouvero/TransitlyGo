@@ -9,15 +9,17 @@
 import UIKit
 
 class CustomTimeTextField: CustomTextField {
+    var onTextChanged: ((String) -> Void)?
     
-    override init() {
+    private var type: TimeType
+    init(type: TimeType) {
+        self.type = type
         super.init()
         setupTextField()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupTextField()
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
@@ -26,10 +28,14 @@ class CustomTimeTextField: CustomTextField {
 extension CustomTimeTextField {
     
     private func setupTextField() {
-        charactersLimit = 2
-        validationType = .integer
+        validationType = .time(type: type)
         textAlignment = .center
         keyboardType = .asciiCapableNumberPad
+       
+    }
+    
+    @objc private func textDidChange() {
+        onTextChanged?(text ?? "")
     }
     
 }
