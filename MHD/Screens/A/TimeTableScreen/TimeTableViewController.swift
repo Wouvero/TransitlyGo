@@ -47,7 +47,7 @@ class TimeTableViewController: UIViewController, MHD_NavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .neutral10
         setupTimetableView()
     }
     
@@ -56,4 +56,5 @@ class TimeTableViewController: UIViewController, MHD_NavigationDelegate {
         view.addSubview(tableView)
         tableView.pinToSuperviewSafeAreaLayoutGuide()
     }
+    
 }
