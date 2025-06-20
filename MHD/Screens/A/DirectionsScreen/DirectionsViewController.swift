@@ -11,6 +11,7 @@ import UIKitPro
 import SwiftUI
 
 
+
 class DirectionsViewController: UIViewController, MHD_NavigationDelegate {
     var contentLabelText: NSAttributedString {
         let transportLineName = transportLine.name ?? ""
@@ -122,7 +123,7 @@ extension DirectionsViewController {
             ),
             style: .filled(
                 backgroundColor: .systemBlue,
-                cornerRadius: 0
+                cornerRadius: 8
             ),
             size: .auto(pTop: 16, pTrailing: 16, pBottom: 16, pLeading: 16)
         )
@@ -142,7 +143,7 @@ extension DirectionsViewController {
             ),
             style: .filled(
                 backgroundColor: .systemBlue,
-                cornerRadius: 0
+                cornerRadius: 8
             ),
             size: .auto(pTop: 16, pTrailing: 16, pBottom: 16, pLeading: 16)
         )

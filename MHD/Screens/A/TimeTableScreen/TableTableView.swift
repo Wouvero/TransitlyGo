@@ -17,13 +17,15 @@ class TimeTableView: UIView {
     // MARK: - Variables
     private let dayTypeSchedules: [MHD_DaytimeSchedule]
     
-    //private var segmentedControl: UISegmentedControl!
     private var segmentedControl: CustomSegmentedControl!
 
     
     private let tableView = UITableView()
     private var tableViewData: [MHD_TimeTable] = [] {
-        didSet { tableView.reloadData() }
+        didSet {
+            guard window != nil else { return }
+            tableView.reloadData()
+        }
     }
     
     private var currentDayTypeIndex: Int?
@@ -47,37 +49,53 @@ class TimeTableView: UIView {
         setupSegmentedControl()
         setupTableView()
         setupLayout()
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.startAutoUpdates()
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit { stopAutoUpdates() }
-    
-   
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.rowHeight = 50
-        tableView.separatorStyle = .none
-        tableView.register(TimeTableViewCell.self, forCellReuseIdentifier: TimeTableViewCell.reuseIdentifier)
+    override func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        
+        if newWindow != nil {
+            // View is being added to a window
+            DispatchQueue.main.async { [weak self] in
+                self?.setCurrentDayType()
+                self?.startAutoUpdates()
+            }
+        } else {
+            // View is being removed from a window
+            stopAutoUpdates()
+        }
     }
+    
+    deinit {
+        tableView.delegate = nil
+        tableView.dataSource = nil
+        // As an extra safety measure (though stopAutoUpdates() should handle this)
+        refreshTimer?.invalidate()
+    }
+    
     
     private func setupLayout() {
-        let stackView = UIStackView(
-            arrangedSubviews: [segmentedControl, tableView],
-            axis: .vertical,
-            spacing: 0
-        )
-        
+        let stackView = UIStackView(arrangedSubviews: [
+            segmentedControl, tableView
+        ])
+        stackView.axis = .vertical
+        stackView.spacing = 0
+    
         addSubview(stackView)
-        stackView.pinToSuperviewSafeAreaLayoutGuide()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
     }
+    
 }
 
 
@@ -87,20 +105,25 @@ private extension TimeTableView {
     private func startAutoUpdates() {
         stopAutoUpdates() // Ensure no duplicate timers
         
-        let now = Date()
-        let components = Calendar.current.dateComponents([.hour, .minute], from: now)
-        lastProcessedHour = components.hour
-        lastProcessedMinute = components.minute
+        //let now = Date()
+        //let components = Calendar.current.dateComponents([.hour, .minute], from: now)
+        //lastProcessedHour = components.hour
+        //lastProcessedMinute = components.minute
         
-        refreshCurrentDeparture(now: now)
-        //timeRemainingToNextDeparture(from: now)
+        refreshCurrentDeparture(now: Date())
         
         // Schedule periodic updates
         refreshTimer = Timer.scheduledTimer(
             withTimeInterval: 1, // Update every minute
             repeats: true
-        ) { [weak self] _ in
+        ) { [weak self] timer in
+            // Only proceed if we're in a window
+            guard self?.window != nil else {
+                timer.invalidate()
+                return
+            }
             self?.checkForTimeUpdate()
+            self?.tableView.reloadData()
         }
         
         // Ensure timer runs during scrolling
@@ -122,36 +145,62 @@ private extension TimeTableView {
         let currentHour = components.hour ?? 0
         let currentMinute = components.minute ?? 0
         
-        if let visiblePaths = tableView.indexPathsForVisibleRows {
-            tableView.reloadRows(at: visiblePaths, with: .none)
-        }
+//        if let visiblePaths = tableView.indexPathsForVisibleRows {
+//            tableView.reloadRows(at: visiblePaths, with: .none)
+//        }
+        //print(currentHour, currentMinute)
+        //print(lastProcessedHour, lastProcessedMinute)
         
-        
-        guard currentHour != lastProcessedHour || currentMinute != lastProcessedMinute else {
-            return
-        }
+        guard currentHour != lastProcessedHour || currentMinute != lastProcessedMinute else { return }
         
         // Handle day type change at midnight
-        if lastProcessedHour == 23 && currentHour == 0 {
-            setCurrentDayType()
-        }
+        // If there is day change, it's call setCurrentDayType
+        if lastProcessedHour == 23 && currentHour == 0 { setCurrentDayType() }
         
         refreshCurrentDeparture(now: now)
         
-        
+        // Set last processed hour and minute
         lastProcessedHour = currentHour
         lastProcessedMinute = currentMinute
     }
     
     private func refreshCurrentDeparture(now: Date = Date()) {
         markUpcomingDeparture(now: now)
-        tableView.reloadData()
+        //print("Refresh Current Departure: ", currentNextHourIndex ?? "-")
+        
+        guard let currentNextHourIndex else { return }
+        
+        let indexPath = IndexPath(row: currentNextHourIndex, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
+    
+    private func timeRemainingToNextDeparture(from now: Date = Date()) -> String? {
+        guard let hour = currentNextHour,
+              let minute = currentNextMinute else { return nil}
+        
+        
+        let calendar = Calendar.current
+        //print("\n",hour, "-", minute ,"\n")
+        var targetComponent = calendar.dateComponents([.year, .month, .day], from: now)
+        targetComponent.hour = hour
+        targetComponent.minute = minute
+        targetComponent.second = 0
+        
+        guard let targetDate = calendar.date(from: targetComponent) else { return nil}
+        
+        let adjustedTarget = targetDate > now ? targetDate : calendar.date(byAdding: .day, value: 1, to: targetDate)!
+        
+        let timeRemainingToNextDeparture = adjustedTarget.timeIntervalSince(now)
+        let timeRemainingToNextDepartureFormated = timeRemainingToNextDeparture.formattedTimeRemaining()
+        
+//        print("Time remaining to next departure: \(timeRemainingToNextDepartureFormated)")
+        return timeRemainingToNextDepartureFormated
     }
 
 }
 
 
-// MARK: -
+// MARK: - Update UI
 private extension TimeTableView {
     
     private func markUpcomingDeparture(now: Date = Date()) {
@@ -179,12 +228,12 @@ private extension TimeTableView {
         ///              - if currant day type change -> getCurentHourData -> currentDayTypeIndex and set hout and minute index 0, 0
         ///              - if current day is same set  hout and minute index 0, 0
         guard currentHour >= firstItem.hour && currentHour <= lastItem.hour else {
-            print("We are out of the time range")
+            //print("We are out of the time range")
             if currentDayTypeIndex == determineCurrentDayType().rawValue {
-                print("Same")
+                //print("Day type didn't change")
                 setDefaultIndices()
             } else {
-                print("Different")
+                // print("Day type change")
                 setCurrentDayType()
                 setDefaultIndices()
             }
@@ -193,7 +242,6 @@ private extension TimeTableView {
         
         
         /// 4. find hour index and minute index
-        //print(currentHour)
         let transformedHourInfoData = getTransformedHourInfoData(for: hourInfoData, matchingHour: currentHour)
         
         var matchingHourIndex: Int?
@@ -267,29 +315,6 @@ private extension TimeTableView {
         
     }
     
-    private func timeRemainingToNextDeparture(from now: Date = Date()) -> String? {
-        guard let hour = currentNextHour,
-              let minute = currentNextMinute else { return nil}
-        
-        
-        let calendar = Calendar.current
-        //print("\n",hour, "-", minute ,"\n")
-        var targetComponent = calendar.dateComponents([.year, .month, .day], from: now)
-        targetComponent.hour = hour
-        targetComponent.minute = minute
-        targetComponent.second = 0
-        
-        guard let targetDate = calendar.date(from: targetComponent) else { return nil}
-        
-        let adjustedTarget = targetDate > now ? targetDate : calendar.date(byAdding: .day, value: 1, to: targetDate)!
-        
-        let timeRemainingToNextDeparture = adjustedTarget.timeIntervalSince(now)
-        let timeRemainingToNextDepartureFormated = timeRemainingToNextDeparture.formattedTimeRemaining()
-        
-//        print("Time remaining to next departure: \(timeRemainingToNextDepartureFormated)")
-        return timeRemainingToNextDepartureFormated
-    }
-    
 }
 
 
@@ -307,13 +332,12 @@ extension TimeTableView: CustomSegmentedControlProtocol {
     
     func setCurrentDayType() {
         let currentDayType = determineCurrentDayType()
-        //print("Curent day type: ",currentDayType)
-        if let currentDayTypeIndex = segmentedControl.findFirstSegmentIndex(withTitle: currentDayType.description) {
-            //print(currentDayTypeIndex)
-            segmentedControl.selectedSegmentIndex = currentDayTypeIndex
-            self.currentDayTypeIndex = currentDayTypeIndex
-            selectedDayTypeIndex = currentDayTypeIndex
-            handleDayTypeSelection(currentDayTypeIndex)
+        
+        if let index = segmentedControl.findFirstSegmentIndex(withTitle: currentDayType.description) {
+            segmentedControl.selectedSegmentIndex = index
+            currentDayTypeIndex = index
+            selectedDayTypeIndex = index
+            handleDayTypeSelection(index)
         }
     }
     
@@ -323,34 +347,32 @@ extension TimeTableView: CustomSegmentedControlProtocol {
         
         // 1. Check if it's a weekend (Saturday or Sunday)
         let isWeekend = calendar.isDateInWeekend(date)
-        if isWeekend {
-            return .weekendOrHoliday
-        }
+        if isWeekend { return .weekendOrHoliday }
         
         // 2. Check if it's a holiday
-        if isHoliday(date: date, calendar: calendar) {
-            return .weekendOrHoliday
-        }
+        if isHoliday(date: date, calendar: calendar) { return .weekendOrHoliday }
         
         // 3. Check if it's during school holidays
-        if isSchoolHoliday(date: date, calendar: calendar) {
-            return .workingHoliday
-        }
+        if isSchoolHoliday(date: date, calendar: calendar) { return .workingHoliday }
         
         // 4. Default to regular school/work day
         return .workingSchoolDay
     }
     
     func handleDayTypeSelection(_ dayTypeIndex: Int) {
-        //print("Handle Day type selection \(dayTypeIndex)")
         selectedDayTypeIndex = dayTypeIndex
-        tableViewData = getHourInfoData(for: dayTypeIndex)
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            tableViewData = getHourInfoData(for: dayTypeIndex)
+        }
     }
     
     // MARK: - Segmented Control Actions (Delegate)
     func didTapSegment(at index: Int) {
         handleDayTypeSelection(index)
     }
+    
 }
 
 
@@ -358,24 +380,24 @@ extension TimeTableView: CustomSegmentedControlProtocol {
 private extension TimeTableView {
     
     func getMinuteInfoData(for hourEntity: MHD_TimeTable) -> [MHD_MinuteInfo] {
-        let minuteInfoData = hourEntity.minuteInfos?.allObjects as? [MHD_MinuteInfo] ?? []
-        let minuteInfoDataSorted = minuteInfoData.sorted { $0.minute < $1.minute}
-        return minuteInfoDataSorted
+        hourEntity.minuteInfos?
+            .allObjects
+            .compactMap { $0 as? MHD_MinuteInfo }
+            .sorted { $0.minute < $1.minute} ?? []
     }
     
     func getHourInfoData(for dayTypeIndex: Int) -> [MHD_TimeTable] {
-        let hourInfoData = dayTypeSchedules[dayTypeIndex].timeTables?.allObjects as? [MHD_TimeTable] ?? []
-        let hourInfoDataSorted = hourInfoData.sorted { $0.hour < $1.hour }
-        return hourInfoDataSorted
+        dayTypeSchedules[dayTypeIndex].timeTables?
+            .allObjects
+            .compactMap { $0 as? MHD_TimeTable }
+            .sorted { $0.hour < $1.hour } ?? []
     }
     
     func getTransformedHourInfoData(for hourInfoData: [MHD_TimeTable], matchingHour: Int) -> [MHD_TimeTable] {
-        guard !hourInfoData.isEmpty else { return [] }
+        guard !hourInfoData.isEmpty,
+              let index = hourInfoData.firstIndex(where: { $0.hour == matchingHour }) else { return [] }
         
-        guard let index = hourInfoData.firstIndex(where: { $0.hour == matchingHour }) else {
-            return []
-        }
-        
+  
         var transformed = [hourInfoData[index]]     // Matching hour first
         transformed += hourInfoData[(index+1)...]   // Adding Later hours
         transformed += hourInfoData[0..<index]      // Adding Earlier hours
@@ -386,8 +408,18 @@ private extension TimeTableView {
 }
 
 
-// MARK: - UITableViewDelegate & UITableViewDataSource methods
+// MARK: - Setup table, UITableViewDelegate & UITableViewDataSource methods
 extension TimeTableView: UITableViewDelegate, UITableViewDataSource {
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.register(
+            TimeTableViewCell.self,
+            forCellReuseIdentifier: TimeTableViewCell.reuseIdentifier
+        )
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData.count
@@ -397,14 +429,19 @@ extension TimeTableView: UITableViewDelegate, UITableViewDataSource {
         return false
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return TimeTableViewCell.Constants.cellHeight
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TimeTableViewCell.reuseIdentifier, for: indexPath) as! TimeTableViewCell
         
-        let isHighlightRow = currentDayTypeIndex == selectedDayTypeIndex && indexPath.row == currentNextHourIndex
+        let isCurrentDayType = currentDayTypeIndex == selectedDayTypeIndex
+        let isHighlightRow = isCurrentDayType && indexPath.row == currentNextHourIndex
         
         cell.configure(
             with: tableViewData[indexPath.row],
-            cellIndex: indexPath.row,
+            index: indexPath.row,
             currentTable: currentDayTypeIndex == selectedDayTypeIndex,
             highlightRowIndex: currentNextHourIndex,
             highlightMinuteIndex: currentNextMinuteIndex,

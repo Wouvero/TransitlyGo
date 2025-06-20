@@ -37,22 +37,34 @@ class MHD_NavigationBarController: UINavigationController {
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
+        //print("PUSH")
         updateBackButton()
     }
     
     override func popViewController(animated: Bool) -> UIViewController? {
         let vc = super.popViewController(animated: animated)
+        //print("POP")
         updateBackButton()
         return vc
     }
     
     override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         let viewControllers = super.popToViewController(viewController, animated: animated)
+        //print("POP to view: \(viewController)")
         updateBackButton()
         return viewControllers
     }
     
+    override func popToRootViewController(animated: Bool) -> [UIViewController]? {
+        let viewControllers = super.popToRootViewController(animated: animated)
+        //print("POP to ROOT view")
+        updateBackButton()
+        return viewControllers
+    }
+    
+    
     private func updateBackButton() {
+        //print("Number of view controller in stack: \(viewControllers.count)")
         let hidden  = viewControllers.count <= 1 && presentingViewController == nil
         customNavBarContent.setBackButtonHidden(hidden)
     }

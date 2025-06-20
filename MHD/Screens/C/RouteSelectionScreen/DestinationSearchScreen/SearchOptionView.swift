@@ -24,6 +24,9 @@ extension Option {
 }
 
 class SearchOptionsView: UIView {
+    
+    var fieldType: InputFieldType = .from
+    
     private let content = UIStackView(
         axis: .vertical,
         spacing: 0,
@@ -96,10 +99,20 @@ class SearchOptionsView: UIView {
         row.layoutMargins.bottom = 8
         
         row.onTapGesture { [weak self] in
+            guard let self else { return }
+            
             guard let optionViewController = option.viewController,
-                  let vc = self?.findViewController() else { return }
-           
-            vc.navigate(to: optionViewController, animation: true)
+                  let vc = self.findViewController() else { return }
+            
+            if let stationListVC = optionViewController as? StationsListViewController {
+                stationListVC.fieldType = fieldType
+                vc.navigate(to: stationListVC, animation: true)
+            }
+            if let mapVC = optionViewController as? MapViewController {
+                mapVC.fieldType = fieldType
+                vc.navigate(to: mapVC, animation: true)
+
+            }
         }
         return row
     }

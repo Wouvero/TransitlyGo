@@ -15,23 +15,9 @@ class TransportLinesCollectionView: UIView {
     private var collectionView: UICollectionView!
     
     private let layout = UICollectionViewFlowLayout()
-    private var columnGap: CGFloat = 0 {
-        didSet {
-            layout.minimumInteritemSpacing = columnGap
-            collectionView.collectionViewLayout.invalidateLayout()
-        }
-    }
-    private var rowGap: CGFloat = 1 {
-        didSet {
-            layout.minimumLineSpacing = rowGap
-            collectionView.collectionViewLayout.invalidateLayout()
-        }
-    }
-    private var itemsInRow: CGFloat = 6 {
-        didSet {
-            collectionView.collectionViewLayout.invalidateLayout()
-        }
-    }
+    private let columnGap: CGFloat = 0
+    private let rowGap: CGFloat = 1
+    private let itemsInRow: CGFloat = 6
     
     private var numberOfTransportLines: Int? = nil
     

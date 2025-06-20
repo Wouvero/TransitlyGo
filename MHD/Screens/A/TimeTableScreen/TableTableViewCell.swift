@@ -13,11 +13,22 @@ import UIKitPro
 class TimeTableViewCell: UITableViewCell {
     static let reuseIdentifier = "TimeTableViewCell"
     
+    enum Constants {
+        static let cellHeight: CGFloat = 44
+        static let timeCellWidth: CGFloat = 50
+    }
+    
     private var cellIndex: Int = 0
     
     private let departureHourView: UIView = {
         let view = UIView()
-        view.setDimensions(width: 50, height: 50)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(equalToConstant: Constants.cellHeight),
+            view.heightAnchor.constraint(equalToConstant: Constants.cellHeight)
+        ])
+        
         return view
     }()
     
@@ -65,17 +76,29 @@ class TimeTableViewCell: UITableViewCell {
     private func setupCell () {
         // Setup hourview
         departureHourView.addSubview(departureHourLabel)
-        departureHourLabel.center()
-        
-        //setup cellContainer
+        departureHourLabel.translatesAutoresizingMaskIntoConstraints = false
+        departureHourLabel.centerXAnchor.constraint(equalTo: departureHourView.centerXAnchor).isActive = true
+        departureHourLabel.centerYAnchor.constraint(equalTo: departureHourView.centerYAnchor).isActive = true
+
         addSubviews(rootStackView)
-        rootStackView.pinToSuperview()
-        
+        rootStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rootStackView.topAnchor.constraint(equalTo: topAnchor),
+            rootStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            rootStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            rootStackView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    
         //setup countdownView
-        countdownView.setDimensions(width: 100, height: 50)
-        countdownView.addSubview(countdownLabel)
-        countdownLabel.center()
         countdownView.isHidden = true
+        countdownView.translatesAutoresizingMaskIntoConstraints = false
+        countdownView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        countdownView.heightAnchor.constraint(equalToConstant: Constants.cellHeight).isActive = true
+        
+        countdownView.addSubview(countdownLabel)
+        countdownLabel.translatesAutoresizingMaskIntoConstraints = false
+        countdownLabel.centerXAnchor.constraint(equalTo: countdownView.centerXAnchor).isActive = true
+        countdownLabel.centerYAnchor.constraint(equalTo: countdownView.centerYAnchor).isActive = true
         
         //add content into cellContainer
         rootStackView.addArrangedSubview(departureHourView)
@@ -83,15 +106,16 @@ class TimeTableViewCell: UITableViewCell {
         rootStackView.addArrangedSubview(countdownView)
     }
     
+
     func configure(
         with departure: MHD_TimeTable,
-        cellIndex: Int,
+        index: Int,
         currentTable: Bool,
         highlightRowIndex: Int? = nil,
         highlightMinuteIndex: Int? = nil,
         timeRemaining: String? = nil
     ) {
-        self.cellIndex = cellIndex
+        cellIndex = index
         
         
         rootStackView.backgroundColor = currentTable && (highlightRowIndex == cellIndex)
@@ -115,8 +139,8 @@ class TimeTableViewCell: UITableViewCell {
 
         
      
-        let availbaleWidth = UIScreen.main.bounds.width - 50 - 100 - 2
-        let availableMinuteViewWidth:CGFloat = 50
+        let availbaleWidth = UIScreen.main.bounds.width - Constants.timeCellWidth - 100 - 2
+        let availableMinuteViewWidth:CGFloat = Constants.timeCellWidth
         
         var currentRow = createMinutesInfoRow()
         var currentRowWidth: CGFloat = 0
@@ -195,10 +219,10 @@ class TimeTableViewCell: UITableViewCell {
         }
         
         let minuteView = UIView()
-        minuteView.setDimensions(width: 50, height: 50)
+        minuteView.setDimensions(width: Constants.timeCellWidth, height: Constants.cellHeight)
         
         let activeMinuteViewIndicator = UIView(color: backgroundColor)
-        activeMinuteViewIndicator.setDimensions(width: 45, height: 40)
+        activeMinuteViewIndicator.setDimensions(width: Constants.timeCellWidth - 4, height: 40)
         activeMinuteViewIndicator.setCornerRadius(radius: 2)
         
         let minuteLabel = UILabel(

@@ -2,14 +2,17 @@
 //
 //
 // Created by: Patrik Drab on 19/05/2025
-// Copyright (c) 2025 MHD 
+// Copyright (c) 2025 MHD
 //
-//         
+//
 
 
 import UIKit
 import UIKitPro
 
+//protocol FieldTypeHandling: AnyObject {
+//    var fieldType: InputFieldType { get set }
+//}
 
 class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate {
     
@@ -25,9 +28,9 @@ class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate 
     func shouldHideTabBar() -> Bool { true }
     
     private let destinationSearchTextField = CustomSearchTextField()
-
+    
     private let tableView = DestinationSearchTable()
-
+    
     private let searchOptionsView = SearchOptionsView()
     
     override func viewDidLoad() {
@@ -66,7 +69,7 @@ extension DestinationSearchViewController {
         ])
     }
     
-
+    
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
@@ -84,7 +87,7 @@ extension DestinationSearchViewController {
     
     private func setupSearchOptionsView() {
         searchOptionsView.translatesAutoresizingMaskIntoConstraints = false
-        
+        searchOptionsView.fieldType = fieldType
         view.addSubview(searchOptionsView)
         
         NSLayoutConstraint.activate([
@@ -130,7 +133,7 @@ extension DestinationSearchViewController {
             action: #selector(handleTapOutsideKeyboard)
         )
         tapGesture.cancelsTouchesInView = false // Allows other controls to still receive touch events
-
+        
         view.addGestureRecognizer(tapGesture)
     }
     
@@ -149,8 +152,20 @@ extension DestinationSearchViewController: DestinationSearchTableDelagate {
             userInfo: ["fieldType": fieldType]
         )
         
-        destinationSearchTextField.dissmissKeyboard()
-        pop()
+        if fieldType == .from, let navController = navigationController as? MHD_NavigationBarController {
+            
+            // move to another view and delete previous view
+            var newStack = navController.viewControllers
+            newStack.removeLast()
+            let vc = DestinationSearchViewController()
+            vc.fieldType = .to
+            newStack.append(vc)
+            navController.setViewControllers(newStack, animated: false)
+        } else {
+            destinationSearchTextField.dissmissKeyboard()
+            pop()
+        }
+        
     }
     
 }

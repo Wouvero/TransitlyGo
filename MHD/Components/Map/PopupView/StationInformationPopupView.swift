@@ -2,15 +2,16 @@
 //
 //
 // Created by: Patrik Drab on 07/06/2025
-// Copyright (c) 2025 MHD 
+// Copyright (c) 2025 MHD
 //
-//         
+//
 
 import UIKit
 
 class StationInformationPopupView: PopupView {
     
     let station: MHD_StationInfo
+    var selectButton: CustomButton!
     
     init(station: MHD_StationInfo) {
         self.station = station
@@ -41,22 +42,12 @@ class StationInformationPopupView: PopupView {
             numberOfLines: 1
         )
         
-        let selectButton = CustomButton(
+        selectButton = CustomButton(
             type: .textOnly(label: "Zvoliť", textColor: .neutral),
             style: .filled(backgroundColor: .primary500, cornerRadius: 8),
             size: .makeAuto(xAxes: 10, yAxes: 16)
         )
-        onTapGesture { [weak self] in
-            guard let self else { return }
-            
-            
-            
-            
-    
-            
-            print("Select station")
-        }
-
+        
         content.addSubview(label)
         label.center()
         
@@ -67,5 +58,26 @@ class StationInformationPopupView: PopupView {
         selectButton.bottom(offset: .init(x: 0, y: 10))
         
         addArrangedSubview(content)
+    }
+    
+    override func show(on viewController: UIViewController) {
+        super.show(on: viewController)
+        
+        guard
+            let selectButton,
+            let vc = viewController as? MapViewController else { return }
+        
+        selectButton.onRelease = { [weak self] in
+            guard let self else { return }
+            NotificationCenter.default.post(
+                name: .didSelectStation,
+                object: station,
+                userInfo: ["fieldType": vc.fieldType]
+            )
+            close()
+            vc.popToRoot()
+        
+        }
+        
     }
 }

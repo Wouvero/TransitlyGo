@@ -24,8 +24,6 @@ class RouteStationsController: UIViewController, MHD_NavigationDelegate {
             .build()
     }
     
-    
-    
     static let reuseIdentifier = "StationController"
 
     private let direction: MHD_Direction
@@ -35,7 +33,7 @@ class RouteStationsController: UIViewController, MHD_NavigationDelegate {
         return sortedStation
     }
     
-    let stationsTable = StationsTable()
+    var routeStationsTable: RouteStationsTable!
     
     
     init(direction: MHD_Direction) {
@@ -50,23 +48,22 @@ class RouteStationsController: UIViewController, MHD_NavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .neutral10
-        setupStationTable()
+        setupRouteStationsTable()
         setupMapButton()
     }
     
-    private func setupStationTable() {
-        stationsTable.translatesAutoresizingMaskIntoConstraints = false
+    private func setupRouteStationsTable() {
+        routeStationsTable = RouteStationsTable(with: stations)
+        routeStationsTable.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stationsTable)
+        view.addSubview(routeStationsTable)
         
         NSLayoutConstraint.activate([
-            stationsTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            stationsTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stationsTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            stationsTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            routeStationsTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            routeStationsTable.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            routeStationsTable.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            routeStationsTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
-
-        stationsTable.update(with: stations)
     }
     
     private func setupMapButton() {
@@ -94,4 +91,5 @@ class RouteStationsController: UIViewController, MHD_NavigationDelegate {
             mapButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
     }
+    
 }

@@ -57,6 +57,12 @@ class MHD_MapView: UIView {
         setupLocationManager()
         //setupRegion()
     }
+    
+    deinit {
+        mapView.delegate = nil
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+    }
 }
 
 
@@ -244,6 +250,7 @@ extension MHD_MapView: MKMapViewDelegate {
         print("[MKMapViewDelegate] - regionDidChangeAnimated")
         updateLocationButton()
     }
+    
 }
 
 
