@@ -28,6 +28,13 @@
         <relationship name="schedules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MHD_DaytimeSchedule" inverseName="directionStation" inverseEntity="MHD_DaytimeSchedule"/>
         <relationship name="stationInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MHD_StationInfo" inverseName="directionStation" inverseEntity="MHD_StationInfo"/>
     </entity>
+    <entity name="MHD_Favorite" representedClassName="MHD_Favorite" syncable="YES">
+        <attribute name="from" attributeType="String"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="sortIndex" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="to" attributeType="String"/>
+    </entity>
     <entity name="MHD_MinuteInfo" representedClassName="MHD_MinuteInfo" syncable="YES">
         <attribute name="condition" optional="YES" attributeType="String"/>
         <attribute name="minute" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
