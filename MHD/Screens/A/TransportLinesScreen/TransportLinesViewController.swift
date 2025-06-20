@@ -54,18 +54,10 @@ private extension TransportLinesViewController {
         DummyDataManager.initialData()
     }
     
-    
     func fetchTransportLines() {
         let context = MHD_CoreDataManager.shared.viewContext
-        let request: NSFetchRequest<MHD_TransportLine> = MHD_TransportLine.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
-        
-        do {
-            let lines = try context.fetch(request)
-            transportLinesCollection.update(with: lines)
-        } catch {
-            print("🔴 Fetch transport lines failed: \(error.localizedDescription)")
-        }
+        let transportLines = MHD_TransportLine.getAll(in: context)
+        transportLinesCollection.update(with: transportLines)
     }
 }
 
