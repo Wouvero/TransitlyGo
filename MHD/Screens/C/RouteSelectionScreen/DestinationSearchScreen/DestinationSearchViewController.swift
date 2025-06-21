@@ -15,6 +15,7 @@ import UIKitPro
 //}
 
 class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate {
+    var viewModel: SearchRouteViewModel
     
     var fieldType: InputFieldType = .from
     
@@ -32,6 +33,17 @@ class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate 
     private let tableView = DestinationSearchTable()
     
     private let searchOptionsView = SearchOptionsView()
+    
+    
+    init(viewModel: SearchRouteViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +85,8 @@ extension DestinationSearchViewController {
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
+        tableView.fieldType = fieldType
+        tableView.viewModel = viewModel
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
@@ -88,6 +102,7 @@ extension DestinationSearchViewController {
     private func setupSearchOptionsView() {
         searchOptionsView.translatesAutoresizingMaskIntoConstraints = false
         searchOptionsView.fieldType = fieldType
+        searchOptionsView.viewModel = viewModel
         view.addSubview(searchOptionsView)
         
         NSLayoutConstraint.activate([
@@ -157,7 +172,7 @@ extension DestinationSearchViewController: DestinationSearchTableDelagate {
             // move to another view and delete previous view
             var newStack = navController.viewControllers
             newStack.removeLast()
-            let vc = DestinationSearchViewController()
+            let vc = DestinationSearchViewController(viewModel: viewModel)
             vc.fieldType = .to
             newStack.append(vc)
             navController.setViewControllers(newStack, animated: false)

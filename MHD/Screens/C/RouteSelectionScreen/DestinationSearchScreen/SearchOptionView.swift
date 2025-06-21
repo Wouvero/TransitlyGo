@@ -25,6 +25,7 @@ extension Option {
 
 class SearchOptionsView: UIView {
     
+    weak var viewModel: SearchRouteViewModel?
     var fieldType: InputFieldType = .from
     
     private let content = UIStackView(
@@ -106,6 +107,7 @@ class SearchOptionsView: UIView {
             
             if let stationListVC = optionViewController as? StationsListViewController {
                 stationListVC.fieldType = fieldType
+                stationListVC.viewModel = viewModel
                 vc.navigate(to: stationListVC, animation: true)
             }
             if let mapVC = optionViewController as? MapViewController {

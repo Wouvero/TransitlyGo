@@ -17,6 +17,9 @@ protocol DestinationSearchTableDelagate: AnyObject {
 class DestinationSearchTable: UIView {
     private let tableView = UITableView()
     
+    var fieldType: InputFieldType = .from
+    weak var viewModel: SearchRouteViewModel?
+    
     private var alphabeticallyGroupedStations: [String: [MHD_StationInfo]] = [:] {
         didSet {
             alphabetSectionTitles = alphabeticallyGroupedStations.keys.sorted()
@@ -95,6 +98,15 @@ extension DestinationSearchTable: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] as? MHD_StationInfo {
+//            if fieldType == .from && stationInfoItem != viewModel?.toStationInfo {
+//                return true
+//            } else if fieldType == .to && stationInfoItem != viewModel?.fromStationInfo {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
         return true
     }
     
@@ -105,5 +117,12 @@ extension DestinationSearchTable: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+
+///
+/// - RouteFinderViewController
+/// - StationSearchViewController
+///     - AllStationsList (Table)
+///     - StationSearchResultList (Table)
+///     - StationsMapViewController
 
 
