@@ -23,7 +23,7 @@ class FavoriteRoutesViewController: UIViewController, MHD_NavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let favoriteView = FavoriteView()
+        let favoriteView = FavoriteView(store: FavoriteStore())
         let hostingController = UIHostingController(rootView: favoriteView)
         
         attachSwiftUIHostingController(hostingController)
@@ -38,14 +38,14 @@ class FavoriteRoutesViewController: UIViewController, MHD_NavigationDelegate {
         
         view.backgroundColor = .neutral10
         
-        fetchFavorites()
+        //fetchFavorites()
     }
     
-    func fetchFavorites() {
-        let context = MHD_CoreDataManager.shared.viewContext
-        let favorites = MHD_Favorite.getAll(in: context)
-        print("ALL favorite: \(favorites)")
-    }
+//    func fetchFavorites() {
+//        let context = MHD_CoreDataManager.shared.viewContext
+//        let favorites = MHD_Favorite.getAll(in: context)
+//        print("ALL favorite: \(favorites)")
+//    }
     
 }
 
@@ -62,18 +62,33 @@ struct Favorite: Hashable {
     let to: String
 }
 
+class FavoriteStore: ObservableObject {
+    @Published var favorites: [MHD_Favorite] = []
+    
+    init() {
+        fetchFavorites()
+    }
+    
+    func fetchFavorites() {
+        let context = MHD_CoreDataManager.shared.viewContext
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            favorites = MHD_Favorite.getAll(in: context)
+            print("ALL favorite: \(favorites)")
+        }
+    }
+}
+
 struct FavoriteView: View {
     
+    @ObservedObject var store: FavoriteStore
     
-    let data: [Favorite] = [
-        Favorite(from: "Laca Novomestkeho", to: "Sidlisko III"),
-        Favorite(from: "Sidlisko III", to: "Zeleznicna stanica")
-    ]
+    let data: [MHD_Favorite] = []
     
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
-                ForEach(data, id:\.self) { item in
+                ForEach(store.favorites, id:\.self) { item in
                     FavoriteItem(item: item)
                 }
             }
@@ -85,7 +100,7 @@ struct FavoriteView: View {
 }
 
 struct FavoriteItem: View {
-    let item: Favorite
+    let item: MHD_Favorite
     @State private var offsetX: CGFloat = 0
     @State private var lastOffsetX: CGFloat = 0
     private let buttonWidth: CGFloat = 50
@@ -171,14 +186,14 @@ struct FavoriteItem: View {
                     Image(systemName: SFSymbols.arrowDownLeft)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.neutral700)
-                    Text("\(item.from)")
+                    Text("\(item.fromStation?.stationName ?? "No from")")
                     Spacer()
                 }
                 HStack {
                     Image(systemName: SFSymbols.arrowUpForward)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.neutral700)
-                    Text("\(item.to)")
+                    Text("\(item.toStation?.stationName ?? "No to")")
                     
                     Spacer()
                 }
@@ -196,7 +211,7 @@ struct FavoriteItem: View {
 
 struct HHPreviewProvider: PreviewProvider {
     static var previews: some View {
-        FavoriteView()
+        FavoriteView(store: FavoriteStore())
     }
 }
 
