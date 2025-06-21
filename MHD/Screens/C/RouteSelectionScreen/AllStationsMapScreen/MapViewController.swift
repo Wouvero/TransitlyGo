@@ -31,8 +31,9 @@ class MapViewController: UIViewController, MHD_NavigationDelegate {
         super.viewDidLoad()
         view.backgroundColor = .neutral10
         
+        //fetchAllStations()
         setupMapView()
-        fetchAllStations()
+       
     }
     
 }
@@ -51,6 +52,8 @@ extension MapViewController {
             mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        mapView.checkLocationAuthorizationStatus()
     }
     
     private func fetchAllStations() {

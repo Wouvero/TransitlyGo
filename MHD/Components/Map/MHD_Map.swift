@@ -155,7 +155,7 @@ extension MHD_MapView: CLLocationManagerDelegate {
     
     private func setupLocationManager() {
         locationManager.delegate = self
-        checkLocationAuthorizationStatus()
+        //checkLocationAuthorizationStatus()
     }
     
     // .notDetermined

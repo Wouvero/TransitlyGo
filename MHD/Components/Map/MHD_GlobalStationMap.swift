@@ -129,14 +129,20 @@ extension MHD_GlobalStationsMap {
         
         let identifier = "StationAnnotation"
         
-        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MHD_StationAnnotationView {
-            annotationView.annotation = annotation
-            return annotationView
-        } else {
-            let annotationView = MHD_StationAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView.canShowCallout = false
-            return annotationView
-        }
+        
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) ?? MHD_StationAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        
+        annotationView.annotation = annotation
+        annotationView.canShowCallout = false
+        return annotationView
+//        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MHD_StationAnnotationView {
+//            annotationView.annotation = annotation
+//            return annotationView
+//        } else {
+//            let annotationView = MHD_StationAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+//            annotationView.canShowCallout = false
+//            return annotationView
+//        }
     }
     
 }
