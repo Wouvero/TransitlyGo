@@ -18,8 +18,8 @@ class StationsListViewController: UIViewController, MHD_NavigationDelegate {
     }
     
     func shouldHideTabBar() -> Bool { true }
-    
     var fieldType: InputFieldType = .from
+    weak var viewModel: SearchRouteViewModel?
     
     private let tableView = UITableView()
     
@@ -70,6 +70,15 @@ extension StationsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] as? MHD_StationInfo {
+//            if fieldType == .from && stationInfoItem != viewModel?.toStationInfo {
+//                return true
+//            } else if fieldType == .to && stationInfoItem != viewModel?.fromStationInfo {
+//                return true
+//            } else {
+//                return false
+//            }
+//        }
         return true
     }
     
@@ -93,7 +102,7 @@ extension StationsListViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: DestinationSearchTableCell.reuseIdentifier, for: indexPath) as! DestinationSearchTableCell
 
         let key = alphabetSectionTitles[indexPath.section]
-        if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] {
+        if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] as? MHD_StationInfo {
             cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName)
         }
         
