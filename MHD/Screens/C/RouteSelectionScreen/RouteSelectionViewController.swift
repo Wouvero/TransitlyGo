@@ -17,12 +17,34 @@ struct NotificationKey {
     static let inputFieldType: String = "InputFieldType"
 }
 
+struct StationSelectionNotification {
+    let station: MHD_StationInfo
+    let inputFieldType: InputFieldType
+    
+    init?(notification: Notification) {
+        guard let station = notification.object as? MHD_StationInfo,
+              let inputFieldType = notification.userInfo?["fieldType"] as? InputFieldType else { return nil }
+        
+        self.station = station
+        self.inputFieldType = inputFieldType
+    }
+}
+
+// MARK: Model
 struct SearchRouteModel {
     let fromStationInfo: MHD_StationInfo
     let toStationInfo: MHD_StationInfo
     let hour: String
     let minute: String
-    let selectedDate: Date
+    let selectedDay: Date
+    
+    var formattedTime: String {
+        "\(hour):\(minute)"
+    }
+    
+    var formattedSelectedDay: String {
+        formatDate(selectedDay)
+    }
 }
 
 
@@ -31,16 +53,17 @@ enum InputFieldType: String {
     case to = "Na zastávku"
 }
 
+// MARK: - ViewModel
 class SearchRouteViewModel {
+    // Properties
+    private let calendar = Calendar.current
+    private var router: UINavigationController
+    
     // UI State
     var isOptionsExpanded: Bool = false {
         didSet {
             guard isOptionsExpanded != oldValue else { return }
-            if !isOptionsExpanded {
-                selectedDate = Date()
-                getCurentTime()
-            }
-            onIsOptionsExpandedChanged?(isOptionsExpanded)
+            handleOptionsExpansionChange()
         }
     }
     
@@ -61,13 +84,14 @@ class SearchRouteViewModel {
     // Time selection
     var hour: String = ""
     var minute: String = ""
-    var selectedDate: Date = Date() {
+    var selectedDay: Date = Date() {
         didSet {
-            guard selectedDate != oldValue else { return }
-            onSelectedDateChanged?(selectedDate)
+            guard selectedDay != oldValue else { return }
+            onSelectedDayChanged?(selectedDay)
         }
     }
-    var dateOptions: [Date] = []
+    lazy var dateOptions: [Date] = generateDateOptions()
+    
     
     // Callbacks
     var onFromInputChanged:         ((String) -> Void)?
@@ -75,39 +99,21 @@ class SearchRouteViewModel {
     var onIsOptionsExpandedChanged: ((Bool) -> Void)?
     var onHourChanged:              ((String) -> Void)?
     var onMinuteChanged:            ((String) -> Void)?
-    var onSelectedDateChanged:      ((Date) -> Void)?
+    var onSelectedDayChanged:       ((Date) -> Void)?
     
-    
-    // Dependencies
-    private var router: UINavigationController
     
     init(router: UINavigationController) {
         self.router = router
-        self.dateOptions = generateDateOptions()
-        getCurentTime()
-        setupObserver()
+        resetToCurrentTime()
+        setupObservers()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func switchInputs() {
-        switch (fromStationInfo, toStationInfo) {
-        case let (from?, to?):
-            // Both have values - simple swap
-            (fromStationInfo, toStationInfo) = (to, from)
-            
-        case (nil, let to?):
-            // Only "to" has value - move it to "from"
-            fromStationInfo = to
-            toStationInfo = nil
-            
-        case (let from?, nil):
-            // Only "from" has value - move it to "to"
-            toStationInfo = from
-            fromStationInfo = nil
-            
-        case (nil, nil):
-            // Both are nil - nothing to do
-            break
-        }
+        (fromStationInfo, toStationInfo) = (toStationInfo, fromStationInfo)
     }
     
     func showExtendedOptions() {
@@ -130,17 +136,8 @@ class SearchRouteViewModel {
             toStationInfo: toStationInfo,
             hour: hour,
             minute: minute,
-            selectedDate: selectedDate
+            selectedDay: selectedDay
         )
-        
-//        print("-----------------------------")
-//        print("Zo zastavky: ",fromInputText)
-//        print("Na zastavku: ",toStationInfo)
-//        
-//        print("Den: ", formatDate(selectedDate))
-//        print("Hodina: ", hour)
-//        print("Minuta: ", minute)
-//        print("-----------------------------")
         
         let vc = ResultScreenViewController(searchRouteModel: searchRouteModel)
         router.pushViewController(vc, animated: true)
@@ -150,56 +147,48 @@ class SearchRouteViewModel {
 
 extension SearchRouteViewModel {
     
-    func handleTap(for fieldType: InputFieldType = .from) {
-        presentSearchController(for: fieldType)
-    }
-    
-    private func presentSearchController(for fieldType: InputFieldType = .from) {
-        let searchController = DestinationSearchViewController()
-        searchController.fieldType = fieldType
-        router.pushViewController(searchController, animated: true)
-    }
+//    func handleTap(for fieldType: InputFieldType = .from) {
+//        showStationSearch(for: fieldType)
+//    }
+//    
+//    private func showStationSearch(for fieldType: InputFieldType = .from) {
+//        let searchController = DestinationSearchViewController()
+//        searchController.fieldType = fieldType
+//        router.pushViewController(searchController, animated: true)
+//    }
     
 }
 
 extension SearchRouteViewModel {
     
-    private func setupObserver() {
+    private func setupObservers() {
         NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(didSelectStation),
-            name: .didSelectStation,
-            object: nil
-        )
+            forName: .didSelectStation,
+            object: nil,
+            queue: .main) { [weak self] notification in
+                guard let selection = StationSelectionNotification(notification: notification) else { return }
+                self?.updateStation(selection.station, for: selection.inputFieldType)
+            }
     }
     
-    @objc private func didSelectStation(_ notification: Notification) {
-        if let stationInfo = notification.object as? MHD_StationInfo,
-           let userInfo = notification.userInfo,
-           let textFieldType = userInfo["fieldType"] as? InputFieldType {
-            switch textFieldType {
-            case .from:
-                fromStationInfo = stationInfo
-            case .to:
-                toStationInfo = stationInfo
-            }
+    private func updateStation(_ station: MHD_StationInfo, for fieldType: InputFieldType) {
+        switch fieldType {
+        case .from: fromStationInfo = station
+        case .to: toStationInfo = station
         }
     }
+    
 }
 
 extension SearchRouteViewModel {
     // Generate options for current day + next 7 days
     private func generateDateOptions() -> [Date] {
-        let calendar = Calendar.current
-        let today = Date()
-        
         return (0..<8).compactMap { dayOffset in
-            calendar.date(byAdding: .day, value: dayOffset, to: today)
+            calendar.date(byAdding: .day, value: dayOffset, to: Date())
         }
     }
     
-    private func getCurentTime() {
-        let calendar = Calendar.current
+    private func resetToCurrentTime() {
         let today = Date()
         
         let dateComponents = calendar.dateComponents([.hour, .minute], from: today)
@@ -211,6 +200,18 @@ extension SearchRouteViewModel {
     }
 }
 
+extension SearchRouteViewModel {
+    
+    private func handleOptionsExpansionChange() {
+        if !isOptionsExpanded {
+            selectedDay = Date()
+            resetToCurrentTime()
+        }
+        onIsOptionsExpandedChanged?(isOptionsExpanded)
+    }
+    
+    
+}
 
 
 
@@ -339,7 +340,7 @@ class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
             }
         }
         
-        searchRouteVM.onSelectedDateChanged = { [weak self] newValue in
+        searchRouteVM.onSelectedDayChanged = { [weak self] newValue in
             guard let self = self else { return }
             optionPicker.selectedOption = newValue
         }
@@ -366,6 +367,16 @@ class RouteSelectionViewController: UIViewController, MHD_NavigationDelegate {
             searchRouteVM.minute = changedText
         }
     }
+    
+    func handleTap(for fieldType: InputFieldType = .from) {
+        showStationSearch(for: fieldType)
+    }
+    
+    private func showStationSearch(for fieldType: InputFieldType = .from) {
+        let searchController = DestinationSearchViewController(viewModel: searchRouteVM)
+        searchController.fieldType = fieldType
+        navigationController?.pushViewController(searchController, animated: true)
+    }
         
 }
 
@@ -376,14 +387,14 @@ extension RouteSelectionViewController {
     private func setupFromInputTextField() {
         fromInputTextField.onTapGesture { [weak self] in
             guard let self = self else { return }
-            searchRouteVM.handleTap(for: .from)
+            handleTap(for: .from)
         }
     }
     
     private func setupToInputTextField() {
         toInputTextField.onTapGesture {[weak self] in
             guard let self = self else { return }
-            searchRouteVM.handleTap(for: .to)
+            handleTap(for: .to)
         }
     }
     
@@ -410,12 +421,12 @@ extension RouteSelectionViewController {
     
     private func setupOptionPicker() {
         optionPicker = MenuPicker(
-            selectedOption: searchRouteVM.selectedDate,
+            selectedOption: searchRouteVM.selectedDay,
             options: searchRouteVM.dateOptions) { formatDate($0) }
         
         optionPicker.onSelectedOptionChanged = { [weak self] newValue in
             guard let self else { return }
-            searchRouteVM.selectedDate = newValue
+            searchRouteVM.selectedDay = newValue
         }
         
         optionPicker.backgroundColor = .clear
