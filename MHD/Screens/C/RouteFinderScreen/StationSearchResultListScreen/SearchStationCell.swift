@@ -9,7 +9,7 @@
 import UIKit
 import UIKitPro
 
-class DestinationSearchTableCell: UITableViewCell {
+class SearchStationCell: UITableViewCell {
     private var section: Int = 0
     private var row: Int = 0
     

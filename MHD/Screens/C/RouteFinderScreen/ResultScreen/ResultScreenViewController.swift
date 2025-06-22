@@ -33,11 +33,11 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
         size: 50
     )
     
-    let searchRouteModel: SearchRouteModel
+    let searchRouteModel: RouteFinderModel
     
     var itemExists: Bool = false
     
-    init(searchRouteModel: SearchRouteModel) {
+    init(searchRouteModel: RouteFinderModel) {
         self.searchRouteModel = searchRouteModel
         super.init(nibName: nil, bundle: nil)
         self.itemExists = checkIfItemExists()

@@ -29,7 +29,7 @@ extension TabBarItem {
         TabBarItem(
             title: "View 3",
             icon: "magnifyingglass",
-            viewController: RouteSelectionViewController()
+            viewController: RouteFinderViewController()
         ),
     ]
 }

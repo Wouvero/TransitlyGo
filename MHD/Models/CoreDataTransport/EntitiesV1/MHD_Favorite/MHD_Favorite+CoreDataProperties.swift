@@ -67,7 +67,7 @@ extension MHD_Favorite {
         }
     }
     
-    static func addToFavorite(_ favorite: SearchRouteModel, in context: NSManagedObjectContext) {
+    static func addToFavorite(_ favorite: RouteFinderModel, in context: NSManagedObjectContext) {
         let favoriteEntity = MHD_Favorite(context: context)
         favoriteEntity.fromStation = favorite.fromStationInfo
         favoriteEntity.toStation = favorite.toStationInfo

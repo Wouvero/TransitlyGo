@@ -14,8 +14,8 @@ import UIKitPro
 //    var fieldType: InputFieldType { get set }
 //}
 
-class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate {
-    var viewModel: SearchRouteViewModel
+class StationSearchViewController: UIViewController, MHD_NavigationDelegate {
+    var viewModel: RouteFinderViewModel
     
     var fieldType: InputFieldType = .from
     
@@ -30,12 +30,12 @@ class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate 
     
     private let destinationSearchTextField = CustomSearchTextField()
     
-    private let tableView = DestinationSearchTable()
+    private let tableView = StationSearchResultList()
     
     private let searchOptionsView = SearchOptionsView()
     
     
-    init(viewModel: SearchRouteViewModel) {
+    init(viewModel: RouteFinderViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -66,7 +66,7 @@ class DestinationSearchViewController: UIViewController, MHD_NavigationDelegate 
     }
 }
 
-extension DestinationSearchViewController {
+extension StationSearchViewController {
     
     private func setupDestinationSearchTextField() {
         destinationSearchTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -118,7 +118,7 @@ extension DestinationSearchViewController {
 }
 
 // MARK: - SearchTextFieldDelegate
-extension DestinationSearchViewController: SearchTextFieldDelegate {
+extension StationSearchViewController: SearchTextFieldDelegate {
     
     func clearTableSearch() {
         tableView.isHidden = true
@@ -140,7 +140,7 @@ extension DestinationSearchViewController: SearchTextFieldDelegate {
     
 }
 
-extension DestinationSearchViewController {
+extension StationSearchViewController {
     
     private func setupDismissKeyboardOnTap() {
         let tapGesture = UITapGestureRecognizer(
@@ -158,7 +158,7 @@ extension DestinationSearchViewController {
     
 }
 
-extension DestinationSearchViewController: DestinationSearchTableDelagate {
+extension StationSearchViewController: StationSearchDelagate {
     
     func didSelectStation(_ stationInfo: MHD_StationInfo) {
         NotificationCenter.default.post(
@@ -172,7 +172,7 @@ extension DestinationSearchViewController: DestinationSearchTableDelagate {
             // move to another view and delete previous view
             var newStack = navController.viewControllers
             newStack.removeLast()
-            let vc = DestinationSearchViewController(viewModel: viewModel)
+            let vc = StationSearchViewController(viewModel: viewModel)
             vc.fieldType = .to
             newStack.append(vc)
             navController.setViewControllers(newStack, animated: false)

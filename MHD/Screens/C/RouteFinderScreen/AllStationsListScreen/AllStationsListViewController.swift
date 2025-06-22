@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import UIKitPro
 
-class StationsListViewController: UIViewController, MHD_NavigationDelegate {
+class AllStationsListViewController: UIViewController, MHD_NavigationDelegate {
     var contentLabelText: NSAttributedString {
         return NSAttributedStringBuilder()
             .add(text: "Všetky zastávky", attributes: [.font: UIFont.interSemibold(size: 16)])
@@ -19,7 +19,7 @@ class StationsListViewController: UIViewController, MHD_NavigationDelegate {
     
     func shouldHideTabBar() -> Bool { true }
     var fieldType: InputFieldType = .from
-    weak var viewModel: SearchRouteViewModel?
+    weak var viewModel: RouteFinderViewModel?
     
     private let tableView = UITableView()
     
@@ -47,7 +47,7 @@ class StationsListViewController: UIViewController, MHD_NavigationDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.register(DestinationSearchTableCell.self, forCellReuseIdentifier: DestinationSearchTableCell.reuseIdentifier)
+        tableView.register(SearchStationCell.self, forCellReuseIdentifier: SearchStationCell.reuseIdentifier)
         
         view.addSubview(tableView)
         tableView.pinToSuperviewSafeAreaLayoutGuide()
@@ -59,7 +59,7 @@ class StationsListViewController: UIViewController, MHD_NavigationDelegate {
     
 }
 
-extension StationsListViewController: UITableViewDelegate, UITableViewDataSource {
+extension AllStationsListViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return alphabetSectionTitles.count
     }
@@ -99,7 +99,7 @@ extension StationsListViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DestinationSearchTableCell.reuseIdentifier, for: indexPath) as! DestinationSearchTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchStationCell.reuseIdentifier, for: indexPath) as! SearchStationCell
 
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] as? MHD_StationInfo {

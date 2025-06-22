@@ -40,7 +40,7 @@
 		375BA5FF2DB008EE00FD8477 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BA5FE2DB008E800FD8477 /* UIViewController.swift */; };
 		375BA6022DB00F1400FD8477 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BA6012DB00F1100FD8477 /* UIView.swift */; };
 		3768326D2DEB7BFC00FAC3FE /* SearchOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768326C2DEB7BF000FAC3FE /* SearchOptionView.swift */; };
-		3768326F2DEB7C3100FAC3FE /* DestinationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768326E2DEB7C2A00FAC3FE /* DestinationSearchTable.swift */; };
+		3768326F2DEB7C3100FAC3FE /* StationSearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768326E2DEB7C2A00FAC3FE /* StationSearchResultList.swift */; };
 		376832732DED94CE00FAC3FE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832722DED94CE00FAC3FE /* CustomTextField.swift */; };
 		376832772DEDB42600FAC3FE /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832762DEDB41E00FAC3FE /* CustomSearchTextField.swift */; };
 		376832792DEE0DAC00FAC3FE /* CustomTimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832782DEE0D9F00FAC3FE /* CustomTimeTextField.swift */; };
@@ -52,10 +52,10 @@
 		377AEB9A2DD3E17F00929129 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB992DD3E17B00929129 /* TimeInterval.swift */; };
 		377AEB9C2DD4C88800929129 /* TableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9B2DD4C88800929129 /* TableTableViewCell.swift */; };
 		377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */; };
-		377AEBB52DD739B100929129 /* RouteSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* RouteSelectionViewController.swift */; };
-		377AEBB92DD8CED700929129 /* StationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* StationsListViewController.swift */; };
-		377AEBD22DDB30D900929129 /* DestinationSearchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD12DDB30D900929129 /* DestinationSearchTableCell.swift */; };
-		377AEBD42DDB310000929129 /* DestinationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD32DDB310000929129 /* DestinationSearchViewController.swift */; };
+		377AEBB52DD739B100929129 /* RouteFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB42DD739A400929129 /* RouteFinderViewController.swift */; };
+		377AEBB92DD8CED700929129 /* AllStationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBB82DD8CECD00929129 /* AllStationsListViewController.swift */; };
+		377AEBD22DDB30D900929129 /* SearchStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD12DDB30D900929129 /* SearchStationCell.swift */; };
+		377AEBD42DDB310000929129 /* StationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBD32DDB310000929129 /* StationSearchViewController.swift */; };
 		377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBDC2DDB683C00929129 /* MapViewController.swift */; };
 		377AEBE22DDDDADB00929129 /* FavoriteRoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */; };
 		3789FD602DF05C7500CE795D /* MHD_StationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3789FD5F2DF05C7500CE795D /* MHD_StationAnnotation.swift */; };
@@ -102,6 +102,7 @@
 		37FED5CB2E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */; };
 		37FED5CC2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */; };
 		37FED5CF2E05B9880024649C /* ResultScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */; };
+		37FED5D42E0766DA0024649C /* RouteFinderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FED5D32E0766D40024649C /* RouteFinderViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,7 +139,7 @@
 		375BA5FE2DB008E800FD8477 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		375BA6012DB00F1100FD8477 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3768326C2DEB7BF000FAC3FE /* SearchOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionView.swift; sourceTree = "<group>"; };
-		3768326E2DEB7C2A00FAC3FE /* DestinationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchTable.swift; sourceTree = "<group>"; };
+		3768326E2DEB7C2A00FAC3FE /* StationSearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchResultList.swift; sourceTree = "<group>"; };
 		376832722DED94CE00FAC3FE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		376832762DEDB41E00FAC3FE /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		376832782DEE0D9F00FAC3FE /* CustomTimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimeTextField.swift; sourceTree = "<group>"; };
@@ -151,10 +152,10 @@
 		377AEB992DD3E17B00929129 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		377AEB9B2DD4C88800929129 /* TableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableTableViewCell.swift; sourceTree = "<group>"; };
 		377AEB9D2DD4C8A900929129 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
-		377AEBB42DD739A400929129 /* RouteSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSelectionViewController.swift; sourceTree = "<group>"; };
-		377AEBB82DD8CECD00929129 /* StationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsListViewController.swift; sourceTree = "<group>"; };
-		377AEBD12DDB30D900929129 /* DestinationSearchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchTableCell.swift; sourceTree = "<group>"; };
-		377AEBD32DDB310000929129 /* DestinationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSearchViewController.swift; sourceTree = "<group>"; };
+		377AEBB42DD739A400929129 /* RouteFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderViewController.swift; sourceTree = "<group>"; };
+		377AEBB82DD8CECD00929129 /* AllStationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsListViewController.swift; sourceTree = "<group>"; };
+		377AEBD12DDB30D900929129 /* SearchStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStationCell.swift; sourceTree = "<group>"; };
+		377AEBD32DDB310000929129 /* StationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchViewController.swift; sourceTree = "<group>"; };
 		377AEBDC2DDB683C00929129 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRoutesViewController.swift; sourceTree = "<group>"; };
 		3789FD5F2DF05C7500CE795D /* MHD_StationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHD_StationAnnotation.swift; sourceTree = "<group>"; };
@@ -201,6 +202,7 @@
 		37FED5C92E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataClass.swift"; sourceTree = "<group>"; };
 		37FED5CA2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MHD_Favorite+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultScreenViewController.swift; sourceTree = "<group>"; };
+		37FED5D32E0766D40024649C /* RouteFinderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteFinderViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -495,24 +497,26 @@
 			path = "Supporting files";
 			sourceTree = "<group>";
 		};
-		377AEBB32DD7397D00929129 /* RouteSelectionScreen */ = {
+		377AEBB32DD7397D00929129 /* RouteFinderScreen */ = {
 			isa = PBXGroup;
 			children = (
 				37FED5CD2E05B95D0024649C /* ResultScreen */,
-				377AEBB72DD8CEBB00929129 /* StationsListScreen */,
+				37FED5D22E0765280024649C /* StationSearchResultListScreen */,
+				377AEBB72DD8CEBB00929129 /* AllStationsListScreen */,
 				377AEBDB2DDB683500929129 /* AllStationsMapScreen */,
-				378AFD192DEA0C7700BFDF2D /* DestinationSearchScreen */,
-				377AEBB42DD739A400929129 /* RouteSelectionViewController.swift */,
+				378AFD192DEA0C7700BFDF2D /* StationSearchScreen */,
+				37FED5D32E0766D40024649C /* RouteFinderViewModel.swift */,
+				377AEBB42DD739A400929129 /* RouteFinderViewController.swift */,
 			);
-			path = RouteSelectionScreen;
+			path = RouteFinderScreen;
 			sourceTree = "<group>";
 		};
-		377AEBB72DD8CEBB00929129 /* StationsListScreen */ = {
+		377AEBB72DD8CEBB00929129 /* AllStationsListScreen */ = {
 			isa = PBXGroup;
 			children = (
-				377AEBB82DD8CECD00929129 /* StationsListViewController.swift */,
+				377AEBB82DD8CECD00929129 /* AllStationsListViewController.swift */,
 			);
-			path = StationsListScreen;
+			path = AllStationsListScreen;
 			sourceTree = "<group>";
 		};
 		377AEBDB2DDB683500929129 /* AllStationsMapScreen */ = {
@@ -682,20 +686,18 @@
 		378AFD172DEA01D600BFDF2D /* C */ = {
 			isa = PBXGroup;
 			children = (
-				377AEBB32DD7397D00929129 /* RouteSelectionScreen */,
+				377AEBB32DD7397D00929129 /* RouteFinderScreen */,
 			);
 			path = C;
 			sourceTree = "<group>";
 		};
-		378AFD192DEA0C7700BFDF2D /* DestinationSearchScreen */ = {
+		378AFD192DEA0C7700BFDF2D /* StationSearchScreen */ = {
 			isa = PBXGroup;
 			children = (
 				3768326C2DEB7BF000FAC3FE /* SearchOptionView.swift */,
-				377AEBD12DDB30D900929129 /* DestinationSearchTableCell.swift */,
-				3768326E2DEB7C2A00FAC3FE /* DestinationSearchTable.swift */,
-				377AEBD32DDB310000929129 /* DestinationSearchViewController.swift */,
+				377AEBD32DDB310000929129 /* StationSearchViewController.swift */,
 			);
-			path = DestinationSearchScreen;
+			path = StationSearchScreen;
 			sourceTree = "<group>";
 		};
 		37AE572D2DE0CDB10074B3E2 /* Button */ = {
@@ -739,6 +741,15 @@
 				37FED5CE2E05B97B0024649C /* ResultScreenViewController.swift */,
 			);
 			path = ResultScreen;
+			sourceTree = "<group>";
+		};
+		37FED5D22E0765280024649C /* StationSearchResultListScreen */ = {
+			isa = PBXGroup;
+			children = (
+				377AEBD12DDB30D900929129 /* SearchStationCell.swift */,
+				3768326E2DEB7C2A00FAC3FE /* StationSearchResultList.swift */,
+			);
+			path = StationSearchResultListScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -861,7 +872,7 @@
 				377AEBE22DDDDADB00929129 /* FavoriteRoutesViewController.swift in Sources */,
 				378AFCC62DE87EB700BFDF2D /* MHD_NavigationBarController.swift in Sources */,
 				374873012DC2D38F006126B2 /* RouteStationViewCell.swift in Sources */,
-				377AEBD42DDB310000929129 /* DestinationSearchViewController.swift in Sources */,
+				377AEBD42DDB310000929129 /* StationSearchViewController.swift in Sources */,
 				377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */,
 				378AFCC42DE87E4700BFDF2D /* MHD_NavigationBarContent.swift in Sources */,
 				37E862592DF4E0BB00E2C5AD /* StationInformationPopupView.swift in Sources */,
@@ -875,12 +886,12 @@
 				37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */,
 				377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */,
 				371CB6D12DF456570007E67E /* MHD_GlobalStationMap.swift in Sources */,
-				377AEBD22DDB30D900929129 /* DestinationSearchTableCell.swift in Sources */,
+				377AEBD22DDB30D900929129 /* SearchStationCell.swift in Sources */,
 				371CB6D32DF45D150007E67E /* MHD_DirectionStationAnnotation.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
 				371CB6C52DF243430007E67E /* DummyDataManager.swift in Sources */,
-				377AEBB92DD8CED700929129 /* StationsListViewController.swift in Sources */,
-				3768326F2DEB7C3100FAC3FE /* DestinationSearchTable.swift in Sources */,
+				377AEBB92DD8CED700929129 /* AllStationsListViewController.swift in Sources */,
+				3768326F2DEB7C3100FAC3FE /* StationSearchResultList.swift in Sources */,
 				378AFCC82DE87F0600BFDF2D /* MHD_NavBarDelegate.swift in Sources */,
 				377AEB982DD1076800929129 /* TableTableView.swift in Sources */,
 				37268EE72E01A8650011353E /* WelcomeScreen.swift in Sources */,
@@ -891,6 +902,7 @@
 				37E862632DF5FD0900E2C5AD /* 8.swift in Sources */,
 				375BA5F92DAC005500FD8477 /* RouteStationsViewController.swift in Sources */,
 				378AFCCF2DE8826900BFDF2D /* MHD_TabBarDelegate.swift in Sources */,
+				37FED5D42E0766DA0024649C /* RouteFinderViewModel.swift in Sources */,
 				376832792DEE0DAC00FAC3FE /* CustomTimeTextField.swift in Sources */,
 				3789FD622DF05CA600CE795D /* MHD_StationAnnotationView.swift in Sources */,
 				37E862612DF5B3C200E2C5AD /* AllStations.swift in Sources */,
@@ -901,7 +913,7 @@
 				37247C852DF6F89B00728290 /* FadeInTransition.swift in Sources */,
 				371CB6C32DF2426F0007E67E /* GeoJSONManager.swift in Sources */,
 				371CB6CA2DF429840007E67E /* MHD_MapWithDirection.swift in Sources */,
-				377AEBB52DD739B100929129 /* RouteSelectionViewController.swift in Sources */,
+				377AEBB52DD739B100929129 /* RouteFinderViewController.swift in Sources */,
 				375BA5FF2DB008EE00FD8477 /* UIViewController.swift in Sources */,
 				37370BEB2DA6E197007BB225 /* TabBarItem.swift in Sources */,
 				37370BCC2DA6CAC0007BB225 /* Fonts.swift in Sources */,

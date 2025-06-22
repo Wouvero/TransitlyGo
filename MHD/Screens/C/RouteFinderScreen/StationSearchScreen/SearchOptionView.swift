@@ -17,7 +17,7 @@ struct Option {
 
 extension Option {
     static let options: [Option] = [
-        Option(iconName: "flag.fill", optionText: "Zo zoznamu všetkých", viewController: StationsListViewController()),
+        Option(iconName: "flag.fill", optionText: "Zo zoznamu všetkých", viewController: AllStationsListViewController()),
         Option(iconName: "location.fill", optionText: "Z najbližších podľa polohy", viewController: nil),
         Option(iconName: "map.fill", optionText: "Na mape", viewController: MapViewController()),
     ]
@@ -25,7 +25,7 @@ extension Option {
 
 class SearchOptionsView: UIView {
     
-    weak var viewModel: SearchRouteViewModel?
+    weak var viewModel: RouteFinderViewModel?
     var fieldType: InputFieldType = .from
     
     private let content = UIStackView(
@@ -105,7 +105,7 @@ class SearchOptionsView: UIView {
             guard let optionViewController = option.viewController,
                   let vc = self.findViewController() else { return }
             
-            if let stationListVC = optionViewController as? StationsListViewController {
+            if let stationListVC = optionViewController as? AllStationsListViewController {
                 stationListVC.fieldType = fieldType
                 stationListVC.viewModel = viewModel
                 vc.navigate(to: stationListVC, animation: true)
@@ -119,6 +119,3 @@ class SearchOptionsView: UIView {
         return row
     }
 }
-
-
-

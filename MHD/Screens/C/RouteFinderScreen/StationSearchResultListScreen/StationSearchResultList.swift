@@ -10,15 +10,15 @@ import UIKit
 import CoreData
 
 
-protocol DestinationSearchTableDelagate: AnyObject {
+protocol StationSearchDelagate: AnyObject {
     func didSelectStation(_ stationInfo: MHD_StationInfo)
 }
 
-class DestinationSearchTable: UIView {
+class StationSearchResultList: UIView {
     private let tableView = UITableView()
     
     var fieldType: InputFieldType = .from
-    weak var viewModel: SearchRouteViewModel?
+    weak var viewModel: RouteFinderViewModel?
     
     private var alphabeticallyGroupedStations: [String: [MHD_StationInfo]] = [:] {
         didSet {
@@ -32,7 +32,7 @@ class DestinationSearchTable: UIView {
         return MHD_CoreDataManager.shared.viewContext
     }()
     
-    weak var delegate: DestinationSearchTableDelagate?
+    weak var delegate: StationSearchDelagate?
     
     init() {
         super.init(frame: .zero)
@@ -50,7 +50,7 @@ class DestinationSearchTable: UIView {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
-        tableView.register(DestinationSearchTableCell.self, forCellReuseIdentifier: DestinationSearchTableCell.reuseIdentifier)
+        tableView.register(SearchStationCell.self, forCellReuseIdentifier: SearchStationCell.reuseIdentifier)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -65,7 +65,7 @@ class DestinationSearchTable: UIView {
     }
 }
 
-extension DestinationSearchTable {
+extension StationSearchResultList {
     func searchFor(_ searchText: String) {
         alphabeticallyGroupedStations = MHD_StationInfo.searchStationInfosGroupedAlphabetically(context: context, contains: searchText)
     }
@@ -75,7 +75,7 @@ extension DestinationSearchTable {
     }
 }
 
-extension DestinationSearchTable: UITableViewDelegate, UITableViewDataSource {
+extension StationSearchResultList: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return alphabetSectionTitles.count
     }
@@ -86,7 +86,7 @@ extension DestinationSearchTable: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DestinationSearchTableCell.reuseIdentifier, for: indexPath) as! DestinationSearchTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchStationCell.reuseIdentifier, for: indexPath) as! SearchStationCell
 
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] {
