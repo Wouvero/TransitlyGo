@@ -39,7 +39,9 @@ struct RouteFinderModel {
     let selectedDay: Date
     
     var formattedTime: String {
-        "\(hour):\(minute)"
+        let hourInt = Int(hour) ?? 0
+        let minuteInt = Int(minute) ?? 0
+        return String(format: "%02d:%02d", hourInt, minuteInt)
     }
     
     var formattedSelectedDay: String {
@@ -121,13 +123,13 @@ class RouteFinderViewModel {
     }
     
     func search() {
-        guard let fromStationInfo else {
-            print("Missing fromInputText")
+        guard let fromStationInfo, let toStationInfo else {
+            showMissingInputsAlert()
             return
         }
         
-        guard let toStationInfo else {
-            print("Missing toInputText")
+        guard fromStationInfo != toStationInfo else {
+            showNotASameInputsAlert()
             return
         }
         
@@ -141,6 +143,28 @@ class RouteFinderViewModel {
         
         let vc = ResultScreenViewController(searchRouteModel: searchRouteModel)
         router.pushViewController(vc, animated: true)
+    }
+    
+    private func showMissingInputsAlert() {
+        let alert = UIAlertController(
+            title: "Missing inputs",
+            message: "From and To inputs need be filled.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        router.present(alert, animated: true)
+    }
+    
+    private func showNotASameInputsAlert() {
+        let alert = UIAlertController(
+            title: "Missing inputs",
+            message: "Inputs canot be equals.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        router.present(alert, animated: true)
     }
     
 }
@@ -175,15 +199,21 @@ extension RouteFinderViewModel {
         }
     }
     
-    private func resetToCurrentTime() {
+    func resetToCurrentTime() {
         let today = Date()
         
         let dateComponents = calendar.dateComponents([.hour, .minute], from: today)
-        guard let curentHour = dateComponents.hour,
+        
+        guard let currentHour = dateComponents.hour,
               let currentMinute = dateComponents.minute else { return }
         
-        hour = String(curentHour)
-        minute = String(currentMinute)
+        let newHour = String(currentHour)
+        let newMinute = String(currentMinute)
+           
+        guard hour != newHour || minute != newMinute else { return }
+        
+        hour = newHour
+        minute = newMinute
     }
 }
 

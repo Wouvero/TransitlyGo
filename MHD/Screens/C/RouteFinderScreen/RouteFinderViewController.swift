@@ -95,6 +95,15 @@ class RouteFinderViewController: UIViewController, MHD_NavigationDelegate {
         size: .auto(pTop: 16, pTrailing: 16, pBottom: 16, pLeading: 16)
     )
     
+    private let resetButton = CustomButton(
+        type: .textOnly(
+            label: "Reset",
+            textColor: .neutral800
+        ),
+        style: .plain(cornerRadius: 8),
+        size: .auto(pTop: 16, pTrailing: 16, pBottom: 16, pLeading: 16)
+    )
+    
     private let expandContentView = UIStackView(
         axis: .vertical,
         spacing: 8
@@ -213,6 +222,15 @@ extension RouteFinderViewController {
         }
     }
     
+    private func setupResetButton() {
+        resetButton.onTapGesture { [weak self] in
+            guard let self = self else { return }
+            searchRouteVM.resetToCurrentTime()
+            hourTextField.text = searchRouteVM.hour
+            minuteTextField.text = searchRouteVM.minute
+        }
+    }
+    
     private func setupOptionPicker() {
         optionPicker = MenuPicker(
             selectedOption: searchRouteVM.selectedDay,
@@ -250,6 +268,7 @@ extension RouteFinderViewController {
                 hourTextField,
                 doubleDotLabel,
                 minuteTextField,
+                resetButton,
                 UIView()
             ],
             axis: .horizontal,
@@ -291,6 +310,7 @@ extension RouteFinderViewController {
         setupSearchButton()
         setupChangeButton()
         setupExpandButton()
+        setupResetButton()
         setupOptionPicker()
         setupContent()
     }
