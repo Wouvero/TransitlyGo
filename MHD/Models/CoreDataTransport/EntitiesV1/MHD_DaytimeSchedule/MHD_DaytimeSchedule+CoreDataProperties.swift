@@ -48,15 +48,15 @@ extension MHD_DaytimeSchedule : Identifiable {
 
 extension MHD_DaytimeSchedule {
 
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_DaytimeSchedule.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-        } catch {
-            print("😞 Failed to clear existing data: \(error)")
-        }
-    }
+//    static func deleteAll(in context: NSManagedObjectContext) {
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_DaytimeSchedule.fetchRequest()
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try context.execute(deleteRequest)
+//        } catch {
+//            print("😞 Failed to clear existing data: \(error)")
+//        }
+//    }
     
 }
