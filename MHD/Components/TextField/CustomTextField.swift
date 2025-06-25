@@ -26,6 +26,15 @@ class CustomTextField: UITextField {
     var toolBar: UIToolbar? = nil
     var charactersLimit: Int? = nil
     
+    var onTextChanged: ((String) -> Void)?
+    
+    override var text: String? {
+        didSet {
+            guard text != oldValue else { return }
+            onTextChanged?(text ?? "")
+        }
+    }
+    
     init() {
         super.init(frame: .zero)
         setupTextField()

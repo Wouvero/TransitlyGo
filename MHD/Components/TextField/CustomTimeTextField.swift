@@ -9,8 +9,6 @@
 import UIKit
 
 class CustomTimeTextField: CustomTextField {
-    var onTextChanged: ((String) -> Void)?
-    
     private var type: TimeType
     init(type: TimeType) {
         self.type = type
@@ -32,10 +30,6 @@ extension CustomTimeTextField {
         textAlignment = .center
         keyboardType = .asciiCapableNumberPad
        
-    }
-    
-    @objc private func textDidChange() {
-        onTextChanged?(text ?? "")
     }
     
 }

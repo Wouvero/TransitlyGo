@@ -10,7 +10,6 @@ import UIKit
 
 
 protocol SearchTextFieldDelegate: AnyObject {
-    func searchTextFieldDidChange(_ text: String?)
     func clearTableSearch()
 }
 
@@ -98,18 +97,6 @@ extension CustomSearchTextField {
         rightViewMode = .always
         rightView = rightViewContent
 
-    }
-    
-}
-
-
-// MARK: - Delegate methods
-extension CustomSearchTextField {
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if let text = textField.text {
-            searchDelegate?.searchTextFieldDidChange(text)
-        }
     }
     
 }
