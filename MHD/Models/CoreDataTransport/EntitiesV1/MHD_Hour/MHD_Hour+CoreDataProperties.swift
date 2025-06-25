@@ -47,14 +47,14 @@ extension MHD_Hour : Identifiable {
 
 extension MHD_Hour {
     
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_Hour.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-        } catch {
-            print("😞 Failed to clear existing data: \(error)")
-        }
-    }
+//    static func deleteAll(in context: NSManagedObjectContext) {
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_Hour.fetchRequest()
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try context.execute(deleteRequest)
+//        } catch {
+//            print("😞 Failed to clear existing data: \(error)")
+//        }
+//    }
 }
