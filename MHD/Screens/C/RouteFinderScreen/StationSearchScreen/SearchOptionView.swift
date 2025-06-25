@@ -12,14 +12,26 @@ import UIKitPro
 struct Option {
     let iconName: String
     let optionText: String
-    let viewController: UIViewController?
+    let viewControllerProvider: () -> UIViewController?
 }
 
 extension Option {
     static let options: [Option] = [
-        Option(iconName: "flag.fill", optionText: "Zo zoznamu všetkých", viewController: AllStationsListViewController()),
-        Option(iconName: "location.fill", optionText: "Z najbližších podľa polohy", viewController: nil),
-        Option(iconName: "map.fill", optionText: "Na mape", viewController: MapViewController()),
+        Option(
+            iconName: "flag.fill",
+            optionText: "Zo zoznamu všetkých",
+            viewControllerProvider: { AllStationsListViewController() }
+        ),
+//        Option(
+//            iconName: "location.fill",
+//            optionText: "Z najbližších podľa polohy",
+//            viewControllerProvider: { nil }
+//        ),
+        Option(
+            iconName: "map.fill",
+            optionText: "Na mape",
+            viewControllerProvider: { MapViewController() }
+        )
     ]
 }
 
@@ -102,7 +114,7 @@ class SearchOptionsView: UIView {
         row.onTapGesture { [weak self] in
             guard let self else { return }
             
-            guard let optionViewController = option.viewController,
+            guard let optionViewController = option.viewControllerProvider(),
                   let vc = self.findViewController() else { return }
             
             if let stationListVC = optionViewController as? AllStationsListViewController {

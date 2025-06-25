@@ -79,6 +79,19 @@ extension StationSearchViewController {
             destinationSearchTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: horizontalPadding),
             destinationSearchTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -horizontalPadding),
         ])
+        
+        destinationSearchTextField.onTextChanged = { [weak self] text in
+            guard let self else { return }
+            guard !text.isEmpty else {
+                searchOptionsView.isHidden = false
+                destinationSearchTextField.clearTextSearch()
+                return
+            }
+            searchOptionsView.isHidden = true
+            tableView.isHidden = false
+            destinationSearchTextField.setClearTextButtonHidden(false)
+            tableView.searchFor(text)
+        }
     }
     
     
@@ -125,19 +138,7 @@ extension StationSearchViewController: SearchTextFieldDelegate {
         searchOptionsView.isHidden = false
         tableView.clearSearch()
     }
-    
-    func searchTextFieldDidChange(_ text: String?) {
-        guard let searchText = text, !searchText.isEmpty else {
-            searchOptionsView.isHidden = false
-            destinationSearchTextField.clearTextSearch()
-            return
-        }
-        searchOptionsView.isHidden = true
-        tableView.isHidden = false
-        destinationSearchTextField.setClearTextButtonHidden(false)
-        tableView.searchFor(searchText)
-    }
-    
+
 }
 
 extension StationSearchViewController {
