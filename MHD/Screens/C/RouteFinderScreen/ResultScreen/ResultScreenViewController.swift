@@ -64,27 +64,85 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
             in: context
         )
     }
+  
+    private func saveFavoriteRoute(customName: String) {
+           let context = MHD_CoreDataManager.shared.viewContext
+           MHD_Favorite.add(
+               searchRouteModel,
+               with: customName,
+               in: context
+           )
+           
+           itemExists = true
+           addToFavoriteBtn.setButtonIcon("heart.fill")
+           showSuccessAlert()
+       }
+    
+    private func showNameInputAlert() {
+        let alert = UIAlertController(
+            title: "Save Favorite Route",
+            message: "Give this route a name (e.g. Home → School)",
+            preferredStyle: .alert
+        )
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Route name"
+            textField.autocapitalizationType = .sentences
+        }
+        
+        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            guard let self,
+                  let name = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespaces),
+                  !name.isEmpty else {
+                return
+            }
+            
+            self.saveFavoriteRoute(customName: name)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true)
+    }
+    
+    private func showAlreadyExistsAlert() {
+        let alert = UIAlertController(
+            title: "Already Saved",
+            message: "This route is already in your favorites",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func showSuccessAlert() {
+        let alert = UIAlertController(
+            title: "Saved",
+            message: "Route was added to favorites",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
     
     private func setFavoriteBtn() {
 
         addToFavoriteBtn.onRelease = { [weak self] in
             guard let self else { return }
             
-            let context = MHD_CoreDataManager.shared.viewContext
-            
-            if !itemExists {
-                MHD_Favorite.addToFavorite(searchRouteModel, in: context)
-                itemExists = true
-                addToFavoriteBtn.setButtonIcon("heart.fill")
+            if itemExists {
+                showAlreadyExistsAlert()
             } else {
-                print("Item exist.")
-                
-                // TODO
-                // implement pop information about item existing.
+                showNameInputAlert()
             }
         }
-        addToFavoriteBtn.setButtonIcon(itemExists ? "heart.fill" : "heart")
         
+        addToFavoriteBtn.setButtonIcon(itemExists ? "heart.fill" : "heart")
         view.addSubview(addToFavoriteBtn)
         addToFavoriteBtn.translatesAutoresizingMaskIntoConstraints = false
         
