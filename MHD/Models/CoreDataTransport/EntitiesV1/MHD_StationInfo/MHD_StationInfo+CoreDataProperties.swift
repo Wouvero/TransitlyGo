@@ -85,83 +85,93 @@ extension MHD_StationInfo : Identifiable {
 
 
 extension MHD_StationInfo {
-    static func searchStationInfosGroupedAlphabetically(context: NSManagedObjectContext) -> [String: [MHD_StationInfo]] {
-        let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
-        
-        let idPredicate = NSPredicate(format: "id ENDSWITH '-1'")
-        
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            idPredicate
-        ])
-        
-        let sortDescriptor = NSSortDescriptor(key: "stationName", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        guard let allStationInfos = try? context.fetch(fetchRequest) else {
-            print("Failed to fetch station infos")
-            return [:]
-        }
-        
-        return Dictionary(grouping: allStationInfos) { stationInfo in
-            stationInfo.stationName?.first
-                .flatMap { $0.isLetter ? String($0).uppercased() : "#" }
-            ?? "#"
-        }
-    }
     
-    
-    static func searchStationInfosGroupedAlphabetically(context: NSManagedObjectContext, contains searchText: String) -> [String: [MHD_StationInfo]] {
-        let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
+    static func searchStationInfosGroupedAlphabetically(context: NSManagedObjectContext, contains searchText: String? = nil) -> [String: [MHD_StationInfo]] {
+        var results: [String: [MHD_StationInfo]] = [:]
         
-        // 1. Add predicate
-        let searchPredicate = NSPredicate(format: "stationName CONTAINS[cd] %@", searchText)
-        let idPredicate = NSPredicate(format: "id ENDSWITH '-1'")
         
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            searchPredicate,
-            idPredicate
-        ])
-        
-        // 2. Add sort descriptor for alphabetical order
-        let sortDescriptor = NSSortDescriptor(key: "stationName", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        guard let allStationInfos = try? context.fetch(fetchRequest) else {
-            print("Failed to fetch station infos")
-            return [:]
+        context.performAndWait {
+            // 1. Build predicates
+            var predicates = [NSPredicate(format: "id ENDSWITH '-1'")]
+            
+            if let searchText = searchText?.trimmingCharacters(in: .whitespaces), !searchText.isEmpty {
+                predicates.append(NSPredicate(format: "stationName CONTAINS[cd] %@", searchText))
+            }
+            
+            // 2. Configure fetch request
+            let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
+            fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "stationName", ascending: true)]
+            fetchRequest.returnsObjectsAsFaults = false
+            
+            // 3. Execute fetch and group results
+            do {
+                let fetchedResults = try context.fetch(fetchRequest)
+                results = Dictionary(grouping: fetchedResults) { stationInfo in
+                    guard let firstChar = stationInfo.stationName?.first else { return "#" }
+                    return firstChar.isLetter ? String(firstChar).uppercased() : "#"
+                }
+            } catch {
+                print("Failed to fetch station infos: \(error.localizedDescription)")
+                results = [:]
+            }
         }
         
-        return Dictionary(grouping: allStationInfos) { stationInfo in
-            stationInfo.stationName?.first
-                .flatMap { $0.isLetter ? String($0).uppercased() : "#" }
-            ?? "#"
-        }
+        return results
     }
     
     static func getStationInfo(withId id: String, in context: NSManagedObjectContext) -> MHD_StationInfo? {
-        let fetchRequest = MHD_StationInfo.fetchRequest()
+        var result: MHD_StationInfo?
         
-        let idPredicate = NSPredicate(format: "id == %@", id)
-        
-        fetchRequest.predicate = idPredicate
-        
-        do {
-            let result = try context.fetch(fetchRequest)
-            return result.first
-        } catch {
-            print("Faild to fetch stationInfo with id: \(id)")
-            return nil
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+            fetchRequest.fetchLimit = 1
+            fetchRequest.returnsObjectsAsFaults = false  // Get full objects if we'll use their properties
+            
+            do {
+                result = try context.fetch(fetchRequest).first
+            } catch {
+                print("Failed to fetch stationInfo with id \(id): \(error.localizedDescription)")
+            }
         }
+        
+        return result
     }
     
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_StationInfo.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    @discardableResult
+    static func deleteAll(in context: NSManagedObjectContext) -> Bool {
+        var success = false
+        
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_StationInfo.fetchRequest()
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(deleteRequest)
+                context.refreshAllObjects()
+                success = true
+            } catch {
+                print("Failed to delete all station infos: \(error.localizedDescription)")
+                success = deleteAllItemsIndividually(in: context)
+            }
+        }
+        
+        return success
+    }
+    
+    private static func deleteAllItemsIndividually(in context: NSManagedObjectContext) -> Bool {
+        let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
         
         do {
-            try context.execute(deleteRequest)
+            let items = try context.fetch(fetchRequest)
+            items.forEach { context.delete($0) }
+            try context.save()
+            return true
         } catch {
-            print("😞 Failed to clear existing data: \(error)")
+            context.rollback()
+            print("❌ Fallback deletion failed: \(error.localizedDescription)")
+            return false
         }
     }
 }
