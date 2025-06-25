@@ -17,6 +17,14 @@ class AllStationsListViewController: UIViewController, MHD_NavigationDelegate {
             .build()
     }
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func shouldHideTabBar() -> Bool { true }
     var fieldType: InputFieldType = .from
     weak var viewModel: RouteFinderViewModel?
@@ -70,15 +78,6 @@ extension AllStationsListViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-//        if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] as? MHD_StationInfo {
-//            if fieldType == .from && stationInfoItem != viewModel?.toStationInfo {
-//                return true
-//            } else if fieldType == .to && stationInfoItem != viewModel?.fromStationInfo {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
         return true
     }
     
@@ -103,7 +102,9 @@ extension AllStationsListViewController: UITableViewDelegate, UITableViewDataSou
 
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] as? MHD_StationInfo {
-            cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName)
+            let isSelected = stationInfoItem.stationName == viewModel?.toStationInfo?.stationName || stationInfoItem.stationName == viewModel?.fromStationInfo?.stationName
+            
+            cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName, isSelected: isSelected)
         }
         
         return cell
