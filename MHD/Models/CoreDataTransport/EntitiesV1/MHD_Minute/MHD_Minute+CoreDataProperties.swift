@@ -29,14 +29,14 @@ extension MHD_Minute : Identifiable {
 }
 
 extension MHD_Minute {
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_Minute.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-        } catch {
-            print("😞 Failed to clear existing data: \(error)")
-        }
-    }
+//    static func deleteAll(in context: NSManagedObjectContext) {
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_Minute.fetchRequest()
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try context.execute(deleteRequest)
+//        } catch {
+//            print("😞 Failed to clear existing data: \(error)")
+//        }
+//    }
 }
