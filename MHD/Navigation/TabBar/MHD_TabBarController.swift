@@ -89,7 +89,7 @@ extension MHD_TabBarController {
     
     private func setupViewControllers() {
         let viewControllers = tabBarItems.enumerated().map { (index, item) in
-            let navController = MHD_NavigationBarController(rootViewController: item.viewController)
+            let navController = MHD_NavigationBarController(rootViewController: item.viewControllerProvider())
             navController.tabBarItem = UITabBarItem(
                 title: item.title,
                 image: UIImage(systemName: item.icon),

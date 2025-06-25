@@ -11,7 +11,7 @@ import UIKit
 struct TabBarItem {
     let title: String
     let icon: String
-    let viewController: UIViewController
+    let viewControllerProvider: () -> UIViewController
 }
 
 extension TabBarItem {
@@ -19,17 +19,17 @@ extension TabBarItem {
         TabBarItem(
             title: "View 1",
             icon: "house",
-            viewController: TransportLinesViewController()
+            viewControllerProvider: { TransportLinesViewController() }
         ),
         TabBarItem(
             title: "View 2",
             icon: "heart",
-            viewController: FavoriteRoutesViewController()
+            viewControllerProvider: { FavoriteRoutesViewController() }
         ),
         TabBarItem(
             title: "View 3",
             icon: "magnifyingglass",
-            viewController: RouteFinderViewController()
+            viewControllerProvider: { RouteFinderViewController() }
         ),
     ]
 }
