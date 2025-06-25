@@ -38,15 +38,7 @@ class FavoriteRoutesViewController: UIViewController, MHD_NavigationDelegate {
         
         view.backgroundColor = .neutral10
         
-        //fetchFavorites()
     }
-    
-//    func fetchFavorites() {
-//        let context = MHD_CoreDataManager.shared.viewContext
-//        let favorites = MHD_Favorite.getAll(in: context)
-//        print("ALL favorite: \(favorites)")
-//    }
-    
 }
 
 extension UIViewController {
@@ -57,24 +49,50 @@ extension UIViewController {
     }
 }
 
-struct Favorite: Hashable {
-    let from: String
-    let to: String
-}
+//struct Favorite: Hashable {
+//    let from: String
+//    let to: String
+//}
 
 class FavoriteStore: ObservableObject {
     @Published var favorites: [MHD_Favorite] = []
     
+    private let context = MHD_CoreDataManager.shared.viewContext
+    
     init() {
         fetchFavorites()
+        setupNotificationObserver()
+    }
+    
+    deinit {
+        
     }
     
     func fetchFavorites() {
-        let context = MHD_CoreDataManager.shared.viewContext
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             favorites = MHD_Favorite.getAll(in: context)
-            print("ALL favorite: \(favorites)")
+        }
+    }
+    
+    func handleDeleteFromFavorites(_ item: MHD_Favorite) {
+        MHD_Favorite.delete(item, in: context)
+    }
+    
+    func handleUpdateFavorite(_ item: MHD_Favorite, newName: String) {
+        guard item.name != newName else { return }
+        item.name = newName
+        MHD_Favorite.update(item, in: context)
+    }
+    
+    
+    private func setupNotificationObserver() {
+        NotificationCenter.default.addObserver(
+            forName: .NSManagedObjectContextDidSave,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.fetchFavorites()
         }
     }
 }
@@ -89,7 +107,7 @@ struct FavoriteView: View {
         ScrollView {
             LazyVStack(spacing: 8) {
                 ForEach(store.favorites, id:\.self) { item in
-                    FavoriteItem(item: item)
+                    FavoriteItem(item: item, store: store)
                 }
             }
             .padding(.horizontal, 16)
@@ -101,9 +119,16 @@ struct FavoriteView: View {
 
 struct FavoriteItem: View {
     let item: MHD_Favorite
+    var store: FavoriteStore
+    
+    @State private var newName = ""
+    @State private var showingEditAlert = false
+    
     @State private var offsetX: CGFloat = 0
     @State private var lastOffsetX: CGFloat = 0
     private let buttonWidth: CGFloat = 50
+    
+    
     
     var body: some View {
         ZStack {
@@ -147,12 +172,21 @@ struct FavoriteItem: View {
                 .fill(.neutral.opacity(0.5)) // Background color
                 .stroke(.neutral600.opacity(0.7), lineWidth: 1) // Border
         )
+        .alert("Edit Favorite", isPresented: $showingEditAlert) {
+            TextField("Route name", text: $newName)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.sentences)
+            Button("Save") {
+                store.handleUpdateFavorite(item, newName: newName.trimmingCharacters(in: .whitespaces))
+            }
+            Button("Cancel", role: .cancel) {}
+        }
     }
     
     
     private var deleteButton: some View {
         Button {
-        
+            store.handleDeleteFromFavorites(item)
         } label: {
             Image(systemName: "trash")
                 .frame(width: buttonWidth)
@@ -165,7 +199,14 @@ struct FavoriteItem: View {
     
     private var edditButton: some View {
         Button {
-        
+            withAnimation(.spring()) {
+                offsetX = 0
+                lastOffsetX = 0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                newName = item.name ?? ""
+                showingEditAlert = true
+            }
         } label: {
             Image(systemName: "pencil")
                 .frame(width: buttonWidth)
@@ -182,19 +223,29 @@ struct FavoriteItem: View {
                 .fontWeight(.semibold)
                 .font(.system(size: 36))
             VStack {
+                if let name = item.name {
+                    HStack {
+                        Text(name)
+                            .font(.system(size: 24, weight: .semibold))
+                        Spacer()
+                    }
+                }
                 HStack {
                     Image(systemName: SFSymbols.arrowDownLeft)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.neutral700)
-                    Text("\(item.fromStation?.stationName ?? "No from")")
+                    if let stationName = item.fromStation {
+                        Text(stationName)
+                    }
                     Spacer()
                 }
                 HStack {
                     Image(systemName: SFSymbols.arrowUpForward)
                         .font(.system(size: 16, weight: .semibold))
                         .foregroundStyle(.neutral700)
-                    Text("\(item.toStation?.stationName ?? "No to")")
-                    
+                    if let stationName = item.toStation {
+                        Text(stationName)
+                    }
                     Spacer()
                 }
             }
