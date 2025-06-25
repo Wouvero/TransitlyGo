@@ -45,13 +45,11 @@ struct DummyDataManager {
 
     private static func createTransportLines(_ transportLines: [TransportLine]) {
         for (index, transportLine) in transportLines.enumerated() {
-            
-            
+
             let transportLineEntity = MHD_TransportLine(context: context)
             transportLineEntity.id = transportLine.id
             transportLineEntity.name = transportLine.name
             transportLineEntity.sortIndex = Int64(index)
-            
             
             createDirections(transportLine.directions, for: transportLineEntity)
         }
