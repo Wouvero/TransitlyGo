@@ -51,7 +51,7 @@ class SearchStationCell: UITableViewCell {
     }
     
     private func setupCell() {
-        backgroundColor = .clear
+        //backgroundColor = .clear
         addSubviews(rootView)
         rootView.pinInSuperview()
         rootView.addBorder(for: [.bottom], in: .neutral30, width: 1)
@@ -67,14 +67,9 @@ class SearchStationCell: UITableViewCell {
         
         rootView.addArrangedSubview(alphabetTitleView)
         rootView.addArrangedSubview(stationNameView)
-        
-        
-        let customSelectionView = UIView()
-        customSelectionView.backgroundColor = .systemGray6
-        selectedBackgroundView = customSelectionView
     }
     
-    func configure(indexPath: IndexPath, alphabet: String, stationName: String?) {
+    func configure(indexPath: IndexPath, alphabet: String, stationName: String?, isSelected: Bool) {
         section = indexPath.section
         row = indexPath.row
         
@@ -82,5 +77,13 @@ class SearchStationCell: UITableViewCell {
         alphabetTitle.isHidden = row != 0
         
         self.stationName.text = stationName
+        
+        
+        backgroundColor = isSelected ? .primary50 : .clear
+        
+        
+        let customSelectionView = UIView()
+        customSelectionView.backgroundColor = isSelected ? .primary500 : .systemGray6
+        selectedBackgroundView = customSelectionView
     }
 }

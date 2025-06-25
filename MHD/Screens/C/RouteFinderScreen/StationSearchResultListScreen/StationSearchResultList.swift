@@ -90,7 +90,9 @@ extension StationSearchResultList: UITableViewDelegate, UITableViewDataSource {
 
         let key = alphabetSectionTitles[indexPath.section]
         if let stationInfoItem = alphabeticallyGroupedStations[key]?[indexPath.row] {
-            cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName)
+            let isSelected = stationInfoItem.stationName == viewModel?.toStationInfo?.stationName || stationInfoItem.stationName == viewModel?.fromStationInfo?.stationName
+
+            cell.configure(indexPath: indexPath, alphabet: key, stationName: stationInfoItem.stationName, isSelected: isSelected)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -98,15 +100,6 @@ extension StationSearchResultList: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-//        if let stationInfoItem = alphabeticallyGroupedStations[alphabetSectionTitles[indexPath.section]]?[indexPath.row] as? MHD_StationInfo {
-//            if fieldType == .from && stationInfoItem != viewModel?.toStationInfo {
-//                return true
-//            } else if fieldType == .to && stationInfoItem != viewModel?.fromStationInfo {
-//                return true
-//            } else {
-//                return false
-//            }
-//        }
         return true
     }
     
