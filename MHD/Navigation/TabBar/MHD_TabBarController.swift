@@ -15,7 +15,7 @@ class MHD_TabBarController: UITabBarController, UITabBarControllerDelegate, UINa
     // MARK: - Properties
     private let tabBarItems = TabBarItem.tabBarItems
     
-    private let tabBarContentHeight: CGFloat = 60
+    //private let tabBarContentHeight: CGFloat = 72
     
     private let customTabBarBackground = UIView(color: .neutral)
     
@@ -83,7 +83,7 @@ extension MHD_TabBarController {
             customTabBarContent.trailingAnchor.constraint(equalTo: customTabBar.trailingAnchor),
             customTabBarContent.leadingAnchor.constraint(equalTo: customTabBar.leadingAnchor),
             customTabBarContent.topAnchor.constraint(equalTo: customTabBar.topAnchor),
-            customTabBarContent.heightAnchor.constraint(equalToConstant: tabBarContentHeight)
+            customTabBarContent.heightAnchor.constraint(equalToConstant: MHD_TabBarContent.Constants.tabBarContentHeight)
         ])
     }
     
@@ -102,7 +102,7 @@ extension MHD_TabBarController {
     
     private func updateContentInset() {
         let safeAreaBottom = view.safeAreaInsets.bottom
-        let totalHeight = isCustomTabBarHidden ? safeAreaBottom : tabBarContentHeight + safeAreaBottom
+        let totalHeight = isCustomTabBarHidden ? safeAreaBottom : MHD_TabBarContent.Constants.tabBarContentHeight + safeAreaBottom
         additionalSafeAreaInsets.bottom = totalHeight - safeAreaBottom
     }
     

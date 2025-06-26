@@ -12,7 +12,10 @@ import UIKitPro
 class MHD_TabBarContent: UIView {
     private var itemsDataSource: [TabBarItem] = []
     
-    private let tabBarContentHeight: CGFloat = 72
+    enum Constants {
+        static let tabBarContentHeight: CGFloat = 60
+    }
+    
     private let defaultColor: UIColor = .neutral600
     private let activeColor: UIColor = .neutral
     
@@ -66,7 +69,7 @@ class MHD_TabBarContent: UIView {
                 x: tabItemWidth * CGFloat(index),
                 y: 0,
                 width: tabItemWidth,
-                height: tabBarContentHeight
+                height: Constants.tabBarContentHeight
             )
             
             // Gesture (On tap)
