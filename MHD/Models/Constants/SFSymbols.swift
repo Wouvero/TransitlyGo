@@ -9,9 +9,23 @@
 import UIKit
 
 struct SFSymbols {
-
+    
+    static let pencil_line = "pencil-line"
+    static let pencil_fill = "pencil-fill"
+    
+    
+    static let delete_bin_fill = "delete-bin-fill"
+    static let delete_bin_line = "delete-bin-line"
     
     static let close_circle_line = "close-circle-line"
+    static let close_circle_fill = "close-circle-fill"
+    
+    static let close_fill = "close-fill"
+    static let close_line = "close-line"
+    
+    static let close_large_fill = "close-large-fill"
+    static let close_large_line = "close-large-line"
+    
     
     static let arrow_up_down_line = "arrow-up-down-line"
     static let arrow_right_up_line = "arrow-right-up-line"
