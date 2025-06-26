@@ -218,7 +218,6 @@
 		371CB6B22DF1F2BD0007E67E /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				371CB6D42DF475590007E67E /* PopupView */,
 				371CB6CF2DF456480007E67E /* Annotation */,
 				371CB6CB2DF44C780007E67E /* AnnotationView */,
 				37F644AA2E0B3E9100749B6F /* AllStationMapView.swift */,
@@ -442,6 +441,7 @@
 			children = (
 				37268EE02E0068850011353E /* Picker */,
 				371CB6C82DF249E40007E67E /* SegmentedControl */,
+				371CB6D42DF475590007E67E /* PopupView */,
 				371CB6B22DF1F2BD0007E67E /* Map */,
 				376832752DEDB34300FAC3FE /* TextField */,
 				37AE572D2DE0CDB10074B3E2 /* Button */,

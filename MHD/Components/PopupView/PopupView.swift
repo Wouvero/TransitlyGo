@@ -12,7 +12,7 @@ class PopupView: UIStackView {
     private weak var dimmingView: UIView?
     
     let closeButton = CustomButton(
-        type: .iconOnly(iconName: "xmark", iconColor: .neutral800, iconSize: 24),
+        type: .iconOnly(iconName: SFSymbols.close_large_line, iconColor: .neutral800, iconSize: 24),
         style: .plain(cornerRadius: 0),
         size: .makeAuto()
     )
