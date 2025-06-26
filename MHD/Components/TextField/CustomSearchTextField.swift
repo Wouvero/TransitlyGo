@@ -20,7 +20,7 @@ class CustomSearchTextField: CustomTextField {
     
     private let clearTextButton = CustomButton(
         type: .iconOnly(
-            iconName: "xmark.circle",
+            iconName: SFSymbols.close_circle_line,
             iconColor: .neutral200,
             iconSize: 16
         ),

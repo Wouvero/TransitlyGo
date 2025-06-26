@@ -37,13 +37,15 @@ import UIKitPro
 
 class CustomButton: UIView {
     // MARK: - Properties
-    private var buttonIcon = IconImageView(
-        systemName: "heart",
-        color: .black,
-        pointSize: 20,
-        weight: .regular,
-        scale: .default
-    )
+    private var buttonIcon =  SymbolView(symbolName: SFSymbols.heart_fill, tintColor: .neutral700)
+    
+//    IconImageView(
+//        systemName: "heart",
+//        color: .black,
+//        pointSize: 20,
+//        weight: .regular,
+//        scale: .default
+//    )
 
     private var buttonLabel = UILabel(font: UIFont.interSemibold(size: 16))
     private var content: UIStackView = {
@@ -106,7 +108,7 @@ extension CustomButton {
     private func configureButtonType() {
         switch type {
         case .textIcon(let label, let textColor, let iconName, let iconColor, let iconSize, let spacing):
-            buttonIcon.setIcon(systemName: iconName)
+            buttonIcon.setSymbol(iconName)
             buttonIcon.setColor(iconColor ?? .black)
             buttonIcon.setSize(iconSize)
     
@@ -156,7 +158,7 @@ extension CustomButton {
             addSubviews(content)
             
         case .iconOnly(let iconName, let iconColor, let iconSize):
-            buttonIcon.setIcon(systemName: iconName)
+            buttonIcon.setSymbol(iconName)
             buttonIcon.setColor(iconColor ?? .black)
             buttonIcon.setSize(iconSize)
             
@@ -240,7 +242,7 @@ extension CustomButton {
 // MARK: - Public methods for future button configuration start with (set...)
 extension CustomButton {
     func setButtonIcon(_ systemName: String) {
-        buttonIcon.setIcon(systemName: systemName)
+        buttonIcon.setSymbol(systemName)
     }
     
     func setButtonIconColor(_ color: UIColor) {

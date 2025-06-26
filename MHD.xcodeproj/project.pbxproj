@@ -85,6 +85,7 @@
 		378AFD012DE903A100BFDF2D /* UIKitPro in Frameworks */ = {isa = PBXBuildFile; productRef = 378AFD002DE903A100BFDF2D /* UIKitPro */; };
 		37AE57312DE377E80074B3E2 /* CustomButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57302DE377E10074B3E2 /* CustomButton+Properties.swift */; };
 		37AE57352DE45EB10074B3E2 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57342DE45EAA0074B3E2 /* CustomButton.swift */; };
+		37BDE15E2E0D9849007CF1D0 /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE15D2E0D9849007CF1D0 /* SymbolView.swift */; };
 		37C8E0502DFD8B1700FABE9D /* RouteStationsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8E04F2DFD8B1700FABE9D /* RouteStationsTable.swift */; };
 		37E862592DF4E0BB00E2C5AD /* StationInformationPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E862582DF4E0A000E2C5AD /* StationInformationPopupView.swift */; };
 		37E8625D2DF575D100E2C5AD /* DummyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8625C2DF575D100E2C5AD /* DummyDataModel.swift */; };
@@ -183,6 +184,7 @@
 		378AFCCE2DE8826900BFDF2D /* MHD_TabBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHD_TabBarDelegate.swift; sourceTree = "<group>"; };
 		37AE57302DE377E10074B3E2 /* CustomButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomButton+Properties.swift"; sourceTree = "<group>"; };
 		37AE57342DE45EAA0074B3E2 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		37BDE15D2E0D9849007CF1D0 /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
 		37C8E04F2DFD8B1700FABE9D /* RouteStationsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationsTable.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37E862582DF4E0A000E2C5AD /* StationInformationPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInformationPopupView.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 				371CB6B22DF1F2BD0007E67E /* Map */,
 				376832752DEDB34300FAC3FE /* TextField */,
 				37AE572D2DE0CDB10074B3E2 /* Button */,
+				37BDE15D2E0D9849007CF1D0 /* SymbolView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				3768326D2DEB7BFC00FAC3FE /* SearchOptionView.swift in Sources */,
 				3789FDC32DF08B6000CE795D /* 4.swift in Sources */,
 				37370BC62DA27717007BB225 /* DirectionsViewController.swift in Sources */,
+				37BDE15E2E0D9849007CF1D0 /* SymbolView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

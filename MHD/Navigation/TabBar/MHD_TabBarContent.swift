@@ -76,12 +76,10 @@ class MHD_TabBarContent: UIView {
             
             
             // Icon Image
-            let iconImageView = IconImageView(
-                systemName: item.icon,
-                color: isActiveTab ? activeColor : defaultColor,
-                pointSize: tabBarIconSize,
-                weight: isActiveTab ? .medium : .regular,
-                scale: .medium
+            let iconImageView = SymbolView(
+                symbolName: item.icon,
+                size: 24,
+                tintColor: isActiveTab ? activeColor : defaultColor
             )
 
             let iconView = UIView(color: isActiveTab ? .primary500 : .clear)
@@ -142,7 +140,7 @@ extension MHD_TabBarContent {
             guard
                 let stackView = tabItemView.subviews.first(where: { $0 is UIStackView }) as? UIStackView,
                 let iconView = stackView.arrangedSubviews.first,
-                let iconImageView = iconView.subviews.first(where: { $0 is IconImageView }) as? IconImageView
+                let iconImageView = iconView.subviews.first(where: { $0 is SymbolView }) as? SymbolView
             else {
                 continue
             }
@@ -150,7 +148,6 @@ extension MHD_TabBarContent {
             let isActiveTab = selectedIndex == index
             iconView.backgroundColor = isActiveTab ? .primary500 : .clear
             
-            iconImageView.setConfig(pointSize: tabBarIconSize, weight: isActiveTab ? .medium : .regular, scale: .medium)
             iconImageView.setColor(isActiveTab ? activeColor : defaultColor)
         }
     }

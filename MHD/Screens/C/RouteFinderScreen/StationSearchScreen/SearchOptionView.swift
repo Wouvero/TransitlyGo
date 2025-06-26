@@ -18,7 +18,7 @@ struct Option {
 extension Option {
     static let options: [Option] = [
         Option(
-            iconName: "flag.fill",
+            iconName: SFSymbols.flag_line,
             optionText: "Zo zoznamu všetkých",
             viewControllerProvider: { AllStationsListViewController() }
         ),
@@ -28,7 +28,7 @@ extension Option {
 //            viewControllerProvider: { nil }
 //        ),
         Option(
-            iconName: "map.fill",
+            iconName: SFSymbols.map_line,
             optionText: "Na mape",
             viewControllerProvider: { MapViewController() }
         )
@@ -92,7 +92,7 @@ class SearchOptionsView: UIView {
             numberOfLines: 1
         )
         
-        let icon = IconImageView(systemName: option.iconName, color: .neutral800)
+        let icon = SymbolView(symbolName: option.iconName, tintColor: .neutral800)
         
         let row = UIStackView(
             arrangedSubviews: [

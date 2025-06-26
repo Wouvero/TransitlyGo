@@ -18,17 +18,17 @@ extension TabBarItem {
     static let tabBarItems: [TabBarItem] = [
         TabBarItem(
             title: "View 1",
-            icon: "house",
+            icon: SFSymbols.home,
             viewControllerProvider: { TransportLinesViewController() }
         ),
         TabBarItem(
             title: "View 2",
-            icon: "heart",
+            icon: SFSymbols.heart_line,
             viewControllerProvider: { FavoriteRoutesViewController() }
         ),
         TabBarItem(
             title: "View 3",
-            icon: "magnifyingglass",
+            icon: SFSymbols.search_line,
             viewControllerProvider: { RouteFinderViewController() }
         ),
     ]

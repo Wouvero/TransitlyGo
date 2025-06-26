@@ -15,7 +15,7 @@ class MHD_TabBarController: UITabBarController, UITabBarControllerDelegate, UINa
     // MARK: - Properties
     private let tabBarItems = TabBarItem.tabBarItems
     
-    private let tabBarContentHeight: CGFloat = 72
+    private let tabBarContentHeight: CGFloat = 60
     
     private let customTabBarBackground = UIView(color: .neutral)
     

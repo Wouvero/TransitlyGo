@@ -219,9 +219,12 @@ struct FavoriteItem: View {
     
     private var foregroundContent: some View {
         HStack {
-            Image(systemName: SFSymbols.search)
-                .fontWeight(.semibold)
-                .font(.system(size: 36))
+            Image(SFSymbols.search_line) // Your custom SVG asset name
+                .resizable()
+                .renderingMode(.template) // To allow tinting
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 36, height: 36)
+                .foregroundColor(.neutral700) // or your danger700
             VStack {
                 if let name = item.name {
                     HStack {
@@ -230,19 +233,25 @@ struct FavoriteItem: View {
                         Spacer()
                     }
                 }
-                HStack {
-                    Image(systemName: SFSymbols.arrowDownLeft)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(.neutral700)
+                HStack(alignment: .center) {
+                    Image(SFSymbols.arrow_right_up_line)
+                        .resizable()
+                        .renderingMode(.template) // To allow tinting
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.neutral700)
                     if let stationName = item.fromStation {
                         Text(stationName)
                     }
                     Spacer()
                 }
-                HStack {
-                    Image(systemName: SFSymbols.arrowUpForward)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundStyle(.neutral700)
+                HStack(alignment: .center) {
+                    Image(SFSymbols.arrow_left_down_line)
+                        .resizable()
+                        .renderingMode(.template) // To allow tinting
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.neutral700)
                     if let stationName = item.toStation {
                         Text(stationName)
                     }

@@ -63,9 +63,9 @@ class RouteFinderViewController: UIViewController, MHD_NavigationDelegate {
     
     private let changeButton = CustomButton(
         type: .iconOnly(
-            iconName: SFSymbols.changePosition,
+            iconName: SFSymbols.arrow_up_down_line,
             iconColor: .neutral,
-            iconSize: 24
+            iconSize: 20
         ),
         style: .filled(
             backgroundColor: .neutral800,

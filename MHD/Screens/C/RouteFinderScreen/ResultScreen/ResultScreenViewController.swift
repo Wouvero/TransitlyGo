@@ -25,12 +25,17 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
             .build()
     }
     
-    private let addToFavoriteBtn = CustomButton.makeCircleBtn(
-        iconName: "heart",
-        iconColor: .white,
-        iconSize: 24,
-        backgroundColor: .systemBlue,
-        size: 50
+    private let addToFavoriteBtn = CustomButton(
+        type: .iconOnly(
+            iconName: SFSymbols.bus_fill,
+            iconColor: .neutral,
+            iconSize: 20
+        ),
+        style: .filled(
+            backgroundColor: .primary500,
+            cornerRadius: 22
+        ),
+        size: .custom(width: 44, height: 44)
     )
     
     let searchRouteModel: RouteFinderModel
@@ -64,19 +69,19 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
             in: context
         )
     }
-  
+    
     private func saveFavoriteRoute(customName: String) {
-           let context = MHD_CoreDataManager.shared.viewContext
-           MHD_Favorite.add(
-               searchRouteModel,
-               with: customName,
-               in: context
-           )
-           
-           itemExists = true
-           addToFavoriteBtn.setButtonIcon("heart.fill")
-           showSuccessAlert()
-       }
+        let context = MHD_CoreDataManager.shared.viewContext
+        MHD_Favorite.add(
+            searchRouteModel,
+            with: customName,
+            in: context
+        )
+        
+        itemExists = true
+        addToFavoriteBtn.setButtonIcon(SFSymbols.heart_fill)
+        showSuccessAlert()
+    }
     
     private func showNameInputAlert() {
         let alert = UIAlertController(
@@ -142,7 +147,7 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
             }
         }
         
-        addToFavoriteBtn.setButtonIcon(itemExists ? "heart.fill" : "heart")
+        addToFavoriteBtn.setButtonIcon(itemExists ? SFSymbols.heart_fill : SFSymbols.heart_line)
         view.addSubview(addToFavoriteBtn)
         addToFavoriteBtn.translatesAutoresizingMaskIntoConstraints = false
         

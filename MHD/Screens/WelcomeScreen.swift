@@ -12,8 +12,9 @@ struct WelcomeScreen: View {
     var body: some View {
         ZStack {
             Color.primary500.ignoresSafeArea()
-            Image(systemName: "bus")
+            Image("time-line")
                 .font(.system(size: 48))
+                .imageScale(.large)
                 .foregroundStyle(.neutral)
         }
     }
