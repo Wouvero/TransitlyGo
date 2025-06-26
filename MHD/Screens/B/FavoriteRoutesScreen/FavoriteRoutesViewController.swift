@@ -211,12 +211,15 @@ struct FavoriteItem: View {
         Button {
             store.handleDeleteFromFavorites(item)
         } label: {
-            Image(systemName: "trash")
+            Image(SFSymbols.delete_bin_fill)
+                .resizable()
+                .renderingMode(.template) // To allow tinting
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .foregroundColor(.danger700)
                 .frame(width: buttonWidth)
                 .frame(maxHeight: .infinity)
                 .background(.danger200)
-                .foregroundStyle(.danger700)
-                .fontWeight(.semibold)
         }
     }
     
@@ -231,12 +234,15 @@ struct FavoriteItem: View {
                 showingEditAlert = true
             }
         } label: {
-            Image(systemName: "pencil")
+            Image(SFSymbols.pencil_fill)
+                .resizable()
+                .renderingMode(.template) // To allow tinting
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 20, height: 20)
+                .foregroundColor(.warning700)
                 .frame(width: buttonWidth)
                 .frame(maxHeight: .infinity)
                 .background(.warning200)
-                .foregroundStyle(.warning700)
-                .fontWeight(.semibold)
         }
     }
     
