@@ -139,6 +139,25 @@ extension MHD_StationInfo {
         return result
     }
     
+    static func getStationInfo(withName name: String, in context: NSManagedObjectContext) -> MHD_StationInfo? {
+        var result: MHD_StationInfo?
+        
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<MHD_StationInfo> = MHD_StationInfo.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "stationName == %@", name)
+            fetchRequest.fetchLimit = 1
+            fetchRequest.returnsObjectsAsFaults = false  // Get full objects if we'll use their properties
+            
+            do {
+                result = try context.fetch(fetchRequest).first
+            } catch {
+                print("Failed to fetch stationInfo with name \(name): \(error.localizedDescription)")
+            }
+        }
+        
+        return result
+    }
+    
     @discardableResult
     static func deleteAll(in context: NSManagedObjectContext) -> Bool {
         var success = false
