@@ -19,11 +19,14 @@ class FavoriteRoutesViewController: UIViewController, MHD_NavigationDelegate {
             .build()
     }
     
+    private let context = MHD_CoreDataManager.shared.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let favoriteView = FavoriteView(store: FavoriteStore())
+        let favoriteView = FavoriteView(store: FavoriteStore()) { [weak self] favorite in
+            self?.handleNavigation(for: favorite)
+        }
         let hostingController = UIHostingController(rootView: favoriteView)
         
         attachSwiftUIHostingController(hostingController)
@@ -37,7 +40,22 @@ class FavoriteRoutesViewController: UIViewController, MHD_NavigationDelegate {
         ])
         
         view.backgroundColor = .neutral10
+    }
+    
+    private func handleNavigation(for item: MHD_Favorite) {
+        guard let fromStationName = item.fromStation,
+              let toStationName = item.toStation else { return }
         
+        guard let fromStation = MHD_StationInfo.getStationInfo(withName: fromStationName, in: context),
+              let toStation = MHD_StationInfo.getStationInfo(withName: toStationName, in: context) else { return }
+        
+        let vc = RouteFinderViewController()
+        navigate(to: vc)
+        
+        DispatchQueue.main.async {
+            vc.searchRouteVM.fromStationInfo = fromStation
+            vc.searchRouteVM.toStationInfo = toStation
+        }
     }
 }
 
@@ -49,10 +67,6 @@ extension UIViewController {
     }
 }
 
-//struct Favorite: Hashable {
-//    let from: String
-//    let to: String
-//}
 
 class FavoriteStore: ObservableObject {
     @Published var favorites: [MHD_Favorite] = []
@@ -100,6 +114,7 @@ class FavoriteStore: ObservableObject {
 struct FavoriteView: View {
     
     @ObservedObject var store: FavoriteStore
+    var onItemTap: (MHD_Favorite) -> Void
     
     let data: [MHD_Favorite] = []
     
@@ -107,7 +122,11 @@ struct FavoriteView: View {
         ScrollView {
             LazyVStack(spacing: 8) {
                 ForEach(store.favorites, id:\.self) { item in
-                    FavoriteItem(item: item, store: store)
+                    FavoriteItem(
+                        item: item,
+                        store: store,
+                        onTap: { onItemTap(item) }
+                    )
                 }
             }
             .padding(.horizontal, 16)
@@ -120,6 +139,7 @@ struct FavoriteView: View {
 struct FavoriteItem: View {
     let item: MHD_Favorite
     var store: FavoriteStore
+    var onTap: (() -> Void)?
     
     @State private var newName = ""
     @State private var showingEditAlert = false
@@ -180,6 +200,9 @@ struct FavoriteItem: View {
                 store.handleUpdateFavorite(item, newName: newName.trimmingCharacters(in: .whitespaces))
             }
             Button("Cancel", role: .cancel) {}
+        }
+        .onTapGesture {
+            onTap?()
         }
     }
     
@@ -268,12 +291,12 @@ struct FavoriteItem: View {
         .foregroundStyle(.neutral600)
     }
 }
-
-struct HHPreviewProvider: PreviewProvider {
-    static var previews: some View {
-        FavoriteView(store: FavoriteStore())
-    }
-}
+//
+//struct HHPreviewProvider: PreviewProvider {
+//    static var previews: some View {
+//        FavoriteView(store: FavoriteStore())
+//    }
+//}
 
 class Shape: UIView {
     
