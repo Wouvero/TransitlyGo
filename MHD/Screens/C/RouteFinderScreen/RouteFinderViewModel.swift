@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 extension Notification.Name {
     static let didSelectStation = Notification.Name("didSelectStation")
@@ -146,27 +147,38 @@ class RouteFinderViewModel {
     }
     
     private func showMissingInputsAlert() {
-        let alert = UIAlertController(
-            title: "Missing inputs",
-            message: "From and To inputs need be filled.",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        router.present(alert, animated: true)
+        let alert = SystemAlertView()
+        alert.titleText = "Chýbajúce údaje"
+        alert.messageText = "Polia 'Zo zastavky' a 'Na zastávku' musia byť vyplnené."
+        alert.buttonConfig = .primaryOnly
+        alert.affirmativeAction = {
+            alert.close()
+        }
+        alert.show(on: router)
     }
     
     private func showNotASameInputsAlert() {
-        let alert = UIAlertController(
-            title: "Missing inputs",
-            message: "Inputs canot be equals.",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        router.present(alert, animated: true)
+        let alert = SystemAlertView()
+        alert.titleText = "Neplatné údaje"
+        alert.messageText = "Polia 'Zo zastavky' a 'Na zastávku' nemôžu mať rovnakú hodnotu."
+        alert.buttonConfig = .primaryOnly
+        alert.affirmativeAction = {
+            alert.close()
+        }
+        alert.show(on: router)
     }
     
+    private func presentSwiftUIAlert(_ alertView: some View) {
+        let hostingController = UIHostingController(rootView: alertView)
+        hostingController.modalPresentationStyle = .fullScreen
+        hostingController.modalTransitionStyle = .crossDissolve
+        hostingController.view.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        
+        // Ensure we're on the main thread
+        DispatchQueue.main.async { [weak self] in
+            self?.router.present(hostingController, animated: true)
+        }
+    }
 }
 
 

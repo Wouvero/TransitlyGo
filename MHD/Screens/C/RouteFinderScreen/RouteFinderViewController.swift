@@ -25,14 +25,14 @@ class RouteFinderViewController: UIViewController, MHD_NavigationDelegate {
     }()
     
     // MARK: - Variables
-    private let fromInputTextField: CustomInactiveTextField = {
-        let tf = CustomInactiveTextField()
+    private let fromInputTextField: CustomTextField = {
+        let tf = CustomTextField(active: false)
         tf.setupPlaceholder(InputFieldType.from.rawValue)
         return tf
     }()
     
-    private let toInputTextField: CustomInactiveTextField = {
-        let tf = CustomInactiveTextField()
+    private let toInputTextField: CustomTextField = {
+        let tf = CustomTextField(active: false)
         tf.setupPlaceholder(InputFieldType.to.rawValue)
         return tf
     }()

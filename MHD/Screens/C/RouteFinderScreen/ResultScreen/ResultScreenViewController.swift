@@ -84,55 +84,42 @@ class ResultScreenViewController: UIViewController, MHD_NavigationDelegate {
     }
     
     private func showNameInputAlert() {
-        let alert = UIAlertController(
-            title: "Save Favorite Route",
-            message: "Give this route a name (e.g. Home → School)",
-            preferredStyle: .alert
-        )
+        let alert = TextFieldAlertView()
+        alert.titleText = "Názov obľúbenej položky"
+        alert.messageText = "Napr. Do práce. K rodičom, atď..."
         
-        alert.addTextField { textField in
-            textField.placeholder = "Route name"
-            textField.autocapitalizationType = .sentences
+        alert.affirmativeAction = { [weak self] in
+            guard let name = alert.textField.text?.trimmingCharacters(in: .whitespaces),
+                  !name.isEmpty else { return }
+            self?.saveFavoriteRoute(customName: name)
+            alert.close()
         }
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
-            guard let self,
-                  let name = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespaces),
-                  !name.isEmpty else {
-                return
-            }
-            
-            self.saveFavoriteRoute(customName: name)
+        alert.dismissiveAction = {
+            alert.close()
         }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true)
+        alert.show(on: self)
     }
     
     private func showAlreadyExistsAlert() {
-        let alert = UIAlertController(
-            title: "Already Saved",
-            message: "This route is already in your favorites",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        let alert = SystemAlertView()
+        alert.titleText = "Už uložené"
+        alert.messageText = "Túto trasu už máte v obľúbených."
+        alert.affirmativeButton.setButtonLabelText("OK")
+        alert.affirmativeAction = {
+            alert.close()
+        }
+        alert.show(on: self)
     }
     
     private func showSuccessAlert() {
-        let alert = UIAlertController(
-            title: "Saved",
-            message: "Route was added to favorites",
-            preferredStyle: .alert
-        )
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        let alert = SystemAlertView()
+        alert.titleText = "🎉 Uložené"
+        alert.messageText = "Trasa bola uložena v obľúbených."
+        alert.affirmativeButton.setButtonLabelText("OK")
+        alert.affirmativeAction = {
+            alert.close()
+        }
+        alert.show(on: self)
     }
     
     private func setFavoriteBtn() {
