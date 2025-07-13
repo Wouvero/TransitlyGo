@@ -7,17 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370AA3D62E23CB0E0074530A /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3D52E23CB0E0074530A /* FavoriteView.swift */; };
+		370AA3D82E23CB370074530A /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3D72E23CB370074530A /* FavoriteViewModel.swift */; };
+		370AA3DA2E23CB4E0074530A /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3D92E23CB4E0074530A /* FavoriteItem.swift */; };
+		370AA3DC2E23CBE70074530A /* View+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3DB2E23CBE70074530A /* View+extension.swift */; };
+		370AA3DE2E23DB0A0074530A /* SystemAlert+representable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3DD2E23DB0A0074530A /* SystemAlert+representable.swift */; };
+		370AA3E02E23DB140074530A /* TextFieldAlert+representable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AA3DF2E23DB140074530A /* TextFieldAlert+representable.swift */; };
 		371CB6B92DF212860007E67E /* RouteStationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6B82DF2127C0007E67E /* RouteStationsMapViewController.swift */; };
 		371CB6C32DF2426F0007E67E /* GeoJSONManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6C22DF2426F0007E67E /* GeoJSONManager.swift */; };
 		371CB6C52DF243430007E67E /* DummyDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6C42DF243430007E67E /* DummyDataManager.swift */; };
 		371CB6C72DF249D50007E67E /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6C62DF249C50007E67E /* SegmentedControl.swift */; };
 		371CB6CE2DF450C90007E67E /* MHD_DirectionStationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6CD2DF450C90007E67E /* MHD_DirectionStationAnnotationView.swift */; };
 		371CB6D32DF45D150007E67E /* MHD_DirectionStationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6D22DF45D150007E67E /* MHD_DirectionStationAnnotation.swift */; };
-		371CB6D62DF475750007E67E /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371CB6D52DF475730007E67E /* PopupView.swift */; };
 		37247C852DF6F89B00728290 /* FadeInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37247C842DF6F89B00728290 /* FadeInTransition.swift */; };
 		37268EDF2E00687A0011353E /* MenuPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EDE2E00687A0011353E /* MenuPicker.swift */; };
 		37268EE72E01A8650011353E /* WelcomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE62E01A84E0011353E /* WelcomeScreen.swift */; };
-		37268EE92E02BEF70011353E /* CustomInactiveTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE82E02BEEB0011353E /* CustomInactiveTextField.swift */; };
+		37268EE92E02BEF70011353E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EE82E02BEEB0011353E /* CustomTextField.swift */; };
 		37268EEB2E02D2580011353E /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37268EEA2E02D2530011353E /* DateFormatter.swift */; };
 		37370BC62DA27717007BB225 /* DirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BC52DA276C0007BB225 /* DirectionsViewController.swift */; };
 		37370BCA2DA6CAAE007BB225 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37370BC92DA6CAA9007BB225 /* Colors.swift */; };
@@ -31,15 +36,19 @@
 		374873012DC2D38F006126B2 /* RouteStationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374873002DC2D38F006126B2 /* RouteStationViewCell.swift */; };
 		374873072DC50358006126B2 /* NSAttributedString+Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 374873062DC50351006126B2 /* NSAttributedString+Builder.swift */; };
 		3748730D2DC63725006126B2 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3748730C2DC63722006126B2 /* Helper.swift */; };
+		3753407F2E19C6A3005CF3AF /* CustomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3753407E2E19C69C005CF3AF /* CustomPopupView.swift */; };
 		375BA5F92DAC005500FD8477 /* RouteStationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BA5F82DABFFF900FD8477 /* RouteStationsViewController.swift */; };
 		375BA5FF2DB008EE00FD8477 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BA5FE2DB008E800FD8477 /* UIViewController.swift */; };
 		375BA6022DB00F1400FD8477 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375BA6012DB00F1100FD8477 /* UIView.swift */; };
 		3762A3842E08AD950016F1CC /* DayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3762A3832E08AD950016F1CC /* DayType.swift */; };
 		3768326D2DEB7BFC00FAC3FE /* SearchOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768326C2DEB7BF000FAC3FE /* SearchOptionView.swift */; };
 		3768326F2DEB7C3100FAC3FE /* StationSearchResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3768326E2DEB7C2A00FAC3FE /* StationSearchResultList.swift */; };
-		376832732DED94CE00FAC3FE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832722DED94CE00FAC3FE /* CustomTextField.swift */; };
+		376832732DED94CE00FAC3FE /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832722DED94CE00FAC3FE /* BaseTextField.swift */; };
 		376832772DEDB42600FAC3FE /* CustomSearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832762DEDB41E00FAC3FE /* CustomSearchTextField.swift */; };
 		376832792DEE0DAC00FAC3FE /* CustomTimeTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376832782DEE0D9F00FAC3FE /* CustomTimeTextField.swift */; };
+		376F97082E22A3F500057D49 /* SystemAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F97072E22A3F500057D49 /* SystemAlertView.swift */; };
+		376F970A2E22A40400057D49 /* TextFieldAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F97092E22A40400057D49 /* TextFieldAlertView.swift */; };
+		376F970D2E22A5F500057D49 /* StationInformationPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376F970C2E22A5EB00057D49 /* StationInformationPopup.swift */; };
 		377246C02D947484000ED98C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377246B42D947484000ED98C /* AppDelegate.swift */; };
 		377246C12D947484000ED98C /* TransportLinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377246B62D947484000ED98C /* TransportLinesViewController.swift */; };
 		377246C22D947484000ED98C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377246BC2D947484000ED98C /* SceneDelegate.swift */; };
@@ -86,8 +95,8 @@
 		37AE57312DE377E80074B3E2 /* CustomButton+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57302DE377E10074B3E2 /* CustomButton+Properties.swift */; };
 		37AE57352DE45EB10074B3E2 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37AE57342DE45EAA0074B3E2 /* CustomButton.swift */; };
 		37BDE15E2E0D9849007CF1D0 /* SymbolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE15D2E0D9849007CF1D0 /* SymbolView.swift */; };
+		37BDE1602E0FE317007CF1D0 /* TODO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE15F2E0FE314007CF1D0 /* TODO.swift */; };
 		37C8E0502DFD8B1700FABE9D /* RouteStationsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C8E04F2DFD8B1700FABE9D /* RouteStationsTable.swift */; };
-		37E862592DF4E0BB00E2C5AD /* StationInformationPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E862582DF4E0A000E2C5AD /* StationInformationPopupView.swift */; };
 		37E8625D2DF575D100E2C5AD /* DummyDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8625C2DF575D100E2C5AD /* DummyDataModel.swift */; };
 		37E8625F2DF5762300E2C5AD /* 38.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E8625E2DF5761F00E2C5AD /* 38.swift */; };
 		37E862612DF5B3C200E2C5AD /* AllStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37E862602DF5B3BE00E2C5AD /* AllStations.swift */; };
@@ -106,17 +115,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370AA3D52E23CB0E0074530A /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		370AA3D72E23CB370074530A /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		370AA3D92E23CB4E0074530A /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
+		370AA3DB2E23CBE70074530A /* View+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+extension.swift"; sourceTree = "<group>"; };
+		370AA3DD2E23DB0A0074530A /* SystemAlert+representable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SystemAlert+representable.swift"; sourceTree = "<group>"; };
+		370AA3DF2E23DB140074530A /* TextFieldAlert+representable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextFieldAlert+representable.swift"; sourceTree = "<group>"; };
 		371CB6B82DF2127C0007E67E /* RouteStationsMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationsMapViewController.swift; sourceTree = "<group>"; };
 		371CB6C22DF2426F0007E67E /* GeoJSONManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoJSONManager.swift; sourceTree = "<group>"; };
 		371CB6C42DF243430007E67E /* DummyDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataManager.swift; sourceTree = "<group>"; };
 		371CB6C62DF249C50007E67E /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		371CB6CD2DF450C90007E67E /* MHD_DirectionStationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHD_DirectionStationAnnotationView.swift; sourceTree = "<group>"; };
 		371CB6D22DF45D150007E67E /* MHD_DirectionStationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHD_DirectionStationAnnotation.swift; sourceTree = "<group>"; };
-		371CB6D52DF475730007E67E /* PopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		37247C842DF6F89B00728290 /* FadeInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadeInTransition.swift; sourceTree = "<group>"; };
 		37268EDE2E00687A0011353E /* MenuPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPicker.swift; sourceTree = "<group>"; };
 		37268EE62E01A84E0011353E /* WelcomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScreen.swift; sourceTree = "<group>"; };
-		37268EE82E02BEEB0011353E /* CustomInactiveTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInactiveTextField.swift; sourceTree = "<group>"; };
+		37268EE82E02BEEB0011353E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		37268EEA2E02D2530011353E /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		37370BC52DA276C0007BB225 /* DirectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsViewController.swift; sourceTree = "<group>"; };
 		37370BC92DA6CAA9007BB225 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -130,15 +144,19 @@
 		374873002DC2D38F006126B2 /* RouteStationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationViewCell.swift; sourceTree = "<group>"; };
 		374873062DC50351006126B2 /* NSAttributedString+Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Builder.swift"; sourceTree = "<group>"; };
 		3748730C2DC63722006126B2 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		3753407E2E19C69C005CF3AF /* CustomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupView.swift; sourceTree = "<group>"; };
 		375BA5F82DABFFF900FD8477 /* RouteStationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationsViewController.swift; sourceTree = "<group>"; };
 		375BA5FE2DB008E800FD8477 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		375BA6012DB00F1100FD8477 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3762A3832E08AD950016F1CC /* DayType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayType.swift; sourceTree = "<group>"; };
 		3768326C2DEB7BF000FAC3FE /* SearchOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionView.swift; sourceTree = "<group>"; };
 		3768326E2DEB7C2A00FAC3FE /* StationSearchResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchResultList.swift; sourceTree = "<group>"; };
-		376832722DED94CE00FAC3FE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		376832722DED94CE00FAC3FE /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
 		376832762DEDB41E00FAC3FE /* CustomSearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchTextField.swift; sourceTree = "<group>"; };
 		376832782DEE0D9F00FAC3FE /* CustomTimeTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimeTextField.swift; sourceTree = "<group>"; };
+		376F97072E22A3F500057D49 /* SystemAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemAlertView.swift; sourceTree = "<group>"; };
+		376F97092E22A40400057D49 /* TextFieldAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldAlertView.swift; sourceTree = "<group>"; };
+		376F970C2E22A5EB00057D49 /* StationInformationPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInformationPopup.swift; sourceTree = "<group>"; };
 		377246B42D947484000ED98C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		377246B52D947484000ED98C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		377246B62D947484000ED98C /* TransportLinesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportLinesViewController.swift; sourceTree = "<group>"; };
@@ -185,9 +203,9 @@
 		37AE57302DE377E10074B3E2 /* CustomButton+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomButton+Properties.swift"; sourceTree = "<group>"; };
 		37AE57342DE45EAA0074B3E2 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		37BDE15D2E0D9849007CF1D0 /* SymbolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolView.swift; sourceTree = "<group>"; };
+		37BDE15F2E0FE314007CF1D0 /* TODO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TODO.swift; sourceTree = "<group>"; };
 		37C8E04F2DFD8B1700FABE9D /* RouteStationsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteStationsTable.swift; sourceTree = "<group>"; };
 		37E0CC6B2D93F1BB003770B1 /* MHD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MHD.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		37E862582DF4E0A000E2C5AD /* StationInformationPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationInformationPopupView.swift; sourceTree = "<group>"; };
 		37E8625C2DF575D100E2C5AD /* DummyDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataModel.swift; sourceTree = "<group>"; };
 		37E8625E2DF5761F00E2C5AD /* 38.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 38.swift; sourceTree = "<group>"; };
 		37E862602DF5B3BE00E2C5AD /* AllStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStations.swift; sourceTree = "<group>"; };
@@ -261,15 +279,6 @@
 				371CB6D22DF45D150007E67E /* MHD_DirectionStationAnnotation.swift */,
 			);
 			path = Annotation;
-			sourceTree = "<group>";
-		};
-		371CB6D42DF475590007E67E /* PopupView */ = {
-			isa = PBXGroup;
-			children = (
-				37E862582DF4E0A000E2C5AD /* StationInformationPopupView.swift */,
-				371CB6D52DF475730007E67E /* PopupView.swift */,
-			);
-			path = PopupView;
 			sourceTree = "<group>";
 		};
 		37247C862DF6F8EC00728290 /* Transitions */ = {
@@ -443,7 +452,7 @@
 			children = (
 				37268EE02E0068850011353E /* Picker */,
 				371CB6C82DF249E40007E67E /* SegmentedControl */,
-				371CB6D42DF475590007E67E /* PopupView */,
+				376F97062E22A3D400057D49 /* CustomPopup */,
 				371CB6B22DF1F2BD0007E67E /* Map */,
 				376832752DEDB34300FAC3FE /* TextField */,
 				37AE572D2DE0CDB10074B3E2 /* Button */,
@@ -455,17 +464,37 @@
 		376832752DEDB34300FAC3FE /* TextField */ = {
 			isa = PBXGroup;
 			children = (
-				37268EE82E02BEEB0011353E /* CustomInactiveTextField.swift */,
+				37268EE82E02BEEB0011353E /* CustomTextField.swift */,
 				376832762DEDB41E00FAC3FE /* CustomSearchTextField.swift */,
 				376832782DEE0D9F00FAC3FE /* CustomTimeTextField.swift */,
-				376832722DED94CE00FAC3FE /* CustomTextField.swift */,
+				376832722DED94CE00FAC3FE /* BaseTextField.swift */,
 			);
 			path = TextField;
+			sourceTree = "<group>";
+		};
+		376F97062E22A3D400057D49 /* CustomPopup */ = {
+			isa = PBXGroup;
+			children = (
+				376F970B2E22A5CB00057D49 /* Alert */,
+				3753407E2E19C69C005CF3AF /* CustomPopupView.swift */,
+				376F970C2E22A5EB00057D49 /* StationInformationPopup.swift */,
+			);
+			path = CustomPopup;
+			sourceTree = "<group>";
+		};
+		376F970B2E22A5CB00057D49 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				376F97072E22A3F500057D49 /* SystemAlertView.swift */,
+				376F97092E22A40400057D49 /* TextFieldAlertView.swift */,
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		377246BF2D947484000ED98C /* MHD */ = {
 			isa = PBXGroup;
 			children = (
+				37BDE15F2E0FE314007CF1D0 /* TODO.swift */,
 				377246C92D947489000ED98C /* App */,
 				377246CA2D947510000ED98C /* Supporting files */,
 				374873042DC5032B006126B2 /* Utilities */,
@@ -530,6 +559,12 @@
 		377AEBE02DDDDAC200929129 /* FavoriteRoutesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				370AA3DF2E23DB140074530A /* TextFieldAlert+representable.swift */,
+				370AA3DD2E23DB0A0074530A /* SystemAlert+representable.swift */,
+				370AA3DB2E23CBE70074530A /* View+extension.swift */,
+				370AA3D72E23CB370074530A /* FavoriteViewModel.swift */,
+				370AA3D52E23CB0E0074530A /* FavoriteView.swift */,
+				370AA3D92E23CB4E0074530A /* FavoriteItem.swift */,
 				377AEBE12DDDDAD200929129 /* FavoriteRoutesViewController.swift */,
 			);
 			path = FavoriteRoutesScreen;
@@ -834,6 +869,7 @@
 				371CB6C72DF249D50007E67E /* SegmentedControl.swift in Sources */,
 				376832772DEDB42600FAC3FE /* CustomSearchTextField.swift in Sources */,
 				377246C02D947484000ED98C /* AppDelegate.swift in Sources */,
+				37BDE1602E0FE317007CF1D0 /* TODO.swift in Sources */,
 				37FED5CB2E05B41A0024649C /* MHD_Favorite+CoreDataClass.swift in Sources */,
 				37FED5CC2E05B41A0024649C /* MHD_Favorite+CoreDataProperties.swift in Sources */,
 				3789FDA52DF088BA00CE795D /* MHD_Alert+CoreDataClass.swift in Sources */,
@@ -851,14 +887,16 @@
 				3789FDB52DF088BA00CE795D /* MHD_TransportLine+CoreDataClass.swift in Sources */,
 				3789FDB62DF088BA00CE795D /* MHD_TransportLine+CoreDataProperties.swift in Sources */,
 				37370BD32DA6CB1E007BB225 /* Constants.swift in Sources */,
-				376832732DED94CE00FAC3FE /* CustomTextField.swift in Sources */,
+				376832732DED94CE00FAC3FE /* BaseTextField.swift in Sources */,
 				37AE57312DE377E80074B3E2 /* CustomButton+Properties.swift in Sources */,
 				375BA6022DB00F1400FD8477 /* UIView.swift in Sources */,
 				37FED5CF2E05B9880024649C /* ResultScreenViewController.swift in Sources */,
+				370AA3DC2E23CBE70074530A /* View+extension.swift in Sources */,
 				3789FD602DF05C7500CE795D /* MHD_StationAnnotation.swift in Sources */,
+				3753407F2E19C6A3005CF3AF /* CustomPopupView.swift in Sources */,
 				378AFCCB2DE87F6400BFDF2D /* MHD_TabBarController.swift in Sources */,
 				37370BCA2DA6CAAE007BB225 /* Colors.swift in Sources */,
-				37268EE92E02BEF70011353E /* CustomInactiveTextField.swift in Sources */,
+				37268EE92E02BEF70011353E /* CustomTextField.swift in Sources */,
 				37E8625F2DF5762300E2C5AD /* 38.swift in Sources */,
 				37268EEB2E02D2580011353E /* DateFormatter.swift in Sources */,
 				377AEB9C2DD4C88800929129 /* TableTableViewCell.swift in Sources */,
@@ -868,6 +906,7 @@
 				377AEB9A2DD3E17F00929129 /* TimeInterval.swift in Sources */,
 				37F644A72E0B368F00749B6F /* BaseMapView.swift in Sources */,
 				378AFCCD2DE87FD000BFDF2D /* MHD_TabBarContent.swift in Sources */,
+				370AA3E02E23DB140074530A /* TextFieldAlert+representable.swift in Sources */,
 				37F644A92E0B3AC200749B6F /* MapWithDirection.swift in Sources */,
 				377AEBE22DDDDADB00929129 /* FavoriteRoutesViewController.swift in Sources */,
 				378AFCC62DE87EB700BFDF2D /* MHD_NavigationBarController.swift in Sources */,
@@ -875,17 +914,19 @@
 				377AEBD42DDB310000929129 /* StationSearchViewController.swift in Sources */,
 				377AEB9E2DD4C8A900929129 /* TimeTableViewController.swift in Sources */,
 				378AFCC42DE87E4700BFDF2D /* MHD_NavigationBarContent.swift in Sources */,
-				37E862592DF4E0BB00E2C5AD /* StationInformationPopupView.swift in Sources */,
 				374872E92DC1096B006126B2 /* TransportLinesCollectionView.swift in Sources */,
 				37AE57352DE45EB10074B3E2 /* CustomButton.swift in Sources */,
 				3748730D2DC63725006126B2 /* Helper.swift in Sources */,
 				37FED5C52E05A81F0024649C /* MHD_Hour+CoreDataClass.swift in Sources */,
 				37FED5C62E05A81F0024649C /* MHD_Hour+CoreDataProperties.swift in Sources */,
+				376F970D2E22A5F500057D49 /* StationInformationPopup.swift in Sources */,
 				37FED5C72E05A81F0024649C /* MHD_Minute+CoreDataClass.swift in Sources */,
 				37FED5C82E05A81F0024649C /* MHD_Minute+CoreDataProperties.swift in Sources */,
 				377AEBDD2DDB684900929129 /* MapViewController.swift in Sources */,
+				376F97082E22A3F500057D49 /* SystemAlertView.swift in Sources */,
 				377AEBD22DDB30D900929129 /* SearchStationCell.swift in Sources */,
 				3762A3842E08AD950016F1CC /* DayType.swift in Sources */,
+				370AA3DA2E23CB4E0074530A /* FavoriteItem.swift in Sources */,
 				371CB6D32DF45D150007E67E /* MHD_DirectionStationAnnotation.swift in Sources */,
 				374872E72DC1093E006126B2 /* TransportLineCell.swift in Sources */,
 				371CB6C52DF243430007E67E /* DummyDataManager.swift in Sources */,
@@ -895,15 +936,17 @@
 				377AEB982DD1076800929129 /* TableTableView.swift in Sources */,
 				37268EE72E01A8650011353E /* WelcomeScreen.swift in Sources */,
 				3789FDC12DF08A0700CE795D /* MHD_CoreDataManager.swift in Sources */,
+				370AA3D62E23CB0E0074530A /* FavoriteView.swift in Sources */,
 				374873072DC50358006126B2 /* NSAttributedString+Builder.swift in Sources */,
-				371CB6D62DF475750007E67E /* PopupView.swift in Sources */,
 				377246C22D947484000ED98C /* SceneDelegate.swift in Sources */,
 				37E862632DF5FD0900E2C5AD /* 8.swift in Sources */,
+				370AA3D82E23CB370074530A /* FavoriteViewModel.swift in Sources */,
 				375BA5F92DAC005500FD8477 /* RouteStationsViewController.swift in Sources */,
 				378AFCCF2DE8826900BFDF2D /* MHD_TabBarDelegate.swift in Sources */,
 				37FED5D42E0766DA0024649C /* RouteFinderViewModel.swift in Sources */,
 				376832792DEE0DAC00FAC3FE /* CustomTimeTextField.swift in Sources */,
 				3789FD622DF05CA600CE795D /* MHD_StationAnnotationView.swift in Sources */,
+				370AA3DE2E23DB0A0074530A /* SystemAlert+representable.swift in Sources */,
 				37E862612DF5B3C200E2C5AD /* AllStations.swift in Sources */,
 				37370BED2DA6FDC8007BB225 /* SFSymbols.swift in Sources */,
 				37E8625D2DF575D100E2C5AD /* DummyDataModel.swift in Sources */,
@@ -915,6 +958,7 @@
 				375BA5FF2DB008EE00FD8477 /* UIViewController.swift in Sources */,
 				37370BEB2DA6E197007BB225 /* TabBarItem.swift in Sources */,
 				37370BCC2DA6CAC0007BB225 /* Fonts.swift in Sources */,
+				376F970A2E22A40400057D49 /* TextFieldAlertView.swift in Sources */,
 				37C8E0502DFD8B1700FABE9D /* RouteStationsTable.swift in Sources */,
 				3789FD652DF0722B00CE795D /* MHD_TransportModel.xcdatamodeld in Sources */,
 				37F644AB2E0B3E9100749B6F /* AllStationMapView.swift in Sources */,
