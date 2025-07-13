@@ -14,7 +14,7 @@ protocol SearchTextFieldDelegate: AnyObject {
 }
 
 
-class CustomSearchTextField: CustomTextField {
+class CustomSearchTextField: BaseTextField {
     
     weak var searchDelegate: SearchTextFieldDelegate?
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomTimeTextField: CustomTextField {
+class CustomTimeTextField: BaseTextField {
     private var type: TimeType
     init(type: TimeType) {
         self.type = type
@@ -29,7 +29,6 @@ extension CustomTimeTextField {
         validationType = .time(type: type)
         textAlignment = .center
         keyboardType = .asciiCapableNumberPad
-       
     }
     
 }
