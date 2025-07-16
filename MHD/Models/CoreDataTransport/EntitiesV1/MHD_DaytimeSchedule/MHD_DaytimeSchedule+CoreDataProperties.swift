@@ -19,7 +19,7 @@ extension MHD_DaytimeSchedule {
     }
 
     @NSManaged public var dayType: Int16
-    @NSManaged public var timeTables: NSSet?
+    @NSManaged public var hours: NSSet?
     @NSManaged public var directionStation: MHD_DirectionStation?
 
 }
@@ -27,17 +27,18 @@ extension MHD_DaytimeSchedule {
 // MARK: Generated accessors for timeTables
 extension MHD_DaytimeSchedule {
 
-    @objc(addTimeTablesObject:)
-    @NSManaged public func addToTimeTables(_ value: MHD_TimeTable)
+    @objc(addHoursObject:)
+    @NSManaged public func addToHours(_ value: MHD_Hour)
 
-    @objc(removeTimeTablesObject:)
-    @NSManaged public func removeFromTimeTables(_ value: MHD_TimeTable)
+    @objc(removeHoursObject:)
+    @NSManaged public func removeFromHours(_ value: MHD_Hour)
 
-    @objc(addTimeTables:)
-    @NSManaged public func addToTimeTables(_ values: NSSet)
+    @objc(addHours:)
+    @NSManaged public func addToHours(_ values: NSSet)
 
-    @objc(removeTimeTables:)
-    @NSManaged public func removeFromTimeTables(_ values: NSSet)
+    @objc(removeHours:)
+    @NSManaged public func removeFromHours(_ values: NSSet)
+
 
 }
 
@@ -47,15 +48,15 @@ extension MHD_DaytimeSchedule : Identifiable {
 
 extension MHD_DaytimeSchedule {
 
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_DaytimeSchedule.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-        } catch {
-            print("😞 Failed to clear existing data: \(error)")
-        }
-    }
+//    static func deleteAll(in context: NSManagedObjectContext) {
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_DaytimeSchedule.fetchRequest()
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try context.execute(deleteRequest)
+//        } catch {
+//            print("😞 Failed to clear existing data: \(error)")
+//        }
+//    }
     
 }

@@ -25,7 +25,7 @@ class MHD_NavigationBarContent: UIView {
     private let titleLabel = UILabel(text: "Hello", font: UIFont.interSemibold(size: 16), textColor: .neutral800, textAlignment: .center, numberOfLines: 0)
     
     private var backButton = CustomButton(
-        type: .iconOnly(iconName: "arrow.left", iconColor: .neutral800, iconSize: 24),
+        type: .iconOnly(iconName: SFSymbols.arrow_left_line, iconColor: .neutral800, iconSize: 24),
         style: .plain(cornerRadius: 0),
         size: .custom(width: 44, height: 44)
     )

@@ -46,12 +46,12 @@ class DirectionsViewController: UIViewController, MHD_NavigationDelegate {
         numberOfLines: 1
     )
     
-    private let destinationIcon = IconImageView(
-        systemName: SFSymbols.signpost,
-        color: .neutral800,
-        pointSize: 24
+    private let destinationIcon = SymbolView(
+        symbolName: SFSymbols.signpost_fill,
+        size: 48,
+        tintColor: .neutral700
     )
-    
+
     private let content = UIView(color: .neutral10)
     
     private var directionOneButton: CustomButton!
@@ -116,7 +116,7 @@ extension DirectionsViewController {
             type: .textIcon(
                 label: directions[0].endDestination?.stationName ?? "",
                 textColor: .white,
-                iconName: SFSymbols.arrowUpForward,
+                iconName: SFSymbols.arrow_right_up_line,
                 iconColor: .white,
                 iconSize: 20,
                 spacing: 8
@@ -136,7 +136,7 @@ extension DirectionsViewController {
             type: .textIcon(
                 label: directions[1].endDestination?.stationName ?? "",
                 textColor: .white,
-                iconName: SFSymbols.arrowDownLeft,
+                iconName: SFSymbols.arrow_left_down_line,
                 iconColor: .white,
                 iconSize: 20,
                 spacing: 8
@@ -191,3 +191,59 @@ extension DirectionsViewController {
     }
     
 }
+
+//extension UIImage {
+//    func resize(to size: CGSize) -> UIImage {
+//        return UIGraphicsImageRenderer(size: size).image { _ in
+//            draw(in: CGRect(origin: .zero, size: size))
+//        }
+//    }
+//}
+
+
+
+//        let originalImage = UIImage(named: "your-icon")?
+//            .withRenderingMode(.alwaysTemplate)
+//        let scaledImage = originalImage?.resize(to: CGSize(width: 50, height: 50))
+//        let imageView = UIImageView(image: scaledImage)
+//        imageView.tintColor = .green // Set color
+
+
+
+
+//        let config = UIImage.SymbolConfiguration(pointSize: 28, weight: .medium, scale: .large) // Set size
+//        let originalImage = UIImage(named: "heart-3-line", in: nil, with: config)?
+//            .withRenderingMode(.alwaysTemplate)
+//        let imageView = UIImageView(image: originalImage)
+//        imageView.tintColor = .red // Set color
+
+
+
+
+
+//        let originalImage = UIImage(named: "heart-3-line")?
+//            .withRenderingMode(.alwaysTemplate)
+//        let scaledImage = originalImage?.resize(to: CGSize(width: 24, height: 24))
+//        let imageView = UIImageView(image: scaledImage)
+//        imageView.tintColor = .green // Set color
+//
+
+//
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//        imageView.contentMode = .scaleAspectFit
+//        imageView.tintColor = UIColor.systemRed
+//
+//        if let image = UIImage(named: SFSymbols.add_box_fill)?.withRenderingMode(.alwaysTemplate) {
+//            imageView.image = image
+//        }
+//
+//        view.addSubview(imageView)
+//
+//        NSLayoutConstraint.activate([
+//            imageView.widthAnchor.constraint(equalToConstant: 50),
+//            imageView.heightAnchor.constraint(equalToConstant: 50),
+//            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//        ])
+//

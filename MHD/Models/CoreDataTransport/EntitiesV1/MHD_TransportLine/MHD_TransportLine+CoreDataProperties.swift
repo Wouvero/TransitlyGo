@@ -67,41 +67,75 @@ extension MHD_TransportLine : Identifiable {
 extension MHD_TransportLine {
     
     static func checkIfItemExists(with id: String, in context: NSManagedObjectContext) -> Bool {
-        let fetchRequest = MHD_TransportLine.fetchRequest()
-        
-        let idPredicate = NSPredicate(format: "id == %@", id)
-        fetchRequest.predicate = idPredicate
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            return results.first != nil ? true : false
-        } catch {
-            print("Error fetching data")
-            return false
+        context.performAndWait {
+            let fetchRequest = MHD_TransportLine.fetchRequest()
+            
+            fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+            fetchRequest.fetchLimit = 1
+            
+            do {
+                return try context.count(for: fetchRequest) > 0
+            } catch {
+                print("Error checking transport line existence: \(error.localizedDescription)")
+                return false
+            }
         }
     }
     
     static func getAll(in context: NSManagedObjectContext) -> [MHD_TransportLine] {
-        let fetchRequest = MHD_TransportLine.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
-        do {
-            let results = try context.fetch(fetchRequest)
-            return results
-        } catch {
-            print("Error fetching data")
-            return []
+        var results: [MHD_TransportLine] = []
+        
+        context.performAndWait {
+            let fetchRequest = MHD_TransportLine.fetchRequest()
+            fetchRequest.sortDescriptors = [NSSortDescriptor(key: "sortIndex", ascending: true)]
+            do {
+                results = try context.fetch(fetchRequest)
+            } catch {
+                print("Failed to fetch transport lines: \(error.localizedDescription)")
+                results = []
+            }
         }
+        
+        return results
     }
     
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_TransportLine.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    @discardableResult
+    static func deleteAll(in context: NSManagedObjectContext) -> Bool {
+        var success = false
+        
+        context.performAndWait {
+            let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_TransportLine.fetchRequest()
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+            
+            do {
+                try context.execute(deleteRequest)
+                
+                // IMPORTANT: Refresh context after batch operation
+                context.refreshAllObjects()
+                
+                success = true
+            } catch {
+                print("Failed to delete all transport lines: \(error.localizedDescription)")
+                // Attempt fallback to individual deletion if batch fails
+                success = deleteAllItemsIndividually(in: context)
+            }
+        }
+        
+        return success
+    }
+    
+    private static func deleteAllItemsIndividually(in context: NSManagedObjectContext) -> Bool {
+        let fetchRequest: NSFetchRequest<MHD_TransportLine> = MHD_TransportLine.fetchRequest()
         
         do {
-            try context.execute(deleteRequest)
+            let items = try context.fetch(fetchRequest)
+            items.forEach { context.delete($0) }
+            try context.save()
+            return true
         } catch {
-            print("😞 Failed to clear existing data: \(error)")
+            context.rollback()
+            print("❌ Fallback deletion failed: \(error.localizedDescription)")
+            return false
         }
     }
-    
 }

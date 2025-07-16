@@ -60,7 +60,7 @@ extension MHD_StationAnnotationView {
             if let annotation = self.annotation as? MHD_StationAnnotation {
                 guard let vc = self.findViewController() as? MapViewController else { return }
                
-                let popup = StationInformationPopupView(station: annotation.station)
+                let popup = StationInformationPopup(station: annotation.station)
                 popup.show(on: vc)
             }
         }

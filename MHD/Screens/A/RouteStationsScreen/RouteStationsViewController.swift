@@ -69,7 +69,7 @@ class RouteStationsController: UIViewController, MHD_NavigationDelegate {
     private func setupMapButton() {
         let mapButton = CustomButton(
             type: .iconOnly(
-                iconName: "map.fill",
+                iconName: SFSymbols.map_line,
                 iconColor: .neutral,
                 iconSize: 20
             ),

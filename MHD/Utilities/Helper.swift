@@ -14,9 +14,9 @@ func numberToString<T: Numeric>(_ num: T) -> String {
 }
 
 
-func formatMinute(_ minuteInfo: MHD_MinuteInfo) -> String {
-    let formattedMinute = String(format: "%02d", minuteInfo.minute)
-    if let condition = minuteInfo.condition {
+func formatMinute(_ minute: MHD_Minute) -> String {
+    let formattedMinute = String(format: "%02d", minute.minuteInfo)
+    if let condition = minute.condition {
         return "\(formattedMinute) \(condition.uppercased())"
     }
     return formattedMinute

@@ -36,10 +36,7 @@ class RouteStationViewCell: UITableViewCell {
         numberOfLines: 1
     )
     
-    var isOnSignIcon = IconImageView(
-        systemName: SFSymbols.onSign,
-        color: .neutral700
-    )
+    var isOnSignIcon = SymbolView(symbolName: SFSymbols.hand, tintColor: .neutral700)
     
     var iconContainer = UIView()
     

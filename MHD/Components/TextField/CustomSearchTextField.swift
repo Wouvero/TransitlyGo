@@ -10,18 +10,17 @@ import UIKit
 
 
 protocol SearchTextFieldDelegate: AnyObject {
-    func searchTextFieldDidChange(_ text: String?)
     func clearTableSearch()
 }
 
 
-class CustomSearchTextField: CustomTextField {
+class CustomSearchTextField: BaseTextField {
     
     weak var searchDelegate: SearchTextFieldDelegate?
     
     private let clearTextButton = CustomButton(
         type: .iconOnly(
-            iconName: "xmark.circle",
+            iconName: SFSymbols.close_circle_line,
             iconColor: .neutral200,
             iconSize: 16
         ),
@@ -98,18 +97,6 @@ extension CustomSearchTextField {
         rightViewMode = .always
         rightView = rightViewContent
 
-    }
-    
-}
-
-
-// MARK: - Delegate methods
-extension CustomSearchTextField {
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        if let text = textField.text {
-            searchDelegate?.searchTextFieldDidChange(text)
-        }
     }
     
 }

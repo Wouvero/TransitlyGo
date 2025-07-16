@@ -31,15 +31,15 @@ extension MHD_StationLocation : Identifiable {
 
 extension MHD_StationLocation {
 
-    static func deleteAll(in context: NSManagedObjectContext) {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_StationLocation.fetchRequest()
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(deleteRequest)
-        } catch {
-            print("😞 Failed to clear existing data: \(error)")
-        }
-    }
+//    static func deleteAll(in context: NSManagedObjectContext) {
+//        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = MHD_StationLocation.fetchRequest()
+//        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+//        
+//        do {
+//            try context.execute(deleteRequest)
+//        } catch {
+//            print("😞 Failed to clear existing data: \(error)")
+//        }
+//    }
     
 }

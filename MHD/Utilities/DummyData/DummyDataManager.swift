@@ -45,13 +45,11 @@ struct DummyDataManager {
 
     private static func createTransportLines(_ transportLines: [TransportLine]) {
         for (index, transportLine) in transportLines.enumerated() {
-            
-            
+
             let transportLineEntity = MHD_TransportLine(context: context)
             transportLineEntity.id = transportLine.id
             transportLineEntity.name = transportLine.name
             transportLineEntity.sortIndex = Int64(index)
-            
             
             createDirections(transportLine.directions, for: transportLineEntity)
         }
@@ -113,8 +111,8 @@ struct DummyDataManager {
             
             // Create hourly departures (6AM to 10PM)
             for hour in 6...22 {
-                let timeTableEntity = MHD_TimeTable(context: context)
-                timeTableEntity.hour = Int16(hour)
+                let timeTableEntity = MHD_Hour(context: context)
+                timeTableEntity.hourInfo = Int16(hour)
                 timeTableEntity.daytimeSchedule = daytimeScheduleEntity
                 
                 // Create minute departures (random 2-4 departures per hour)
@@ -122,14 +120,14 @@ struct DummyDataManager {
                 let minuteSteps = 60 / departureCount
                 
                 for i in 0..<departureCount {
-                    let minuteInfoEntity = MHD_MinuteInfo(context: context)
+                    let minuteInfoEntity = MHD_Minute(context: context)
                     let baseMinute = i * minuteSteps
                     let minuteVariance = Int.random(in: -5...5) // Random variance
                     let actualMinute = max(0, min(59, baseMinute + minuteVariance))
                     
-                    minuteInfoEntity.minute = Int16(actualMinute)
+                    minuteInfoEntity.minuteInfo = Int16(actualMinute)
                     minuteInfoEntity.condition = Double.random(in: 0...1) < 0.02 ? ["D", "C", "A"].randomElement()! : nil
-                    minuteInfoEntity.timeTable = timeTableEntity
+                    minuteInfoEntity.hour = timeTableEntity
                 }
             }
         }
